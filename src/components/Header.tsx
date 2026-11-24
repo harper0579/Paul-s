@@ -10,14 +10,63 @@ const NAV_LINKS = [
   { to: "/blog", label: "Blog" },
 ] as const;
 
-const MOBILE_LINKS = [
-  { to: "/", label: "Home", end: true },
-  { to: "/services", label: "Services", end: false },
-  { to: "/winter-help", label: "Winter Help", end: false },
-  { to: "/our-work", label: "Our Work", end: false },
-  { to: "/about", label: "About & FAQ", end: false },
-  { to: "/blog", label: "Blog", end: false },
-  { to: "/quote", label: "Get a Quote", end: false },
+const MOBILE_MENU_ITEMS = [
+  {
+    to: "/",
+    label: "Home",
+    end: true,
+    bgPos: "0% 0%",
+    color: "#FFFFFF",
+    shadow: "0 2px 8px rgba(0,0,0,0.5)",
+  },
+  {
+    to: "/services",
+    label: "Services",
+    end: false,
+    bgPos: "0% 16.6%",
+    color: "#FFFFFF",
+    shadow: "0 2px 8px rgba(0,0,0,0.5)",
+  },
+  {
+    to: "/winter-help",
+    label: "Winter Help",
+    end: false,
+    bgPos: "0% 33.3%",
+    color: "#FFFFFF",
+    shadow: "0 2px 8px rgba(0,0,0,0.5)",
+  },
+  {
+    to: "/our-work",
+    label: "Our Work",
+    end: false,
+    bgPos: "0% 50%",
+    color: "#081A33",
+    shadow: "0 1px 4px rgba(255,255,255,0.6)",
+  },
+  {
+    to: "/about",
+    label: "About & FAQ",
+    end: false,
+    bgPos: "0% 66.6%",
+    color: "#FFFFFF",
+    shadow: "0 2px 8px rgba(0,0,0,0.5)",
+  },
+  {
+    to: "/blog",
+    label: "Blog",
+    end: false,
+    bgPos: "0% 83.3%",
+    color: "#FFFFFF",
+    shadow: "0 2px 8px rgba(0,0,0,0.5)",
+  },
+  {
+    to: "/quote",
+    label: "Get a Quote",
+    end: false,
+    bgPos: "0% 100%",
+    color: "#081A33",
+    shadow: "0 1px 4px rgba(255,255,255,0.6)",
+  },
 ] as const;
 
 export function Header() {
@@ -52,13 +101,11 @@ export function Header() {
             alt="Paul's Roofing official emblem"
             className="w-11 h-11 rounded-full object-cover shrink-0 ring-1 ring-[#45BCFF]/50"
           />
-          <div className="min-w-0 leading-none">
-            <div className="font-display text-base sm:text-lg font-extrabold tracking-tight whitespace-nowrap">
-              <span className="text-white">PAUL&apos;S</span>{" "}
-              <span className="text-[#45BCFF]">ROOFING</span>
-            </div>
-            <div className="mt-1 text-[8px] sm:text-[9px] font-semibold tracking-[0.11em] uppercase text-[#C9DDF3] whitespace-nowrap truncate max-w-[165px] sm:max-w-none">
-              ATLANTIC CANADA&apos;S TRUSTED ROOFING EXPERTS
+          <div className="min-w-0 leading-tight">
+            <div className="text-[10px] sm:text-xs font-bold tracking-[0.08em] uppercase text-[#C9DDF3] leading-[1.25]">
+              Atlantic Canada&apos;s
+              <br />
+              Trusted Roofers
             </div>
           </div>
         </Link>
@@ -110,30 +157,33 @@ export function Header() {
 
       {mobileOpen && (
         <nav
-          className="lg:hidden fixed top-16 inset-x-0 bottom-0 z-50 bg-cover bg-center overflow-y-auto"
-          style={{ backgroundImage: "url('/images/menu-panels-bg.jpg')" }}
+          className="lg:hidden fixed top-16 inset-x-0 bottom-0 z-50 overflow-y-auto bg-white"
           aria-label="Mobile navigation"
         >
-          <div className="min-h-full w-full bg-gradient-to-r from-[#081A33]/85 via-[#081A33]/45 to-transparent px-6 py-8 flex flex-col justify-start">
-            <div className="flex flex-col items-start gap-2">
-              {MOBILE_LINKS.map((link) => (
-                <NavLink
-                  key={link.to}
-                  to={link.to}
-                  end={link.end}
-                  onClick={() => setMobileOpen(false)}
-                  className={({ isActive }) =>
-                    `py-2.5 min-h-11 inline-flex items-center text-xl font-display font-bold drop-shadow transition-colors duration-150 ${
-                      isActive
-                        ? "text-[#45BCFF] underline underline-offset-8 decoration-2"
-                        : "text-white hover:text-[#BFE3FF]"
-                    }`
-                  }
-                >
-                  {link.label}
-                </NavLink>
-              ))}
-            </div>
+          <div className="min-h-full w-full flex flex-col">
+            {MOBILE_MENU_ITEMS.map((item) => (
+              <NavLink
+                key={item.to + item.label}
+                to={item.to}
+                end={item.end}
+                onClick={() => setMobileOpen(false)}
+                style={{
+                  backgroundImage: "url('/images/menu-panels-bg.jpg')",
+                  backgroundSize: "100% 700%",
+                  backgroundPosition: item.bgPos,
+                  backgroundRepeat: "no-repeat",
+                  color: item.color,
+                  textShadow: item.shadow,
+                }}
+                className={({ isActive }) =>
+                  `w-full flex-1 flex items-center min-h-[64px] px-6 py-4 text-2xl leading-none font-display font-bold ${
+                    isActive ? "underline underline-offset-8 decoration-2" : ""
+                  }`
+                }
+              >
+                {item.label}
+              </NavLink>
+            ))}
           </div>
         </nav>
       )}
