@@ -3,7 +3,7 @@ export const CONTACT = {
   phoneDisplay: "(506) 271-4162",
   email: "paul@paulroofs.com",
   emailHref: "mailto:paul@paulroofs.com",
-  facebookHref: "https://www.facebook.com/paulsroofingnb",
+  facebookHref: "https://www.facebook.com/profile.php?id=61577716957565",
   googleReviewsHref:
     "https://www.google.com/maps/search/?api=1&query=Paul%27s+Roofing+Quispamsis+NB",
   ikoVisualizerHref: "https://www.iko.com/na/roofviewer/",
