@@ -59,6 +59,11 @@ export function Footer() {
                     Get a Quote
                   </Link>
                 </li>
+                <li>
+                  <Link to="/sitemap" className="hover:text-white hover:underline">
+                    XML Sitemap &amp; Crawler
+                  </Link>
+                </li>
               </ul>
             </div>
 

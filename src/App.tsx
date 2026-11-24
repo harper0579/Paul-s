@@ -14,6 +14,7 @@ import { AboutAndAreasSection } from "./components/AboutAndAreasSection";
 import { BlogSection } from "./components/BlogSection";
 import { QuoteSection } from "./components/QuoteSection";
 import { GmailWorkspaceSection } from "./components/GmailWorkspaceSection";
+import { SitemapGeneratorSection } from "./components/SitemapGeneratorSection";
 import { Footer } from "./components/Footer";
 
 const LEGACY_HASH_ROUTES: Record<string, string> = {
@@ -115,6 +116,7 @@ export default function App() {
           <Route path="/blog/:slug" element={<BlogSection />} />
           <Route path="/quote" element={<QuoteSection />} />
           <Route path="/gmail" element={<GmailWorkspaceSection />} />
+          <Route path="/sitemap" element={<SitemapGeneratorSection />} />
           <Route path="*" element={<NotFoundPage />} />
         </Routes>
       </main>

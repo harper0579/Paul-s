@@ -1,6 +1,8 @@
+import { useState } from "react";
 import { Link } from "react-router-dom";
 import { ArrowRight, ArrowUpRight, Check, Phone, ShieldAlert, Snowflake, Award, ShieldCheck, MapPin, Layers, PhoneCall, SearchCheck } from "lucide-react";
 import { Hero } from "./Hero";
+import { WinterHelpCarousel } from "./WinterHelpCarousel";
 import {
   CONTACT,
   SECONDARY_SERVICES,
@@ -10,6 +12,8 @@ import {
 } from "../data/siteContent";
 
 export function HomePage() {
+  const [winterIndex, setWinterIndex] = useState(0);
+
   return (
     <>
       <Hero />
@@ -78,78 +82,111 @@ export function HomePage() {
             </Link>
           </div>
 
-          <div className="mt-7 grid grid-cols-1 lg:grid-cols-12 gap-5">
-            <article className="lg:col-span-6 rounded-2xl border border-[#C3D6EA] bg-white overflow-hidden flex flex-col justify-between">
-              <div className="bg-[#050D20] overflow-hidden">
-                <img
-                  src="/images/sunset-house-panels-clean.jpg"
-                  alt="New Brunswick home with dark charcoal standing-seam metal roofing at sunset and four colour panels in front."
-                  className="w-full h-auto block"
-                  loading="lazy"
-                  referrerPolicy="no-referrer"
-                />
-              </div>
-              <div className="p-6 flex-1 flex flex-col justify-between">
-                <div>
-                  <p className="text-xs font-bold tracking-wider uppercase text-[#0B6CB8]">
-                    Our specialty
-                  </p>
-                  <h3 className="mt-1 font-display text-xl sm:text-2xl font-extrabold text-[#081A33]">
-                    Premium Metal Roofing
-                  </h3>
-                  <p className="mt-2 text-sm text-[#2A3D57] leading-relaxed">
-                    50+ year lifespan with a 40-year paint warranty and lifetime steel material
-                    warranty, sourced from Community Metal &amp; Dairy Town Exteriors.
-                  </p>
-                  <ul className="mt-4 space-y-1.5 text-sm text-[#2A3D57]">
-                    <li className="flex items-start gap-2">
-                      <Check className="w-4 h-4 text-[#0B6CB8] shrink-0 mt-0.5" />
-                      <span>8 popular colours ready to preview</span>
-                    </li>
-                    <li className="flex items-start gap-2">
-                      <Check className="w-4 h-4 text-[#0B6CB8] shrink-0 mt-0.5" />
-                      <span>Installed for heavy snow load &amp; Bay of Fundy wind</span>
-                    </li>
-                  </ul>
+          <div className="mt-7 space-y-6">
+            <article className="rounded-2xl border border-[#C3D6EA] bg-white overflow-hidden shadow-sm">
+              <div className="grid grid-cols-1 lg:grid-cols-12 items-stretch">
+                <div className="lg:col-span-6 bg-[#050D20] overflow-hidden">
+                  <img
+                    src="/images/sunset-house-panels-clean.jpg"
+                    alt="New Brunswick home with dark charcoal standing-seam metal roofing at sunset and four colour panels in front."
+                    className="w-full h-full object-cover min-h-[280px]"
+                    loading="lazy"
+                    referrerPolicy="no-referrer"
+                  />
                 </div>
+                <div className="lg:col-span-6 p-6 lg:p-8 flex flex-col justify-between">
+                  <div>
+                    <p className="text-xs font-bold tracking-wider uppercase text-[#0B6CB8]">
+                      Our specialty
+                    </p>
+                    <h3 className="mt-1 font-display text-xl sm:text-2xl font-extrabold text-[#081A33]">
+                      Premium Metal Roofing
+                    </h3>
+                    <p className="mt-2 text-sm text-[#2A3D57] leading-relaxed">
+                      50+ year lifespan with a 40-year paint warranty and lifetime steel material
+                      warranty, sourced from Community Metal &amp; Dairy Town Exteriors.
+                    </p>
+                    <ul className="mt-4 space-y-1.5 text-sm text-[#2A3D57]">
+                      <li className="flex items-start gap-2">
+                        <Check className="w-4 h-4 text-[#0B6CB8] shrink-0 mt-0.5" />
+                        <span>8 popular colours ready to preview</span>
+                      </li>
+                      <li className="flex items-start gap-2">
+                        <Check className="w-4 h-4 text-[#0B6CB8] shrink-0 mt-0.5" />
+                        <span>Installed for heavy snow load &amp; Bay of Fundy wind</span>
+                      </li>
+                    </ul>
+                  </div>
 
-                <div className="mt-5 pt-4 border-t border-[#EFF5FB] flex flex-wrap gap-3">
-                  <Link
-                    to="/services"
-                    className="inline-flex items-center gap-1.5 text-sm font-bold text-[#0B6CB8] hover:underline"
-                  >
-                    Preview metal colours
-                    <ArrowRight className="w-4 h-4" />
-                  </Link>
-                  <Link
-                    to="/services#compare"
-                    className="inline-flex items-center gap-1.5 text-sm font-semibold text-[#081A33] hover:text-[#0B6CB8] hover:underline"
-                  >
-                    Compare metal vs. shingles
-                  </Link>
+                  <div className="mt-6 pt-4 border-t border-[#EFF5FB] flex flex-wrap gap-4 items-center justify-between">
+                    <div className="flex flex-wrap gap-3">
+                      <Link
+                        to="/services"
+                        className="inline-flex items-center gap-1.5 text-sm font-bold text-[#0B6CB8] hover:underline"
+                      >
+                        Preview metal colours
+                        <ArrowRight className="w-4 h-4" />
+                      </Link>
+                      <Link
+                        to="/services#compare"
+                        className="inline-flex items-center gap-1.5 text-sm font-semibold text-[#081A33] hover:text-[#0B6CB8] hover:underline"
+                      >
+                        Compare metal vs. shingles
+                      </Link>
+                    </div>
+                    <Link
+                      to="/quote"
+                      state={{
+                        projectType: "Replacement",
+                        roofType: "Metal",
+                        description: "Interested in Premium Metal Roofing.",
+                        timestamp: Date.now(),
+                      }}
+                      className="btn-quote-glow inline-flex items-center justify-center px-4 py-2.5 min-h-10 font-display text-sm font-extrabold cursor-pointer"
+                    >
+                      Get a Quote
+                    </Link>
+                  </div>
                 </div>
               </div>
             </article>
 
-            <div className="lg:col-span-6 grid grid-cols-1 gap-4">
-              {SECONDARY_SERVICES.map((svc) => (
-                <article
-                  key={svc.title}
-                  className="rounded-xl border border-[#C3D6EA] bg-white p-5 flex flex-col justify-between"
-                >
+            {SECONDARY_SERVICES.map((svc) => (
+              <article
+                key={svc.title}
+                className="flex flex-col md:flex-row items-stretch bg-white border border-[#C3D6EA] rounded-2xl overflow-hidden shadow-sm"
+              >
+                <div className="w-full md:w-[320px] shrink-0 bg-[#081A33] aspect-video md:aspect-auto overflow-hidden flex items-center justify-center">
+                  <img
+                    src={svc.imageSrc}
+                    alt={svc.imageAlt}
+                    loading="lazy"
+                    referrerPolicy="no-referrer"
+                    className="w-full h-full object-contain bg-[#081A33]"
+                  />
+                </div>
+                <div className="p-6 flex-1 flex flex-col justify-between">
                   <div>
-                    <h3 className="font-display text-lg font-bold text-[#081A33]">{svc.title}</h3>
-                    <p className="mt-1.5 text-sm text-[#47617F] leading-relaxed">
+                    <h3 className="font-display text-xl font-bold text-[#081A33]">{svc.title}</h3>
+                    <p className="mt-2 text-sm sm:text-base text-[#47617F] leading-relaxed">
                       {svc.description}
                     </p>
+                    <ul className="mt-3 space-y-1.5 text-sm text-[#2A3D57]">
+                      {svc.bullets.map((bullet) => (
+                        <li key={bullet} className="flex items-start gap-2">
+                          <Check className="w-4 h-4 text-[#0B6CB8] shrink-0 mt-0.5" />
+                          <span>{bullet}</span>
+                        </li>
+                      ))}
+                    </ul>
                   </div>
-                  <div className="mt-3 pt-3 border-t border-[#EFF5FB] flex items-center justify-between gap-3">
+
+                  <div className="mt-5 pt-4 border-t border-[#EFF5FB] flex flex-wrap items-center justify-between gap-4">
                     <Link
                       to="/services"
-                      className="inline-flex items-center gap-1 text-xs sm:text-sm font-bold text-[#0B6CB8] hover:underline"
+                      className="inline-flex items-center gap-1.5 text-sm font-bold text-[#0B6CB8] hover:underline"
                     >
-                      View service details
-                      <ArrowRight className="w-3.5 h-3.5" />
+                      View service details &rarr;
                     </Link>
                     <Link
                       to="/quote"
@@ -159,21 +196,21 @@ export function HomePage() {
                         description: `Interested in ${svc.title}.`,
                         timestamp: Date.now(),
                       }}
-                      className="text-xs font-bold text-[#081A33] hover:text-[#0B6CB8]"
+                      className="btn-quote-glow inline-flex items-center justify-center px-4 py-2.5 min-h-10 font-display text-sm font-extrabold cursor-pointer"
                     >
-                      Request quote &rarr;
+                      Get a Quote
                     </Link>
                   </div>
-                </article>
-              ))}
-            </div>
+                </div>
+              </article>
+            ))}
           </div>
         </div>
       </section>
 
       <section className="py-12 lg:py-14 bg-[#E4EFFA] border-b border-[#C3D6EA]">
         <div className="max-w-6xl mx-auto px-4 lg:px-6">
-          <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4">
+          <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4 mb-8">
             <div>
               <p className="text-xs font-bold tracking-wider uppercase text-[#0B6CB8]">
                 Winter in New Brunswick
@@ -195,17 +232,30 @@ export function HomePage() {
             </Link>
           </div>
 
+          <WinterHelpCarousel activeIndex={winterIndex} setActiveIndex={setWinterIndex} />
+
           <div className="mt-7 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
             {WINTER_SERVICES.map((svc, idx) => {
               const Icon = idx === 0 ? Snowflake : idx === 1 ? PhoneCall : idx === 2 ? ShieldAlert : SearchCheck;
+              const activeCard = idx === winterIndex;
               return (
                 <article
                   key={svc.id}
-                  className="bg-white border border-[#C3D6EA] rounded-2xl p-5 shadow-xs hover:border-[#0E8FE8] transition-all flex flex-col justify-between"
+                  onMouseEnter={() => setWinterIndex(idx)}
+                  className={`bg-white rounded-2xl p-5 shadow-xs transition-all flex flex-col justify-between border ${
+                    activeCard
+                      ? "border-[#0B6CB8] shadow-lg ring-2 ring-[#0B6CB8]/20"
+                      : "border-[#C3D6EA] hover:border-[#0E8FE8]"
+                  }`}
                 >
                   <div>
-                    <div className="w-10 h-10 rounded-xl bg-[#EBF4FC] border border-[#C3D6EA] text-[#0B6CB8] flex items-center justify-center mb-3">
-                      <Icon className="w-5 h-5" />
+                    <div className="flex items-center justify-between mb-3">
+                      <div className="w-10 h-10 rounded-xl bg-[#EBF4FC] border border-[#C3D6EA] text-[#0B6CB8] flex items-center justify-center">
+                        <Icon className="w-5 h-5" />
+                      </div>
+                      {activeCard && (
+                        <span className="w-2 h-2 rounded-full bg-[#0E8FE8] animate-pulse" />
+                      )}
                     </div>
                     <h3 className="font-display text-base font-bold text-[#081A33]">{svc.title}</h3>
                     <p className="mt-2 text-sm text-[#47617F] leading-relaxed">{svc.description}</p>
@@ -215,7 +265,7 @@ export function HomePage() {
                     {svc.action === "ice-guide" && (
                       <Link
                         to="/blog/ice-dams-explained"
-                        className="flex items-center justify-between text-sm font-bold text-[#0B6CB8] hover:underline"
+                        className="btn-quote-glow w-full inline-flex items-center justify-center gap-2 px-4 py-2.5 min-h-10 font-display text-sm font-extrabold transition-colors"
                       >
                         <span>{svc.ctaLabel}</span>
                         <ArrowRight className="w-4 h-4" />
@@ -224,7 +274,7 @@ export function HomePage() {
                     {svc.action === "call" && (
                       <a
                         href={CONTACT.phoneHref}
-                        className="inline-flex items-center justify-center gap-2 w-full py-2.5 px-4 rounded-full border border-red-200 bg-red-50 text-red-700 font-bold text-sm hover:bg-red-100 transition-colors"
+                        className="btn-quote-glow w-full inline-flex items-center justify-center gap-2 px-4 py-2.5 min-h-10 font-display text-sm font-extrabold transition-colors"
                       >
                         <Phone className="w-4 h-4" />
                         {svc.ctaLabel}
@@ -239,7 +289,7 @@ export function HomePage() {
                             "Interested in snow rails over doors, deck, or walkways on a metal roof.",
                           timestamp: Date.now(),
                         }}
-                        className="flex items-center justify-between text-sm font-bold text-[#0B6CB8] hover:underline"
+                        className="btn-quote-glow w-full inline-flex items-center justify-center gap-2 px-4 py-2.5 min-h-10 font-display text-sm font-extrabold transition-colors"
                       >
                         <span>{svc.ctaLabel}</span>
                         <ArrowRight className="w-4 h-4" />
@@ -254,7 +304,7 @@ export function HomePage() {
                             "Looking to book a winter roof, flashing, and attic inspection.",
                           timestamp: Date.now(),
                         }}
-                        className="flex items-center justify-between text-sm font-bold text-[#0B6CB8] hover:underline"
+                        className="btn-quote-glow w-full inline-flex items-center justify-center gap-2 px-4 py-2.5 min-h-10 font-display text-sm font-extrabold transition-colors"
                       >
                         <span>{svc.ctaLabel}</span>
                         <ArrowRight className="w-4 h-4" />

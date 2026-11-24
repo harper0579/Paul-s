@@ -196,89 +196,79 @@ export function ServicesSection() {
             </div>
           </article>
 
-          <div className="mt-6 grid grid-cols-1 lg:grid-cols-3 gap-5">
+          <div className="mt-8 space-y-6">
             {SECONDARY_SERVICES.map((svc) => (
               <article
                 key={svc.title}
-                className="rounded-xl border border-[#C3D6EA] bg-white p-6 flex flex-col justify-between"
+                className="flex flex-col md:flex-row items-stretch bg-white border border-[#C3D6EA] rounded-2xl overflow-hidden shadow-sm"
               >
-                <div>
-                  <button
-                    type="button"
-                    onClick={() =>
-                      navigate("/quote", {
-                        state: {
-                          projectType: svc.defaultProjectType,
-                          roofType: svc.defaultRoofType,
-                          description: `Interested in ${svc.title}.`,
-                          timestamp: Date.now(),
-                        },
-                      })
-                    }
-                    className="mb-4 block w-full overflow-hidden rounded-lg border border-[#C3D6EA] bg-[#081A33] cursor-pointer focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#0B6CB8]"
-                    aria-label={`Request a quote for ${svc.title}`}
-                  >
-                    <img
-                      src={svc.imageSrc}
-                      alt={svc.imageAlt}
-                      loading="lazy"
-                      referrerPolicy="no-referrer"
-                      className="w-full h-auto block"
-                    />
-                  </button>
-                  <h2 className="font-display text-xl font-bold text-[#081A33]">{svc.title}</h2>
-                  <p className="mt-2.5 text-sm sm:text-base text-[#47617F] leading-relaxed">
-                    {svc.description}
-                  </p>
-                  <ul className="mt-4 space-y-2 text-sm text-[#2A3D57]">
-                    {svc.bullets.map((bullet) => (
-                      <li key={bullet} className="flex items-start gap-2">
-                        <Check className="w-4 h-4 text-[#0B6CB8] shrink-0 mt-0.5" />
-                        <span>{bullet}</span>
-                      </li>
-                    ))}
-                  </ul>
+                <div className="w-full md:w-[320px] shrink-0 bg-[#081A33] overflow-hidden">
+                  <img
+                    src={svc.imageSrc}
+                    alt={svc.imageAlt}
+                    loading="lazy"
+                    referrerPolicy="no-referrer"
+                    className="w-full h-full object-cover min-h-[220px]"
+                  />
                 </div>
+                <div className="p-6 flex-1 flex flex-col justify-between">
+                  <div>
+                    <h3 className="font-display text-xl font-bold text-[#081A33]">{svc.title}</h3>
+                    <p className="mt-2 text-sm sm:text-base text-[#47617F] leading-relaxed">
+                      {svc.description}
+                    </p>
+                    <ul className="mt-3 space-y-1.5 text-sm text-[#2A3D57]">
+                      {svc.bullets.map((bullet) => (
+                        <li key={bullet} className="flex items-start gap-2">
+                          <Check className="w-4 h-4 text-[#0B6CB8] shrink-0 mt-0.5" />
+                          <span>{bullet}</span>
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
 
-                <div className="mt-5 pt-4 border-t border-[#EFF5FB] space-y-3">
-                  {svc.hasVisualizers && (
-                    <div className="flex flex-wrap gap-4 text-sm">
-                      <a
-                        href={CONTACT.ikoVisualizerHref}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="inline-flex items-center gap-1 font-semibold text-[#0B6CB8] hover:underline"
-                      >
-                        IKO Roof Viewer
-                        <ArrowUpRight className="w-3.5 h-3.5" />
-                      </a>
-                      <a
-                        href={CONTACT.bpVisualizerHref}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="inline-flex items-center gap-1 font-semibold text-[#0B6CB8] hover:underline"
-                      >
-                        BP Canada Visualizer
-                        <ArrowUpRight className="w-3.5 h-3.5" />
-                      </a>
+                  <div className="mt-5 pt-4 border-t border-[#EFF5FB] flex flex-wrap items-center justify-between gap-4">
+                    <div className="flex flex-wrap items-center gap-4">
+                      {svc.hasVisualizers && (
+                        <div className="flex flex-wrap gap-3 text-sm">
+                          <a
+                            href={CONTACT.ikoVisualizerHref}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="inline-flex items-center gap-1 font-semibold text-[#0B6CB8] hover:underline"
+                          >
+                            IKO Roof Viewer
+                            <ArrowUpRight className="w-3.5 h-3.5" />
+                          </a>
+                          <a
+                            href={CONTACT.bpVisualizerHref}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="inline-flex items-center gap-1 font-semibold text-[#0B6CB8] hover:underline"
+                          >
+                            BP Canada Visualizer
+                            <ArrowUpRight className="w-3.5 h-3.5" />
+                          </a>
+                        </div>
+                      )}
                     </div>
-                  )}
-                  <button
-                    type="button"
-                    onClick={() =>
-                      navigate("/quote", {
-                        state: {
-                          projectType: svc.defaultProjectType,
-                          roofType: svc.defaultRoofType,
-                          description: `Interested in ${svc.title}.`,
-                          timestamp: Date.now(),
-                        },
-                      })
-                    }
-                    className="btn-quote-glow w-full inline-flex items-center justify-center px-4 py-2.5 min-h-10 font-display text-sm font-extrabold cursor-pointer"
-                  >
-                    Get a Quote
-                  </button>
+                    <button
+                      type="button"
+                      onClick={() =>
+                        navigate("/quote", {
+                          state: {
+                            projectType: svc.defaultProjectType,
+                            roofType: svc.defaultRoofType,
+                            description: `Interested in ${svc.title}.`,
+                            timestamp: Date.now(),
+                          },
+                        })
+                      }
+                      className="btn-quote-glow inline-flex items-center justify-center px-4 py-2.5 min-h-10 font-display text-sm font-extrabold cursor-pointer"
+                    >
+                      Get a Quote
+                    </button>
+                  </div>
                 </div>
               </article>
             ))}

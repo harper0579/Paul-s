@@ -291,13 +291,16 @@ export function BlogSection() {
   }
 
   return (
-    <section id="handbook" className="scroll-mt-20 py-14 lg:py-16 bg-[#EFF5FB]">
-      <div className="max-w-7xl mx-auto px-4 md:px-6 mb-8">
+    <section id="handbook" className="scroll-mt-20 pt-6 pb-4 bg-[#EFF5FB]">
+      <div className="max-w-7xl mx-auto px-4 md:px-6 mb-6">
         {/* White-on-Navy Blog Hero Banner */}
-        <div className="rounded-2xl border border-[#1E3A5F] bg-[#081A33] shadow-md overflow-hidden relative">
+        <div className="bg-[#081A33] rounded-2xl overflow-hidden relative max-w-7xl mx-auto mb-8 shadow-sm">
           <div
-            className="absolute inset-0 bg-cover bg-right lg:bg-[linear-gradient(90deg,#081A33_0%,#081A33_48%,rgba(8,26,51,0.75)_72%,rgba(8,26,51,0.15)_100%)] opacity-35 lg:opacity-90 pointer-events-none"
-            style={{ backgroundImage: "url('/images/blog-hero.webp')" }}
+            className="absolute inset-0 bg-cover bg-right bg-no-repeat hidden lg:block"
+            style={{
+              backgroundImage:
+                "linear-gradient(90deg, #081A33 0%, #081A33 48%, rgba(8,26,51,0.75) 72%, rgba(8,26,51,0.1) 100%), url('/images/blog-hero.webp')",
+            }}
             aria-hidden="true"
           />
           <div className="relative z-10 max-w-2xl p-6 sm:p-8 lg:p-10">

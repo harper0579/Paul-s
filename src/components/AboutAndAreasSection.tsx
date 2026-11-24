@@ -196,13 +196,13 @@ export function AboutAndAreasSection() {
             </div>
           </div>
 
-          <div className="mt-8 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+          <div className="mt-8 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 items-stretch">
             {SERVICE_AREAS.map((area) => (
               <button
                 key={area.town}
                 type="button"
                 onClick={() => handleSelectTown(area.town)}
-                className="text-left rounded-xl border border-[#C3D6EA] bg-white hover:border-[#0E8FE8] p-5 transition-colors duration-150 cursor-pointer flex flex-col justify-between group"
+                className="text-left rounded-xl border border-[#C3D6EA] bg-white hover:border-[#0E8FE8] p-5 transition-colors duration-150 cursor-pointer flex flex-col justify-between h-full group"
               >
                 <div>
                   <div className="flex items-center justify-between gap-2">
@@ -222,30 +222,32 @@ export function AboutAndAreasSection() {
 
           <div
             id="financing"
-            className="scroll-mt-20 mt-10 rounded-2xl border border-[#C3D6EA] bg-white p-6 lg:p-8 max-w-3xl"
+            className="scroll-mt-20 w-full max-w-7xl mx-auto mt-6 rounded-2xl border border-[#C3D6EA] bg-white p-6 lg:p-8 flex flex-col lg:flex-row lg:items-center lg:justify-between gap-6 shadow-sm"
           >
-            <p className="text-xs font-bold tracking-wider uppercase text-[#0B6CB8]">
-              Financing &middot; Coming soon
-            </p>
-            <h3 className="mt-1.5 font-display text-2xl font-extrabold text-[#081A33]">
-              Want to know when monthly financing launches?
-            </h3>
-            <p className="mt-2.5 text-sm sm:text-base text-[#47617F] leading-relaxed">
-              We&apos;re setting up financing so a roof that needs doing now can be spread out
-              instead of draining your savings. It&apos;s not available yet — ask Paul at your free
-              estimate and he&apos;ll note your interest while your itemized quote stays valid for
-              planning.
-            </p>
-            <div className="mt-5 flex flex-wrap gap-3">
+            <div>
+              <p className="text-xs font-bold tracking-wider uppercase text-[#0B6CB8]">
+                Financing &middot; Coming soon
+              </p>
+              <h3 className="mt-1.5 font-display text-2xl font-extrabold text-[#081A33]">
+                Want to know when monthly financing launches?
+              </h3>
+              <p className="mt-2.5 text-sm sm:text-base text-[#47617F] leading-relaxed max-w-3xl">
+                We&apos;re setting up financing so a roof that needs doing now can be spread out
+                instead of draining your savings. It&apos;s not available yet — ask Paul at your free
+                estimate and he&apos;ll note your interest while your itemized quote stays valid for
+                planning.
+              </p>
+            </div>
+            <div className="flex flex-wrap lg:flex-nowrap gap-3 shrink-0">
               <Link
                 to="/quote"
-                className="inline-flex items-center justify-center px-5 py-2.5 min-h-11 rounded-lg bg-[#0E8FE8] hover:bg-[#0B6CB8] text-white font-display text-sm font-bold transition-colors duration-150"
+                className="btn-quote-glow inline-flex items-center justify-center px-5 py-2.5 min-h-11 rounded-lg font-display text-sm font-bold transition-colors duration-150"
               >
                 Get a free quote
               </Link>
               <a
                 href={CONTACT.phoneHref}
-                className="inline-flex items-center justify-center gap-2 px-5 py-2.5 min-h-11 rounded-lg bg-[#081A33] hover:bg-[#0B6CB8] text-white font-display text-sm font-bold transition-colors duration-150"
+                className="inline-flex items-center justify-center gap-2 px-5 py-2.5 min-h-11 rounded-lg bg-[#081A33] hover:bg-[#0B6CB8] text-white font-display text-sm font-bold transition-colors duration-150 whitespace-nowrap"
               >
                 <Phone className="w-4 h-4" />
                 Call Paul
@@ -256,14 +258,14 @@ export function AboutAndAreasSection() {
       </section>
 
       <section id="faq" className="scroll-mt-20 py-14 lg:py-16 bg-white">
-        <div className="max-w-4xl mx-auto px-4 lg:px-6">
+        <div className="max-w-7xl mx-auto px-4 lg:px-6">
           <p className="text-xs font-bold tracking-wider uppercase text-[#0B6CB8]">
             Straight answers
           </p>
           <h2 className="mt-2 font-display text-3xl sm:text-4xl font-extrabold text-[#081A33]">
             Questions homeowners ask Paul
           </h2>
-          <p className="mt-3 text-base text-[#47617F]">
+          <p className="mt-3 text-base text-[#47617F] max-w-2xl">
             Search or tap a question to open the answer. No sales talk — the same answers
             you&apos;d get at your kitchen table.
           </p>
@@ -286,9 +288,9 @@ export function AboutAndAreasSection() {
             />
           </div>
 
-          <div className="mt-6 divide-y divide-[#C3D6EA] border-y border-[#C3D6EA]">
+          <div className="mt-8 grid grid-cols-1 lg:grid-cols-2 gap-4 items-start">
             {filteredFaqs.length === 0 ? (
-              <div className="py-6 text-sm text-[#47617F]">
+              <div className="col-span-full py-6 text-sm text-[#47617F]">
                 No FAQ questions match &ldquo;{faqQuery}&rdquo;.{" "}
                 <button
                   type="button"
@@ -302,14 +304,18 @@ export function AboutAndAreasSection() {
               filteredFaqs.map((item) => {
                 const isOpen = openFaqSlug === item.slug || faqQuery.trim().length > 0;
                 return (
-                  <div key={item.slug} id={`faq-${item.slug}`} className="scroll-mt-24">
+                  <div
+                    key={item.slug}
+                    id={`faq-${item.slug}`}
+                    className="scroll-mt-24 bg-white border border-[#C3D6EA] rounded-xl px-5 py-4"
+                  >
                     <button
                       type="button"
                       onClick={() => toggleFaq(item.slug)}
                       aria-expanded={isOpen}
-                      className="w-full py-4 px-1 flex items-center justify-between gap-4 text-left cursor-pointer focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#0B6CB8]"
+                      className="w-full py-1 flex items-center justify-between gap-4 text-left cursor-pointer focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#0B6CB8]"
                     >
-                      <span className="font-display text-base sm:text-lg font-semibold text-[#081A33]">
+                      <span className="font-display text-base font-semibold text-[#081A33]">
                         {item.question}
                       </span>
                       <ChevronDown
@@ -319,7 +325,7 @@ export function AboutAndAreasSection() {
                       />
                     </button>
                     {isOpen && (
-                      <div className="pb-5 px-1 text-sm sm:text-base text-[#2A3D57] leading-relaxed space-y-3">
+                      <div className="mt-3 pt-3 border-t border-[#EFF5FB] text-sm sm:text-base text-[#2A3D57] leading-relaxed space-y-3">
                         <p>
                           {item.answer}{" "}
                           {item.linkToCompare && (

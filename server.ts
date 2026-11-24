@@ -3,6 +3,8 @@ import express from "express";
 import fs from "fs";
 import path from "path";
 import { fileURLToPath } from "url";
+import { ARTICLES } from "./src/data/articles";
+import { SERVICE_AREAS } from "./src/data/siteContent";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -152,6 +154,56 @@ async function dispatchToEmail(record: QuoteRecord): Promise<boolean> {
 async function startServer() {
   const app = express();
   app.use(express.json({ limit: "32kb" }));
+
+  app.get("/sitemap.xml", (_req, res) => {
+    const protocol = _req.protocol || "https";
+    const host = _req.get("host") || "paulroofs.com";
+    const baseUrl = `${protocol}://${host}`;
+
+    const staticRoutes = [
+      { path: "", changefreq: "daily", priority: "1.0" },
+      { path: "/services", changefreq: "weekly", priority: "0.9" },
+      { path: "/winter-help", changefreq: "weekly", priority: "0.9" },
+      { path: "/our-work", changefreq: "weekly", priority: "0.8" },
+      { path: "/about", changefreq: "weekly", priority: "0.8" },
+      { path: "/blog", changefreq: "daily", priority: "0.9" },
+      { path: "/quote", changefreq: "weekly", priority: "0.9" },
+      { path: "/sitemap", changefreq: "monthly", priority: "0.5" },
+    ];
+
+    let xml = `<?xml version="1.0" encoding="UTF-8"?>\n`;
+    xml += `<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n`;
+
+    for (const route of staticRoutes) {
+      xml += `  <url>\n`;
+      xml += `    <loc>${baseUrl}${route.path}</loc>\n`;
+      xml += `    <changefreq>${route.changefreq}</changefreq>\n`;
+      xml += `    <priority>${route.priority}</priority>\n`;
+      xml += `  </url>\n`;
+    }
+
+    for (const article of ARTICLES) {
+      xml += `  <url>\n`;
+      xml += `    <loc>${baseUrl}/blog/${article.id}</loc>\n`;
+      if (article.date) xml += `    <lastmod>${article.date}</lastmod>\n`;
+      xml += `    <changefreq>weekly</changefreq>\n`;
+      xml += `    <priority>0.8</priority>\n`;
+      xml += `  </url>\n`;
+    }
+
+    for (const area of SERVICE_AREAS) {
+      xml += `  <url>\n`;
+      xml += `    <loc>${baseUrl}/about#areas</loc>\n`;
+      xml += `    <changefreq>monthly</changefreq>\n`;
+      xml += `    <priority>0.7</priority>\n`;
+      xml += `  </url>\n`;
+    }
+
+    xml += `</urlset>`;
+
+    res.header("Content-Type", "application/xml; charset=utf-8");
+    res.send(xml);
+  });
 
   app.get("/api/health", (_req, res) => {
     res.json({ ok: true, service: "pauls-roofing", recipient: RECIPIENT_EMAIL });
