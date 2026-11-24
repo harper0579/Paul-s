@@ -66,7 +66,7 @@ export function WorkGallerySection() {
                       alt={item.alt}
                       loading="lazy"
                       referrerPolicy="no-referrer"
-                      className="w-full h-auto block transition-transform duration-300 group-hover:scale-[1.02]"
+                      className="w-full aspect-video object-cover block transition-transform duration-300 group-hover:scale-[1.02]"
                     />
                   </div>
                   <span
@@ -85,31 +85,6 @@ export function WorkGallerySection() {
           </div>
         </div>
       </section>
-
-      <div className="relative bg-[#050D20] text-white overflow-hidden">
-        <img
-          src="/images/coastal-row.jpg"
-          alt="Aerial view of six New Brunswick homes in a row with metal roofs in blue, red, green, charcoal, tan and silver."
-          loading="lazy"
-          referrerPolicy="no-referrer"
-          className="w-full h-auto md:h-[360px] md:object-cover md:opacity-60 block"
-        />
-        <div
-          aria-hidden="true"
-          className="hidden md:block absolute inset-0 bg-gradient-to-r from-[#050D20]/90 via-[#050D20]/65 to-[#050D20]/30"
-        />
-        <div className="md:absolute md:inset-0 flex items-center py-8 md:py-0">
-          <div className="max-w-6xl w-full mx-auto px-4 lg:px-6">
-            <h2 className="font-display text-3xl sm:text-5xl font-extrabold leading-tight text-white max-w-xl">
-              Rain. Snow. Salt air. <span className="text-[#45BCFF]">Still standing.</span>
-            </h2>
-            <p className="mt-3 text-base sm:text-lg text-[#DCE9F8] max-w-xl">
-              Six roofs, six colours, one street — every house in the row, up close. This is the
-              weather our roofs are built for.
-            </p>
-          </div>
-        </div>
-      </div>
 
       {activeItem && lightboxIdx !== null && (
         <div

@@ -59,11 +59,6 @@ export function Footer() {
                     Get a Quote
                   </Link>
                 </li>
-                <li>
-                  <Link to="/gmail" className="hover:text-white hover:underline">
-                    Gmail Quote Desk
-                  </Link>
-                </li>
               </ul>
             </div>
 

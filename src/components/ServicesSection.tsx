@@ -85,8 +85,8 @@ export function ServicesSection() {
               <div className="lg:col-span-6 flex flex-col justify-between gap-6">
                 <div className="overflow-hidden rounded-xl border border-[#C3D6EA] bg-[#081A33]">
                   <img
-                    src="/images/metal-sunset-panels.jpg"
-                    alt="New Brunswick home with dark charcoal standing-seam metal roofing at sunset with four metal roofing panels laid out in front and the official Paul's Roofing emblem."
+                    src="/images/sunset-house-panels-clean.jpg"
+                    alt="New Brunswick home with dark charcoal standing-seam metal roofing at sunset with four metal roofing panels laid out in front."
                     className="w-full h-auto block"
                     loading="lazy"
                     referrerPolicy="no-referrer"

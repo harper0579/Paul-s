@@ -74,8 +74,8 @@ export function HomePage() {
             <article className="lg:col-span-6 rounded-2xl border border-[#C3D6EA] bg-white overflow-hidden flex flex-col justify-between">
               <div className="bg-[#050D20] overflow-hidden">
                 <img
-                  src="/images/metal-sunset-panels.jpg"
-                  alt="New Brunswick home with dark charcoal standing-seam metal roofing at sunset and four colour panels in front, with the official Paul's Roofing emblem."
+                  src="/images/sunset-house-panels-clean.jpg"
+                  alt="New Brunswick home with dark charcoal standing-seam metal roofing at sunset and four colour panels in front."
                   className="w-full h-auto block"
                   loading="lazy"
                   referrerPolicy="no-referrer"

@@ -225,58 +225,105 @@ export function QuoteSection() {
   return (
     <section
       id="quote"
-      className="scroll-mt-20 py-14 lg:py-16 bg-white border-t border-[#C3D6EA]"
+      className="scroll-mt-20 bg-gradient-to-b from-[#edf3f8] via-[#e4edf4] to-[#dbe6ef] text-[#081A33] py-14 px-4 sm:px-6 lg:px-8 border-t border-[#C3D6EA]"
     >
-      <div className="max-w-4xl mx-auto px-4 lg:px-6">
-        <p className="text-xs font-bold tracking-wider uppercase text-[#0B6CB8]">Free estimate</p>
-        <h1 className="mt-2 font-display text-3xl sm:text-4xl font-extrabold text-[#081A33]">
-          Get a free quote or request 24/7 emergency repair
-        </h1>
-        <p className="mt-3 text-base text-[#47617F] max-w-2xl">
-          Tell us about the job and hit send — your request routes directly to{" "}
-          <span className="font-semibold text-[#081A33]">{CONTACT.email}</span> with a reference
-          number. Active leak right now? Select 24/7 Emergency below and call anytime.
-        </p>
+      <div className="max-w-3xl mx-auto">
+        <div className="mb-8">
+          <p className="text-center text-xs font-bold tracking-wider uppercase text-[#0B6CB8] mb-2">
+            Free estimates
+          </p>
+          <h1 className="text-center font-display text-3xl sm:text-4xl font-extrabold tracking-tight text-[#081A33] leading-tight mb-4">
+            Get a free quote or request
+            <br />
+            24/7 emergency repair
+          </h1>
+          <div className="flex justify-center sm:justify-end">
+            <p className="max-w-md text-[#2A3D57] text-sm sm:text-base leading-relaxed">
+              Tell us about the job and we&apos;ll send your request directly to{" "}
+              <a
+                href={CONTACT.emailHref}
+                className="text-[#081A33] font-semibold hover:text-[#0B6CB8] underline underline-offset-2"
+              >
+                {CONTACT.email}
+              </a>{" "}
+              with a reference number. Active leak right now? Select 24/7 Emergency below and call
+              anytime.
+            </p>
+          </div>
+        </div>
 
-        <div className="mt-6 rounded-xl border border-[#C3D6EA] bg-[#EFF5FB] p-5">
-          <h3 className="font-display text-base font-bold text-[#081A33]">
-            Before you call — have these handy if you can
-          </h3>
-          <ul className="mt-2.5 list-disc pl-5 space-y-1 text-sm text-[#2A3D57]">
-            <li>Your town, and roughly how old the roof is if you know it</li>
-            <li>Metal or shingles — or &ldquo;not sure,&rdquo; that&apos;s fine too</li>
-            <li>Where the leak or damage shows inside: which room, which wall</li>
-            <li>Photos from the ground if you have them — never climb up to take one</li>
-            <li>When it started, and whether it&apos;s still dripping</li>
+        <div className="mb-7 rounded-2xl bg-[#eaf2f8] border border-[#b8cde0] p-6 shadow-sm">
+          <h2 className="font-display text-base font-bold text-[#081A33] mb-3">
+            It helps if you have these handy:
+          </h2>
+          <ul className="space-y-2 text-sm sm:text-base text-[#2A3D57]">
+            <li className="flex items-start gap-2.5">
+              <span
+                aria-hidden="true"
+                className="inline-block w-2 h-2 rounded-full bg-[#0E8FE8] ring-2 ring-[#bae6fd] mt-2 shrink-0"
+              />
+              <span>Your town, and roughly how old the roof is (if you know it)</span>
+            </li>
+            <li className="flex items-start gap-2.5">
+              <span
+                aria-hidden="true"
+                className="inline-block w-2 h-2 rounded-full bg-[#0E8FE8] ring-2 ring-[#bae6fd] mt-2 shrink-0"
+              />
+              <span>Metal or shingles &mdash; or &ldquo;not sure,&rdquo; that&apos;s fine too</span>
+            </li>
+            <li className="flex items-start gap-2.5">
+              <span
+                aria-hidden="true"
+                className="inline-block w-2 h-2 rounded-full bg-[#0E8FE8] ring-2 ring-[#bae6fd] mt-2 shrink-0"
+              />
+              <span>Where the leak or damage shows inside (which room, which wall)</span>
+            </li>
+            <li className="flex items-start gap-2.5">
+              <span
+                aria-hidden="true"
+                className="inline-block w-2 h-2 rounded-full bg-[#0E8FE8] ring-2 ring-[#bae6fd] mt-2 shrink-0"
+              />
+              <span>Photos from the ground if you have them &mdash; never climb up to take one</span>
+            </li>
+            <li className="flex items-start gap-2.5">
+              <span
+                aria-hidden="true"
+                className="inline-block w-2 h-2 rounded-full bg-[#0E8FE8] ring-2 ring-[#bae6fd] mt-2 shrink-0"
+              />
+              <span>When it started, and whether it&apos;s still dripping</span>
+            </li>
           </ul>
-          <p className="mt-3 text-xs sm:text-sm text-[#47617F]">
-            Don&apos;t have half of that? Call anyway. Sorting it out is our job, not yours.
+          <p className="mt-4 text-sm sm:text-base font-semibold text-[#0B6CB8]">
+            Don&apos;t have all of that? Call anyway. Sorting it out is our job, not yours.
           </p>
         </div>
 
-        <div className="mt-6 rounded-2xl border border-[#C3D6EA] bg-white p-6 sm:p-8">
+        <div className="rounded-2xl bg-[#eef4f9] border border-[#b8cde0] p-6 sm:p-7 shadow-md">
           {confirmation ? (
             <div
-              className="rounded-xl border border-[#15803D]/30 bg-emerald-50/70 p-6"
+              className="rounded-xl border border-[#86efac] bg-[#cbead7]/60 p-6"
               role="status"
             >
               <div className="flex items-start gap-3">
-                <CheckCircle2 className="w-6 h-6 text-[#15803D] shrink-0 mt-0.5" />
+                <CheckCircle2 className="w-6 h-6 text-[#15803d] shrink-0 mt-0.5" />
                 <div>
-                  <h3 className="font-display text-xl font-bold text-[#081A33]">
+                  <h2 className="font-display text-xl font-bold text-[#081A33]">
                     {urgency === "emergency"
                       ? "24/7 emergency request logged"
                       : "Quote request received"}
-                  </h3>
-                  <p className="mt-1.5 text-sm sm:text-base text-[#2A3D57]">
+                  </h2>
+                  <p className="mt-1.5 text-sm sm:text-base text-[#14532d]">
                     {confirmation.message}
                   </p>
-                  <p className="mt-2 text-xs font-semibold text-[#47617F] tabular-nums">
-                    Reference: {confirmation.referenceId} &middot; Destination:{" "}
-                    {confirmation.recipient}
+                  <p className="mt-2 inline-flex items-center gap-1.5 rounded-md bg-[#cbead7] border border-[#86efac] px-3 py-1 text-xs font-semibold text-[#14532d] tabular-nums">
+                    <CheckCircle2 className="w-3.5 h-3.5 text-[#15803d] shrink-0" />
+                    <span>
+                      Your reference is {confirmation.referenceId} &middot; Destination:{" "}
+                      {confirmation.recipient}
+                    </span>
                   </p>
                   {gmailSentNote && (
-                    <p className="mt-2 text-xs font-semibold text-[#15803D]">{gmailSentNote}</p>
+                    <p className="mt-2 text-xs font-semibold text-[#15803d]">{gmailSentNote}</p>
                   )}
                   {gmailError && (
                     <p className="mt-2 text-xs font-semibold text-[#B91C1C]" role="alert">
@@ -286,15 +333,15 @@ export function QuoteSection() {
                   <div className="mt-5 flex flex-wrap gap-3">
                     <a
                       href={CONTACT.phoneHref}
-                      className="inline-flex items-center gap-2 px-4 py-2.5 min-h-10 rounded-lg bg-[#081A33] text-white font-display text-sm font-bold"
+                      className="btn-call-glow inline-flex items-center gap-2 px-5 py-2.5 min-h-10 font-display text-sm font-extrabold"
                     >
-                      <Phone className="w-4 h-4" />
+                      <Phone className="w-4 h-4 text-[#45BCFF]" />
                       Call {CONTACT.phoneDisplay}
                     </a>
                     {!confirmation.emailDispatched && (
                       <a
                         href={confirmation.mailtoHref}
-                        className="inline-flex items-center gap-2 px-4 py-2.5 min-h-10 rounded-lg bg-[#0E8FE8] text-white font-display text-sm font-bold"
+                        className="btn-quote-glow inline-flex items-center gap-2 px-5 py-2.5 min-h-10 font-display text-sm font-extrabold"
                       >
                         <Mail className="w-4 h-4" />
                         Email copy to Paul
@@ -319,7 +366,7 @@ export function QuoteSection() {
                           );
                         }
                       }}
-                      className="inline-flex items-center gap-2 px-4 py-2.5 min-h-10 rounded-lg border border-[#C3D6EA] bg-white hover:border-[#0B6CB8] text-sm font-semibold text-[#081A33] cursor-pointer"
+                      className="inline-flex items-center gap-2 px-4 py-2.5 min-h-10 rounded-full border border-[#94a3b8] bg-white hover:border-[#0B6CB8] text-sm font-semibold text-[#081A33] cursor-pointer"
                     >
                       <Send className="w-4 h-4" />
                       Send via Gmail
@@ -332,7 +379,7 @@ export function QuoteSection() {
                         setGmailSentNote("");
                         setGmailError("");
                       }}
-                      className="px-4 py-2.5 min-h-10 rounded-lg border border-[#C3D6EA] text-sm font-semibold text-[#081A33] hover:bg-[#EFF5FB] cursor-pointer"
+                      className="px-4 py-2.5 min-h-10 rounded-full border border-[#94a3b8] bg-[#e2ebf3] hover:bg-[#d5e2ee] text-sm font-semibold text-[#081A33] cursor-pointer"
                     >
                       Submit another request
                     </button>
@@ -341,24 +388,29 @@ export function QuoteSection() {
               </div>
             </div>
           ) : (
-            <form onSubmit={handleSubmit} noValidate className="space-y-6">
+            <form onSubmit={handleSubmit} noValidate className="space-y-5">
               <div>
                 <span className="block text-sm font-bold text-[#081A33] mb-2.5">
                   Request urgency
                 </span>
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5" role="group" aria-label="Request urgency">
+                <div
+                  className="grid grid-cols-1 sm:grid-cols-2 gap-3"
+                  role="group"
+                  aria-label="Request urgency"
+                >
                   <button
                     type="button"
                     aria-pressed={urgency === "standard"}
                     onClick={() => setUrgency("standard")}
-                    className={`px-4 py-2.5 min-h-11 rounded-lg border text-sm font-semibold transition-colors duration-150 cursor-pointer text-left ${
+                    className={`py-2.5 px-4 min-h-11 rounded-xl text-sm font-semibold border transition-all text-center cursor-pointer ${
                       urgency === "standard"
-                        ? "bg-[#081A33] border-[#081A33] text-white"
-                        : "bg-white border-[#C3D6EA] text-[#081A33] hover:border-[#0B6CB8]"
+                        ? "bg-[#081224] text-white border-[#081224] shadow-sm"
+                        : "bg-[#f4f8fb] text-[#081A33] border-[#94a3b8] hover:border-[#0B6CB8]"
                     }`}
                   >
                     Standard Quote / Free Inspection
                   </button>
+
                   <button
                     type="button"
                     aria-pressed={urgency === "emergency"}
@@ -366,14 +418,14 @@ export function QuoteSection() {
                       setUrgency("emergency");
                       if (!projectType) setProjectType("Repair / Leak");
                     }}
-                    className={`inline-flex items-center gap-2 px-4 py-2.5 min-h-11 rounded-lg border text-sm font-semibold transition-colors duration-150 cursor-pointer text-left ${
+                    className={`py-2.5 px-4 min-h-11 rounded-xl text-sm font-semibold border transition-all flex items-center justify-center gap-2 cursor-pointer ${
                       urgency === "emergency"
-                        ? "bg-[#B91C1C] border-[#B91C1C] text-white"
-                        : "bg-white border-[#C3D6EA] text-[#B91C1C] hover:border-[#B91C1C]"
+                        ? "bg-red-50 text-red-900 border-red-700 shadow-sm"
+                        : "bg-[#f4f8fb] text-[#7f1d1d] border-[#b97a7a] hover:border-red-700"
                     }`}
                   >
-                    <AlertTriangle className="w-4 h-4 shrink-0" />
-                    24/7 Emergency Leak — Urgent
+                    <AlertTriangle className="w-4 h-4 text-[#7f1d1d] shrink-0" />
+                    <span>24/7 Emergency Leak &mdash; Urgent</span>
                   </button>
                 </div>
               </div>
@@ -383,28 +435,28 @@ export function QuoteSection() {
                   1 &middot; What type of project is this?
                 </span>
                 <div
-                  className="grid grid-cols-2 sm:grid-cols-4 gap-2.5"
+                  className="grid grid-cols-2 sm:grid-cols-4 gap-3"
                   role="group"
                   aria-label="Project type"
                 >
-                  {PROJECT_TYPES.map((type) => {
-                    const selected = projectType === type;
+                  {PROJECT_TYPES.map((option) => {
+                    const isSelected = projectType === option;
                     return (
                       <button
-                        key={type}
+                        key={option}
                         type="button"
-                        aria-pressed={selected}
+                        aria-pressed={isSelected}
                         onClick={() => {
-                          setProjectType(type);
+                          setProjectType(option);
                           setErrorMsg("");
                         }}
-                        className={`px-3 py-2.5 min-h-11 rounded-lg border text-sm font-semibold transition-colors duration-150 cursor-pointer ${
-                          selected
-                            ? "bg-[#0E8FE8] border-[#0E8FE8] text-white"
-                            : "bg-white border-[#C3D6EA] text-[#081A33] hover:border-[#0B6CB8]"
+                        className={`py-2.5 px-3 min-h-11 rounded-xl text-sm font-semibold border transition-all cursor-pointer ${
+                          isSelected
+                            ? "bg-gradient-to-b from-[#0ea5e9] to-[#0284c7] text-white border-[#0284c7] shadow-[0_4px_12px_rgba(2,132,199,0.35)]"
+                            : "bg-[#f4f8fb] text-[#081A33] border-[#94a3b8] hover:border-[#0B6CB8]"
                         }`}
                       >
-                        {type}
+                        {option}
                       </button>
                     );
                   })}
@@ -415,25 +467,29 @@ export function QuoteSection() {
                 <span className="block text-sm font-bold text-[#081A33] mb-2.5">
                   2 &middot; What type of roof?
                 </span>
-                <div className="grid grid-cols-3 gap-2.5" role="group" aria-label="Roof type">
-                  {ROOF_TYPES.map((type) => {
-                    const selected = roofType === type;
+                <div
+                  className="grid grid-cols-1 sm:grid-cols-3 gap-3"
+                  role="group"
+                  aria-label="Roof type"
+                >
+                  {ROOF_TYPES.map((option) => {
+                    const isSelected = roofType === option;
                     return (
                       <button
-                        key={type}
+                        key={option}
                         type="button"
-                        aria-pressed={selected}
+                        aria-pressed={isSelected}
                         onClick={() => {
-                          setRoofType(type);
+                          setRoofType(option);
                           setErrorMsg("");
                         }}
-                        className={`px-3 py-2.5 min-h-11 rounded-lg border text-sm font-semibold transition-colors duration-150 cursor-pointer ${
-                          selected
-                            ? "bg-[#0E8FE8] border-[#0E8FE8] text-white"
-                            : "bg-white border-[#C3D6EA] text-[#081A33] hover:border-[#0B6CB8]"
+                        className={`py-2.5 px-4 min-h-11 rounded-xl text-sm font-semibold border transition-all cursor-pointer ${
+                          isSelected
+                            ? "bg-gradient-to-b from-[#0ea5e9] to-[#0284c7] text-white border-[#0284c7] shadow-[0_4px_12px_rgba(2,132,199,0.35)]"
+                            : "bg-[#f4f8fb] text-[#081A33] border-[#94a3b8] hover:border-[#0B6CB8]"
                         }`}
                       >
-                        {type}
+                        {option}
                       </button>
                     );
                   })}
@@ -444,14 +500,16 @@ export function QuoteSection() {
                 <label htmlFor="qDesc" className="block text-sm font-bold text-[#081A33] mb-2">
                   3 &middot; Tell us about the job
                 </label>
-                <textarea
-                  id="qDesc"
-                  value={description}
-                  onChange={(e) => setDescription(e.target.value)}
-                  rows={4}
-                  placeholder="Roof size if you know it, what's leaking, timing — anything that helps."
-                  className="w-full rounded-xl border border-[#C3D6EA] bg-white px-4 py-3 text-base text-[#081A33] placeholder:text-[#47617F] focus:outline-none focus:border-[#0B6CB8]"
-                />
+                <div className="rounded-xl bg-[#f1f6fa] border border-[#94a3b8] focus-within:border-[#0B6CB8] focus-within:ring-1 focus-within:ring-[#0B6CB8]">
+                  <textarea
+                    id="qDesc"
+                    rows={4}
+                    value={description}
+                    onChange={(e) => setDescription(e.target.value)}
+                    placeholder="Roof size if you know it, what's leaking, timing — anything that helps."
+                    className="w-full rounded-xl bg-transparent px-4 py-3 text-sm sm:text-base text-[#081A33] placeholder-[#47617F] focus:outline-none"
+                  />
+                </div>
               </div>
 
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
@@ -466,9 +524,11 @@ export function QuoteSection() {
                     autoComplete="name"
                     value={name}
                     onChange={(e) => setName(e.target.value)}
-                    className="w-full min-h-12 rounded-xl border border-[#C3D6EA] bg-white px-4 py-2.5 text-base text-[#081A33] focus:outline-none focus:border-[#0B6CB8]"
+                    placeholder="Full name"
+                    className="w-full min-h-11 rounded-xl bg-[#f1f6fa] border border-[#94a3b8] px-4 py-2.5 text-sm sm:text-base text-[#081A33] placeholder-[#47617F] focus:outline-none focus:border-[#0B6CB8] focus:ring-1 focus:ring-[#0B6CB8]"
                   />
                 </div>
+
                 <div>
                   <label htmlFor="qPhone" className="block text-sm font-bold text-[#081A33] mb-1.5">
                     Phone *
@@ -481,9 +541,10 @@ export function QuoteSection() {
                     value={phone}
                     onChange={(e) => setPhone(e.target.value)}
                     placeholder="(506) 555-0199"
-                    className="w-full min-h-12 rounded-xl border border-[#C3D6EA] bg-white px-4 py-2.5 text-base text-[#081A33] placeholder:text-[#47617F] focus:outline-none focus:border-[#0B6CB8]"
+                    className="w-full min-h-11 rounded-xl bg-[#f1f6fa] border border-[#94a3b8] px-4 py-2.5 text-sm sm:text-base text-[#081A33] placeholder-[#47617F] focus:outline-none focus:border-[#0B6CB8] focus:ring-1 focus:ring-[#0B6CB8]"
                   />
                 </div>
+
                 <div>
                   <label htmlFor="qEmail" className="block text-sm font-bold text-[#081A33] mb-1.5">
                     Email
@@ -494,9 +555,11 @@ export function QuoteSection() {
                     autoComplete="email"
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
-                    className="w-full min-h-12 rounded-xl border border-[#C3D6EA] bg-white px-4 py-2.5 text-base text-[#081A33] focus:outline-none focus:border-[#0B6CB8]"
+                    placeholder="Email"
+                    className="w-full min-h-11 rounded-xl bg-[#f1f6fa] border border-[#94a3b8] px-4 py-2.5 text-sm sm:text-base text-[#081A33] placeholder-[#47617F] focus:outline-none focus:border-[#0B6CB8] focus:ring-1 focus:ring-[#0B6CB8]"
                   />
                 </div>
+
                 <div>
                   <label htmlFor="qTown" className="block text-sm font-bold text-[#081A33] mb-1.5">
                     Town
@@ -507,7 +570,7 @@ export function QuoteSection() {
                     value={town}
                     onChange={(e) => setTown(e.target.value)}
                     placeholder="e.g. Quispamsis"
-                    className="w-full min-h-12 rounded-xl border border-[#C3D6EA] bg-white px-4 py-2.5 text-base text-[#081A33] placeholder:text-[#47617F] focus:outline-none focus:border-[#0B6CB8]"
+                    className="w-full min-h-11 rounded-xl bg-[#f1f6fa] border border-[#94a3b8] px-4 py-2.5 text-sm sm:text-base text-[#081A33] placeholder-[#47617F] focus:outline-none focus:border-[#0B6CB8] focus:ring-1 focus:ring-[#0B6CB8]"
                   />
                 </div>
               </div>
@@ -522,10 +585,10 @@ export function QuoteSection() {
                 <button
                   type="submit"
                   disabled={submitting}
-                  className={`px-6 py-3 min-h-12 rounded-lg text-white font-display text-base font-bold cursor-pointer transition-colors duration-150 disabled:opacity-60 ${
+                  className={`px-6 py-2.5 min-h-11 rounded-full text-white font-display font-bold text-sm transition-all cursor-pointer disabled:opacity-60 ${
                     urgency === "emergency"
-                      ? "bg-[#B91C1C] hover:bg-[#991B1B]"
-                      : "bg-[#0E8FE8] hover:bg-[#0B6CB8]"
+                      ? "bg-[#B91C1C] hover:bg-[#991B1B] shadow-[0_4px_14px_rgba(185,28,28,0.35)]"
+                      : "btn-quote-glow"
                   }`}
                 >
                   {submitting
@@ -537,22 +600,22 @@ export function QuoteSection() {
 
                 <a
                   href={CONTACT.phoneHref}
-                  className="inline-flex items-center justify-center gap-2 px-5 py-3 min-h-12 rounded-lg bg-[#081A33] hover:bg-[#0B6CB8] text-white font-display text-sm font-bold transition-colors duration-150"
+                  className="btn-call-glow px-5 py-2.5 min-h-11 font-display font-bold text-sm inline-flex items-center gap-2"
                 >
-                  <Phone className="w-4 h-4" />
-                  Call {CONTACT.phoneDisplay}
+                  <Phone className="w-4 h-4 text-[#45BCFF]" />
+                  <span>Call {CONTACT.phoneDisplay}</span>
                 </a>
 
                 <a
                   href={CONTACT.emailHref}
-                  className="inline-flex items-center justify-center gap-2 px-4 py-3 min-h-12 rounded-lg border border-[#C3D6EA] hover:border-[#0B6CB8] text-[#081A33] font-semibold text-sm transition-colors duration-150"
+                  className="px-5 py-2.5 min-h-11 rounded-full bg-[#e2ebf3] hover:bg-[#d5e2ee] text-[#081A33] font-semibold text-sm border border-[#94a3b8] transition-all inline-flex items-center gap-2"
                 >
-                  <Mail className="w-4 h-4" />
-                  Email {CONTACT.email}
+                  <Mail className="w-4 h-4 text-[#47617F]" />
+                  <span>Email: {CONTACT.email}</span>
                 </a>
               </div>
 
-              <p className="text-xs sm:text-sm text-[#47617F]">{CONTACT.hours}</p>
+              <p className="text-xs sm:text-sm text-[#47617F] pt-1">{CONTACT.hours}</p>
             </form>
           )}
         </div>
@@ -632,3 +695,5 @@ export function QuoteSection() {
     </section>
   );
 }
+
+export default QuoteSection;

@@ -110,8 +110,8 @@ export function AboutAndAreasSection() {
             <div className="lg:col-span-6">
               <div className="h-full overflow-hidden rounded-2xl border border-[#C3D6EA] bg-[#081A33]">
                 <img
-                  src="/images/work-white-siding-metal.jpg"
-                  alt="Five white Southern New Brunswick homes with standing-seam metal roofs in red, blue, green, charcoal and copper tones with the official Paul's Roofing emblem."
+                  src="/images/street-houses-clean.jpg"
+                  alt="Five white Southern New Brunswick homes with standing-seam metal roofs in red, blue, green, charcoal and copper tones."
                   loading="lazy"
                   referrerPolicy="no-referrer"
                   className="w-full h-auto block"
