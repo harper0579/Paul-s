@@ -7,8 +7,8 @@ export function Hero() {
     <section className="bg-[#050D20] text-white">
       <div className="relative bg-[#050D20] overflow-hidden">
         <img
-          src="/images/hero-bridge.jpg"
-          alt="Damascus covered bridge near Hampton, New Brunswick at sunset with the Paul's Roofing logo over the bridge and river."
+          src="/assets/aistudio/image_b39e51-stop-with-the-30-years-strong-and-better-call-paul-try-the-first-damascus-bridge-image_f8b7f0a6.jpg"
+          alt="Damascus covered bridge near Hampton, New Brunswick at sunset with the Paul's Roofing emblem over the bridge and river."
           className="w-full h-auto md:max-h-[540px] md:w-auto md:mx-auto object-contain block"
           fetchPriority="high"
           referrerPolicy="no-referrer"
@@ -36,16 +36,16 @@ export function Hero() {
         <div className="mt-7 flex flex-wrap items-center gap-3">
           <Link
             to="/quote"
-            className="inline-flex items-center justify-center px-6 py-3 min-h-12 rounded-lg bg-[#0E8FE8] hover:bg-[#0B7ED6] text-white font-display font-bold text-base whitespace-nowrap shrink-0 transition-colors duration-150 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white"
+            className="btn-quote-glow inline-flex items-center justify-center px-6 py-3 min-h-12 font-display font-extrabold text-base whitespace-nowrap shrink-0 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white"
           >
             Get a Free Quote
           </Link>
 
           <a
             href={CONTACT.phoneHref}
-            className="inline-flex items-center justify-center gap-2 px-5 py-3 min-h-12 rounded-lg bg-white hover:bg-[#E1EFFC] text-[#081A33] font-display font-bold text-base whitespace-nowrap shrink-0 transition-colors duration-150 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#45BCFF]"
+            className="btn-call-glow inline-flex items-center justify-center gap-2 px-6 py-3 min-h-12 font-display font-extrabold text-base whitespace-nowrap shrink-0 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#45BCFF]"
           >
-            <Phone className="w-4 h-4 shrink-0" />
+            <Phone className="w-4 h-4 text-[#45BCFF] drop-shadow-[0_0_6px_rgba(69,188,255,0.8)] shrink-0" />
             Call {CONTACT.phoneDisplay}
           </a>
 

@@ -26,17 +26,33 @@ export function WinterHelpSection() {
       className="scroll-mt-20 py-14 lg:py-16 bg-[#E4EFFA] border-b border-[#C3D6EA]"
     >
       <div className="max-w-6xl mx-auto px-4 lg:px-6">
-        <p className="text-xs font-bold tracking-wider uppercase text-[#0B6CB8]">
-          Winter in New Brunswick
-        </p>
-        <h1 className="mt-2 font-display text-3xl sm:text-4xl font-extrabold text-[#081A33]">
-          Winter help — before the snow piles up
-        </h1>
-        <p className="mt-3 text-base text-[#2A3D57] max-w-2xl leading-relaxed">
-          November is when small roof problems turn into January leaks. Four things we get called
-          for most in winter — plain and simple. If water is coming in right now, skip the reading
-          and tap Call.
-        </p>
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
+          <div className="lg:col-span-7">
+            <p className="text-xs font-bold tracking-wider uppercase text-[#0B6CB8]">
+              Winter in New Brunswick
+            </p>
+            <h1 className="mt-2 font-display text-3xl sm:text-4xl font-extrabold text-[#081A33]">
+              Winter help — before the snow piles up
+            </h1>
+            <p className="mt-3 text-base text-[#2A3D57] max-w-2xl leading-relaxed">
+              November is when small roof problems turn into January leaks. Four things we get
+              called for most in winter — plain and simple. If water is coming in right now, skip
+              the reading and tap Call.
+            </p>
+          </div>
+
+          <div className="lg:col-span-5">
+            <div className="overflow-hidden rounded-2xl border border-[#C3D6EA] bg-[#081A33] max-w-md lg:ml-auto">
+              <img
+                src="/assets/aistudio/image_b39e51-stop-with-the-30-years-strong-and-better-call-paul_d90b71d9.jpg"
+                alt="Misty Atlantic morning over the Damascus Covered Bridge with the official Paul's Roofing emblem."
+                loading="lazy"
+                referrerPolicy="no-referrer"
+                className="w-full h-auto block"
+              />
+            </div>
+          </div>
+        </div>
 
         <div className="mt-8 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
           {WINTER_SERVICES.map((svc) => (

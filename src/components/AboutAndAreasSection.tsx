@@ -110,11 +110,11 @@ export function AboutAndAreasSection() {
             <div className="lg:col-span-6">
               <div className="h-full overflow-hidden rounded-2xl border border-[#C3D6EA] bg-[#081A33]">
                 <img
-                  src="/images/about-street-aerial.jpg"
-                  alt="Aerial view of a Southern New Brunswick street with metal roofs in red, blue, green, charcoal and copper tones."
+                  src="/assets/aistudio/image_20261119_165749_a82f68e5.jpg"
+                  alt="Five white Southern New Brunswick homes with standing-seam metal roofs in red, blue, green, charcoal and copper tones with the official Paul's Roofing emblem."
                   loading="lazy"
                   referrerPolicy="no-referrer"
-                  className="w-full aspect-video lg:aspect-auto lg:h-full object-cover block"
+                  className="w-full h-auto block"
                 />
               </div>
             </div>
@@ -173,15 +173,28 @@ export function AboutAndAreasSection() {
         className="scroll-mt-20 py-14 lg:py-16 bg-[#EFF5FB] border-y border-[#C3D6EA]"
       >
         <div className="max-w-6xl mx-auto px-4 lg:px-6">
-          <p className="text-xs font-bold tracking-wider uppercase text-[#0B6CB8]">Where we work</p>
-          <h2 className="mt-2 font-display text-3xl sm:text-4xl font-extrabold text-[#081A33]">
-            Service area — town by town
-          </h2>
-          <p className="mt-3 text-base text-[#47617F] max-w-2xl">
-            Based in Quispamsis, working across Southern New Brunswick. Free inspections, itemized
-            quotes and 24/7 emergency service in every town below. Select your town to start a
-            quote.
-          </p>
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
+            <div className="lg:col-span-6">
+              <p className="text-xs font-bold tracking-wider uppercase text-[#0B6CB8]">Where we work</p>
+              <h2 className="mt-2 font-display text-3xl sm:text-4xl font-extrabold text-[#081A33]">
+                Service area — town by town
+              </h2>
+              <p className="mt-3 text-base text-[#47617F] max-w-2xl">
+                Based in Quispamsis, working across Southern New Brunswick. Free inspections,
+                itemized quotes and 24/7 emergency service in every town below. Select your town to
+                start a quote.
+              </p>
+            </div>
+            <div className="lg:col-span-6 overflow-hidden rounded-2xl border border-[#C3D6EA] bg-[#081A33]">
+              <img
+                src="/assets/aistudio/image_20261119_170401_f37b1277.jpg"
+                alt="Aerial view across Saint John skyline and Atlantic harbour communities served by Paul's Roofing."
+                loading="lazy"
+                referrerPolicy="no-referrer"
+                className="w-full h-auto block"
+              />
+            </div>
+          </div>
 
           <div className="mt-8 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
             {SERVICE_AREAS.map((area) => (

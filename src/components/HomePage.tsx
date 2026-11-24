@@ -72,11 +72,11 @@ export function HomePage() {
 
           <div className="mt-7 grid grid-cols-1 lg:grid-cols-12 gap-5">
             <article className="lg:col-span-6 rounded-2xl border border-[#C3D6EA] bg-white overflow-hidden flex flex-col justify-between">
-              <div className="bg-[#081A33] overflow-hidden">
+              <div className="bg-[#050D20] overflow-hidden">
                 <img
-                  src="/images/service-metal.jpg"
-                  alt="House with a dark metal roof at sunset and metal roofing panels laid out in front."
-                  className="w-full aspect-video object-cover block"
+                  src="/assets/aistudio/image_20261119_165746_b2f595d0.jpg"
+                  alt="New Brunswick home with dark charcoal standing-seam metal roofing at sunset and four colour panels in front, with the official Paul's Roofing emblem."
+                  className="w-full h-auto block"
                   loading="lazy"
                   referrerPolicy="no-referrer"
                 />
@@ -321,8 +321,8 @@ export function HomePage() {
       </section>
 
       <section className="py-12 lg:py-14 bg-[#050D20] text-white border-t border-white/10">
-        <div className="max-w-6xl mx-auto px-4 lg:px-6 flex flex-col lg:flex-row lg:items-center justify-between gap-6">
-          <div className="max-w-2xl">
+        <div className="max-w-6xl mx-auto px-4 lg:px-6 grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
+          <div className="lg:col-span-6">
             <p className="text-xs font-bold tracking-wider uppercase text-[#45BCFF]">
               Free inspections &middot; Itemized quotes
             </p>
@@ -337,22 +337,31 @@ export function HomePage() {
               </Link>
               .
             </p>
+            <div className="mt-6 flex flex-wrap items-center gap-3">
+              <Link
+                to="/quote"
+                className="btn-quote-glow inline-flex items-center justify-center px-6 py-3 min-h-12 font-display font-extrabold text-base whitespace-nowrap"
+              >
+                Get a Free Quote
+              </Link>
+              <a
+                href={CONTACT.phoneHref}
+                className="btn-call-glow inline-flex items-center justify-center gap-2 px-6 py-3 min-h-12 font-display font-extrabold text-base whitespace-nowrap"
+              >
+                <Phone className="w-4 h-4 text-[#45BCFF] drop-shadow-[0_0_6px_rgba(69,188,255,0.8)] shrink-0" />
+                Call {CONTACT.phoneDisplay}
+              </a>
+            </div>
           </div>
 
-          <div className="flex flex-wrap items-center gap-3 shrink-0">
-            <Link
-              to="/quote"
-              className="inline-flex items-center justify-center px-6 py-3 min-h-12 rounded-lg bg-[#0E8FE8] hover:bg-[#0B7ED6] text-white font-display font-bold text-base whitespace-nowrap transition-colors"
-            >
-              Get a Free Quote
-            </Link>
-            <a
-              href={CONTACT.phoneHref}
-              className="inline-flex items-center justify-center gap-2 px-5 py-3 min-h-12 rounded-lg bg-white hover:bg-[#E1EFFC] text-[#081A33] font-display font-bold text-base whitespace-nowrap transition-colors"
-            >
-              <Phone className="w-4 h-4" />
-              Call {CONTACT.phoneDisplay}
-            </a>
+          <div className="lg:col-span-6 overflow-hidden rounded-2xl border border-white/15 bg-[#081A33]">
+            <img
+              src="/assets/aistudio/Gemini_Generated_Image_i1ydzdi1ydzdi1yd_1e49a471.jpg"
+              alt="Paul's Roofing GMC service truck with ladders outside a dark metal-roofed home — Serving Quispamsis, NB and surrounding areas."
+              loading="lazy"
+              referrerPolicy="no-referrer"
+              className="w-full h-auto block"
+            />
           </div>
         </div>
       </section>

@@ -11,13 +11,11 @@ export function Footer() {
             <div>
               <Link to="/" className="inline-block">
                 <img
-                  src="/images/logo-footer.jpg"
-                  alt="Paul's Roofing logo — blue rooftops over the words Paul's Roofing"
-                  width={1161}
-                  height={536}
+                  src="/assets/aistudio/image_2285dc99.png"
+                  alt="Paul's Roofing — Atlantic Canada's Trusted Roofing Experts official emblem"
                   loading="lazy"
                   referrerPolicy="no-referrer"
-                  className="w-44 h-auto rounded-lg bg-white p-1.5"
+                  className="w-44 h-auto rounded-xl border border-white/15 block"
                 />
               </Link>
               <p className="mt-3 text-sm text-[#C9DDF3] leading-relaxed">
@@ -119,20 +117,20 @@ export function Footer() {
       </footer>
 
       <div
-        className="lg:hidden fixed bottom-0 inset-x-0 z-40 bg-white border-t border-[#C3D6EA] px-3 py-2 flex gap-2"
+        className="lg:hidden fixed bottom-0 inset-x-0 z-40 bg-white/95 backdrop-blur-sm border-t border-[#C3D6EA] px-3 py-2 flex gap-2.5"
         role="navigation"
         aria-label="Quick contact"
       >
         <a
           href={CONTACT.phoneHref}
-          className="flex-1 inline-flex items-center justify-center gap-1.5 min-h-11 rounded-lg bg-[#081A33] text-white font-display text-sm font-bold"
+          className="btn-call-glow flex-1 inline-flex items-center justify-center gap-2 min-h-11 px-4 font-display text-sm font-extrabold tracking-tight"
         >
-          <Phone className="w-4 h-4" />
+          <Phone className="w-4 h-4 text-[#45BCFF] drop-shadow-[0_0_6px_rgba(69,188,255,0.8)] shrink-0" />
           Call Paul
         </a>
         <Link
           to="/quote"
-          className="flex-1 inline-flex items-center justify-center min-h-11 rounded-lg bg-[#0E8FE8] text-white font-display text-sm font-bold"
+          className="btn-quote-glow flex-1 inline-flex items-center justify-center min-h-11 px-4 font-display text-sm font-extrabold tracking-tight"
         >
           Free Quote
         </Link>

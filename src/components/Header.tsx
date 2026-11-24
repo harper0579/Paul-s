@@ -26,9 +26,17 @@ export function Header() {
         <Link
           to="/"
           onClick={() => setMobileOpen(false)}
-          className="font-display text-xl font-extrabold tracking-tight text-[#081A33] whitespace-nowrap shrink-0 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#0B6CB8]"
+          className="inline-flex items-center gap-2.5 font-display text-xl font-extrabold tracking-tight text-[#081A33] whitespace-nowrap shrink-0 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#0B6CB8]"
         >
-          Paul&apos;s <span className="text-[#0B6CB8]">Roofing</span>
+          <img
+            src="/assets/aistudio/image_2285dc99.png"
+            alt=""
+            aria-hidden="true"
+            className="w-9 h-9 rounded-lg object-cover shrink-0"
+          />
+          <span>
+            Paul&apos;s <span className="text-[#0B6CB8]">Roofing</span>
+          </span>
         </Link>
 
         <nav className="hidden lg:flex items-center gap-7" aria-label="Primary navigation">
@@ -54,10 +62,8 @@ export function Header() {
             to="/quote"
             onClick={() => setMobileOpen(false)}
             className={({ isActive }) =>
-              `inline-flex items-center justify-center px-4 py-2.5 min-h-10 rounded-lg font-display text-sm font-bold whitespace-nowrap shrink-0 transition-colors duration-150 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#081A33] ${
-                isActive
-                  ? "bg-[#081A33] text-white"
-                  : "bg-[#0E8FE8] hover:bg-[#0B6CB8] text-white"
+              `inline-flex items-center justify-center px-4 py-2 min-h-10 font-display text-sm font-extrabold whitespace-nowrap shrink-0 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#081A33] ${
+                isActive ? "btn-call-glow" : "btn-quote-glow"
               }`
             }
           >

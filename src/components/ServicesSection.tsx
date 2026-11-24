@@ -85,9 +85,9 @@ export function ServicesSection() {
               <div className="lg:col-span-6 flex flex-col justify-between gap-6">
                 <div className="overflow-hidden rounded-xl border border-[#C3D6EA] bg-[#081A33]">
                   <img
-                    src="/images/service-metal.jpg"
-                    alt="House with a dark metal roof at sunset, with red, green, charcoal and brown metal roofing panels laid out in front."
-                    className="w-full aspect-video object-cover block"
+                    src="/assets/aistudio/image_20261119_165746_b2f595d0.jpg"
+                    alt="New Brunswick home with dark charcoal standing-seam metal roofing at sunset with four metal roofing panels laid out in front and the official Paul's Roofing emblem."
+                    className="w-full h-auto block"
                     loading="lazy"
                     referrerPolicy="no-referrer"
                   />
@@ -177,6 +177,21 @@ export function ServicesSection() {
                       <ArrowUpRight className="w-3.5 h-3.5" />
                     </a>
                   </div>
+
+                  <div className="mt-5 pt-4 border-t border-[#C3D6EA]">
+                    <p className="text-xs font-bold uppercase tracking-wider text-[#47617F] mb-2">
+                      Full showroom metal sample wall (24 panel colours)
+                    </p>
+                    <div className="overflow-hidden rounded-lg border border-[#C3D6EA] bg-white">
+                      <img
+                        src="/assets/aistudio/August_2025_Color_Wall_350d67df.jpg"
+                        alt="Showroom wall of 24 real steel roofing panel samples including Copper, Shiny Black, Burnished Slate, Charcoal, Hartford Green, Burgundy, Crimson Red, Gallery Blue, Stone, Bright White, Gold, Tan, and Galvalume."
+                        loading="lazy"
+                        referrerPolicy="no-referrer"
+                        className="w-full h-auto block"
+                      />
+                    </div>
+                  </div>
                 </div>
               </div>
             </div>
@@ -189,6 +204,17 @@ export function ServicesSection() {
                 className="rounded-xl border border-[#C3D6EA] bg-white p-6 flex flex-col justify-between"
               >
                 <div>
+                  {svc.hasVisualizers && (
+                    <div className="mb-4 overflow-hidden rounded-lg border border-[#C3D6EA] bg-[#081A33]">
+                      <img
+                        src="/assets/aistudio/image_cf4540c8.png"
+                        alt="Two-storey Southern New Brunswick home with charcoal architectural asphalt shingles and the official Paul's Roofing emblem."
+                        loading="lazy"
+                        referrerPolicy="no-referrer"
+                        className="w-full h-auto block"
+                      />
+                    </div>
+                  )}
                   <h2 className="font-display text-xl font-bold text-[#081A33]">{svc.title}</h2>
                   <p className="mt-2.5 text-sm sm:text-base text-[#47617F] leading-relaxed">
                     {svc.description}
