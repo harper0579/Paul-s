@@ -17,6 +17,7 @@ export interface Article {
   date: string;
   read: number;
   excerpt: string;
+  image?: string;
   blocks: ArticleBlock[];
   faq: [string, string][];
 }
@@ -42,6 +43,7 @@ export const ARTICLES: Article[] = [
     "date": "2025-07-12",
     "read": 6,
     "excerpt": "Metal roof colours for Quispamsis and Rothesay homes — how light, siding, trees and NB sun change the colour you pick, plus how to try colours on your own house first.",
+    "image": "/images/blog-01-metal-roof-colour.webp",
     "blocks": [
       {
         "type": "p",
@@ -153,6 +155,7 @@ export const ARTICLES: Article[] = [
     "date": "2025-07-05",
     "read": 7,
     "excerpt": "Metal vs shingles in New Brunswick: lifespan, upkeep, weather resistance and energy — an honest side-by-side from a Saint John area roofer with no sales pitch.",
+    "image": "/images/blog-02-metal-vs-shingles-guide.webp",
     "blocks": [
       {
         "type": "p",
@@ -267,6 +270,7 @@ export const ARTICLES: Article[] = [
     "date": "2025-06-28",
     "read": 5,
     "excerpt": "Getting a new roof in Hampton or Quispamsis? A simple day-before and day-of checklist: vehicles, pets, attic items, neighbours and what the crew needs from you.",
+    "image": "/images/blog-03-preparing-for-installation.webp",
     "blocks": [
       {
         "type": "p",
@@ -375,6 +379,7 @@ export const ARTICLES: Article[] = [
     "date": "2025-11-08",
     "read": 5,
     "excerpt": "Winterizing your roof in Rothesay and Quispamsis before the snow: gutters, flashing, attic ventilation and the small fixes that stop ice dams and January leaks.",
+    "image": "/images/blog-04-winterizing-your-roof.webp",
     "blocks": [
       {
         "type": "p",
@@ -495,6 +500,7 @@ export const ARTICLES: Article[] = [
     "date": "2025-09-14",
     "read": 6,
     "excerpt": "What a full roof replacement actually involves in Quispamsis NB — tear-off, deck inspection, underlayment, flashing, installation and the final walk-through, step by step.",
+    "image": "/images/blog-05-roof-replacement-involves.webp",
     "blocks": [
       {
         "type": "p",
@@ -611,6 +617,7 @@ export const ARTICLES: Article[] = [
     "date": "2025-08-19",
     "read": 5,
     "excerpt": "A needed roof in Saint John should not wait on a leak getting worse. How roof cost is built, what affects it, and how to plan for it — financing is coming soon.",
+    "image": "/images/blog-06-making-roof-affordable.webp",
     "blocks": [
       {
         "type": "p",
@@ -722,6 +729,7 @@ export const ARTICLES: Article[] = [
     "date": "2026-01-18",
     "read": 7,
     "excerpt": "Metal roof cost in New Brunswick explained without fake numbers: the size, pitch, tear-off, trim and access factors that drive a Quispamsis metal roof quote.",
+    "image": "/images/blog-07-metal-roof-cost-nb.webp",
     "blocks": [
       {
         "type": "p",
@@ -838,6 +846,7 @@ export const ARTICLES: Article[] = [
     "date": "2025-10-05",
     "read": 7,
     "excerpt": "Standing seam vs screw-down (exposed fastener) metal roofing in New Brunswick — how each system works, where each shines, and what Rothesay homeowners should ask.",
+    "image": "/images/blog-08-standing-seam-vs-screw-down.webp",
     "blocks": [
       {
         "type": "p",
@@ -941,6 +950,7 @@ export const ARTICLES: Article[] = [
     "date": "2025-09-28",
     "read": 6,
     "excerpt": "How long a metal roof lasts in Atlantic Canada: 50+ years with the right install — and the salt air, snow load and freeze-thaw factors that decide it in Saint John.",
+    "image": "/images/blog-09-how-long-metal-roof-lasts.webp",
     "blocks": [
       {
         "type": "p",
@@ -1044,6 +1054,7 @@ export const ARTICLES: Article[] = [
     "date": "2025-08-31",
     "read": 6,
     "excerpt": "Curling, bald spots, granules in the gutters — 9 signs your shingles in Hampton NB are at end of life, and how to tell repair from replacement.",
+    "image": "/images/blog-10-signs-shingles-need-replacing.webp",
     "blocks": [
       {
         "type": "p",
@@ -1159,6 +1170,7 @@ export const ARTICLES: Article[] = [
     "date": "2025-10-19",
     "read": 6,
     "excerpt": "IKO vs BP architectural shingles for New Brunswick homes — what actually differs, what is marketing, and how to use the IKO and BP visualizers to choose a colour.",
+    "image": "/images/blog-11-iko-vs-bp-shingles.webp",
     "blocks": [
       {
         "type": "p",
@@ -1259,6 +1271,7 @@ export const ARTICLES: Article[] = [
     "date": "2026-02-08",
     "read": 8,
     "excerpt": "Ice dams in Quispamsis and Rothesay explained: heat loss, the freeze line at your eaves, and the permanent fixes — insulation, ventilation and ice-and-water shield.",
+    "image": "/images/blog-12-ice-dams-explained.webp",
     "blocks": [
       {
         "type": "p",
@@ -1354,6 +1367,7 @@ export const ARTICLES: Article[] = [
     "date": "2026-01-25",
     "read": 6,
     "excerpt": "Roof leaking in winter in Saint John NB? The first 24 hours matter: contain the water, protect the house, what not to climb on, and when it is a 24/7 emergency call.",
+    "image": "/images/blog-13-roof-leaking-winter.webp",
     "blocks": [
       {
         "type": "p",
@@ -1565,6 +1579,7 @@ export const ARTICLES: Article[] = [
     "date": "2025-10-26",
     "read": 6,
     "excerpt": "Fall roof inspection checklist for New Brunswick: shingles, flashing, gutters, attic and vents — what to check in October in Quispamsis before winter tests your roof.",
+    "image": "/images/blog-15-fall-roof-inspection-checklist.webp",
     "blocks": [
       {
         "type": "p",
@@ -1660,6 +1675,7 @@ export const ARTICLES: Article[] = [
     "date": "2025-09-07",
     "read": 7,
     "excerpt": "Attic ventilation in New Brunswick homes: how soffit and ridge vents work together, why poor airflow cooks shingles and builds ice dams, and the signs in your attic.",
+    "image": "/images/blog-16-roof-ventilation-guide.webp",
     "blocks": [
       {
         "type": "p",
@@ -1763,6 +1779,7 @@ export const ARTICLES: Article[] = [
     "date": "2025-11-15",
     "read": 6,
     "excerpt": "Gutters in New Brunswick: cleaning schedule, repairs, and how clogged gutters in Grand Bay-Westfield back water under shingles, rot fascia and feed ice dams.",
+    "image": "/images/blog-17-gutter-guide-nb.webp",
     "blocks": [
       {
         "type": "p",
@@ -1866,6 +1883,7 @@ export const ARTICLES: Article[] = [
     "date": "2025-08-10",
     "read": 5,
     "excerpt": "Moss and algae on shingles on the Kingston Peninsula: which growth is cosmetic, which holds moisture and lifts shingles, and how to clean without damaging the roof.",
+    "image": "/images/blog-18-moss-algae-shingles.webp",
     "blocks": [
       {
         "type": "p",
@@ -1969,6 +1987,7 @@ export const ARTICLES: Article[] = [
     "date": "2025-12-06",
     "read": 7,
     "excerpt": "Repair or replace your roof in Hampton NB? Age, damage spread, deck condition and leak history — the honest decision framework Paul uses, including when repair is a waste.",
+    "image": "/images/blog-19-roof-repair-vs-replacement.webp",
     "blocks": [
       {
         "type": "p",
@@ -2089,6 +2108,7 @@ export const ARTICLES: Article[] = [
     "date": "2025-07-26",
     "read": 6,
     "excerpt": "Metal roofing in Hampton NB: farmhouses, snow load, colour choices and cost factors — the questions Hampton homeowners ask Paul's Roofing most, answered straight.",
+    "image": "/images/blog-20-metal-roof-hampton.webp",
     "blocks": [
       {
         "type": "p",
@@ -2200,6 +2220,7 @@ export const ARTICLES: Article[] = [
     "date": "2025-08-02",
     "read": 7,
     "excerpt": "Roofing in Quispamsis and Rothesay NB: replacement timing, common local leak causes, metal roof popularity and what a local quote should include — from a Quispamsis roofer.",
+    "image": "/images/blog-21-roofing-quispamsis-rothesay.webp",
     "blocks": [
       {
         "type": "p",
@@ -2298,6 +2319,7 @@ export const ARTICLES: Article[] = [
     "date": "2026-02-15",
     "read": 6,
     "excerpt": "Snow load and winter roof damage in New Brunswick: how much snow is too much in Sussex and Southern NB, the warning signs of overload, and when to clear a roof safely.",
+    "image": "/images/blog-22-winter-roof-damage-snow-load.webp",
     "blocks": [
       {
         "type": "p",
@@ -2396,6 +2418,7 @@ export const ARTICLES: Article[] = [
     "date": "2026-03-22",
     "read": 6,
     "excerpt": "Spring roof check in Saint John NB: lifted shingles, flashing damage, gutter overload and attic moisture — what winter did to your roof and what to fix first.",
+    "image": "/images/blog-23-spring-roof-check.webp",
     "blocks": [
       {
         "type": "p",
@@ -2496,6 +2519,7 @@ export const ARTICLES: Article[] = [
     "date": "2025-12-13",
     "read": 6,
     "excerpt": "Chimney flashing leaks in Rothesay NB: step flashing, counterflashing and cricket basics — why chimneys leak first, and why caulk is not a flashing repair.",
+    "image": "/images/blog-24-chimney-flashing-leaks.webp",
     "blocks": [
       {
         "type": "p",
@@ -2591,6 +2615,7 @@ export const ARTICLES: Article[] = [
     "date": "2025-11-29",
     "read": 6,
     "excerpt": "Metal roof myths for Grand Bay-Westfield homeowners: rain noise, lightning, rust and cell signal — what is actually true, from 30 years of installing metal in NB.",
+    "image": "/images/blog-25-metal-roof-noise-myths.webp",
     "blocks": [
       {
         "type": "p",
@@ -2710,6 +2735,7 @@ export const ARTICLES: Article[] = [
     "date": "2026-03-08",
     "read": 6,
     "excerpt": "Selling a home in Quispamsis NB with an old roof? What a new roof does for buyers, inspectors and lenders — and when a repair and a condition report are the smarter move.",
+    "image": "/images/blog-26-new-roof-before-selling.webp",
     "blocks": [
       {
         "type": "p",
@@ -2820,6 +2846,7 @@ export const ARTICLES: Article[] = [
     "date": "2025-07-19",
     "read": 6,
     "excerpt": "How old is too old for a roof in New Brunswick? Age guide for shingle and metal roofs in Sussex NB — expected service life, and the condition signs that matter more than birthdays.",
+    "image": "/images/blog-27-roof-age-guide.webp",
     "blocks": [
       {
         "type": "p",
@@ -2923,6 +2950,7 @@ export const ARTICLES: Article[] = [
     "date": "2025-09-20",
     "read": 6,
     "excerpt": "Roofing in Grand Bay-Westfield, Sussex and St. Martins NB: coastal wind, valley snow and village roofs — one local crew for metal, shingles, repairs and emergencies across Southern NB.",
+    "image": "/images/blog-28-grand-bay-sussex-st-martins.webp",
     "blocks": [
       {
         "type": "p",
@@ -3036,6 +3064,7 @@ export const ARTICLES: Article[] = [
     "date": "2026-01-11",
     "read": 6,
     "excerpt": "Snow rails on metal roofs in New Brunswick: why metal sheds snow in one slide, where rails belong — doors, decks, walkways — and when a Quispamsis home needs them.",
+    "image": "/images/blog-29-snow-rails-metal-roof.webp",
     "blocks": [
       {
         "type": "p",
@@ -3123,6 +3152,7 @@ export const ARTICLES: Article[] = [
     "date": "2026-02-01",
     "read": 6,
     "excerpt": "Ice and water shield explained for Rothesay and NB homeowners: what the self-sealing membrane does at eaves and valleys, where it belongs, and why skipping it is false economy.",
+    "image": "/images/blog-30-ice-and-water-shield.webp",
     "blocks": [
       {
         "type": "p",
@@ -3218,6 +3248,7 @@ export const ARTICLES: Article[] = [
     "date": "2025-10-12",
     "read": 5,
     "excerpt": "Drip edge, fascia and soffit in Saint John NB: what each piece at your roof edge does, how rot starts, and the signs your eave line needs attention before the roof does.",
+    "image": "/images/blog-31-drip-edge-fascia-soffit.webp",
     "blocks": [
       {
         "type": "p",
@@ -3313,6 +3344,7 @@ export const ARTICLES: Article[] = [
     "date": "2025-11-02",
     "read": 5,
     "excerpt": "Skylight and vent leaks in Hampton NB: cracked vent boots, tired skylight seals and the flashing details behind most 'mystery' ceiling stains — and the right fix for each.",
+    "image": "/images/blog-32-skylight-vent-leaks.webp",
     "blocks": [
       {
         "type": "p",
@@ -3403,6 +3435,7 @@ export const ARTICLES: Article[] = [
     "date": "2025-09-21",
     "read": 6,
     "excerpt": "What a free roof inspection in Quispamsis actually covers: shingles or panels, flashing, valleys, gutters, eaves and the attic — and the straight report you get at the end.",
+    "image": "/images/blog-33-what-paul-checks-inspection.webp",
     "blocks": [
       {
         "type": "p",
@@ -3503,6 +3536,7 @@ export const ARTICLES: Article[] = [
     "date": "2025-08-24",
     "read": 6,
     "excerpt": "Metal roof maintenance in Sussex NB: the short, honest list — fasteners, sealants, valleys, scratches and debris — that carries a metal roof to its full 50+ year life.",
+    "image": "/images/blog-34-metal-roof-maintenance.webp",
     "blocks": [
       {
         "type": "p",
@@ -3603,6 +3637,7 @@ export const ARTICLES: Article[] = [
     "date": "2026-03-15",
     "read": 5,
     "excerpt": "Best time to book a roof replacement in New Brunswick: why spring quotes beat fall scrambles in Saint John, how roofer calendars fill, and when waiting costs more than booking.",
+    "image": "/images/blog-35-best-time-book-roof-nb.webp",
     "blocks": [
       {
         "type": "p",
@@ -3685,6 +3720,7 @@ export const ARTICLES: Article[] = [
     "date": "2025-08-17",
     "read": 5,
     "excerpt": "Granules in the gutters in Grand Bay-Westfield: what shingle granule loss means at different roof ages, when it is normal wear and when it is the roof asking to be replaced.",
+    "image": "/images/blog-36-granules-in-gutters.webp",
     "blocks": [
       {
         "type": "p",

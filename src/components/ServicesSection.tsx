@@ -2,7 +2,6 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { Check, ArrowUpRight } from "lucide-react";
 import {
-  COMPARISON_ROWS,
   CONTACT,
   METAL_COLOURS,
   SECONDARY_SERVICES,
@@ -308,54 +307,7 @@ export function ServicesSection() {
             />
           </div>
 
-          <div className="mt-6 rounded-2xl border border-[#C3D6EA] bg-white overflow-hidden">
-            <div className="overflow-x-auto">
-              <table className="w-full text-left border-collapse">
-                <thead>
-                  <tr className="bg-[#E4EFFA] border-b border-[#C3D6EA]">
-                    <th className="py-4 px-5 font-display text-sm sm:text-base font-bold text-[#081A33]">
-                      Feature
-                    </th>
-                    <th className="py-4 px-5 font-display text-sm sm:text-base font-bold text-[#081A33] text-center">
-                      Metal roofing
-                    </th>
-                    <th className="py-4 px-5 font-display text-sm sm:text-base font-bold text-[#081A33] text-center">
-                      Shingle roofing
-                    </th>
-                  </tr>
-                </thead>
-                <tbody className="divide-y divide-[#C3D6EA]">
-                  {COMPARISON_ROWS.map((row) => (
-                    <tr key={row.feature} className="hover:bg-[#EFF5FB]/60 transition-colors">
-                      <td className="py-4 px-5 font-display font-bold text-[#081A33] text-sm sm:text-base">
-                        {row.feature}
-                      </td>
-                      <td
-                        className={`py-4 px-5 text-center text-sm sm:text-base tabular-nums ${
-                          row.advantage === "metal"
-                            ? "font-bold text-[#15803D]"
-                            : "text-[#2A3D57]"
-                        }`}
-                      >
-                        {row.metal}
-                      </td>
-                      <td
-                        className={`py-4 px-5 text-center text-sm sm:text-base tabular-nums ${
-                          row.advantage === "shingle"
-                            ? "font-bold text-[#15803D]"
-                            : "text-[#2A3D57]"
-                        }`}
-                      >
-                        {row.shingle}
-                      </td>
-                    </tr>
-                  ))}
-                </tbody>
-              </table>
-            </div>
-          </div>
-
-          <div className="mt-8 flex flex-wrap items-center gap-3">
+          <div className="mt-6 flex flex-wrap items-center gap-3">
             <button
               type="button"
               onClick={() =>

@@ -16,56 +16,49 @@ const MOBILE_MENU_ITEMS = [
     label: "Home",
     end: true,
     bgImage: "/images/menu-band-1.jpg",
-    color: "#FFFFFF",
-    shadow: "0 2px 10px rgba(0,0,0,0.65)",
+    lightBg: false,
   },
   {
     to: "/services",
     label: "Services",
     end: false,
     bgImage: "/images/menu-band-2.jpg",
-    color: "#FFFFFF",
-    shadow: "0 2px 10px rgba(0,0,0,0.65)",
+    lightBg: false,
   },
   {
     to: "/winter-help",
     label: "Winter Help",
     end: false,
     bgImage: "/images/menu-band-3.jpg",
-    color: "#FFFFFF",
-    shadow: "0 2px 10px rgba(0,0,0,0.65)",
+    lightBg: false,
   },
   {
     to: "/our-work",
     label: "Our Work",
     end: false,
     bgImage: "/images/menu-band-4.jpg",
-    color: "#081A33",
-    shadow: "0 1px 2px rgba(255,255,255,0.75)",
+    lightBg: true,
   },
   {
     to: "/about",
     label: "About & FAQ",
     end: false,
     bgImage: "/images/menu-band-5.jpg",
-    color: "#FFFFFF",
-    shadow: "0 2px 10px rgba(0,0,0,0.65)",
+    lightBg: false,
   },
   {
     to: "/blog",
     label: "Blog",
     end: false,
     bgImage: "/images/menu-band-6.jpg",
-    color: "#FFFFFF",
-    shadow: "0 2px 10px rgba(0,0,0,0.65)",
+    lightBg: false,
   },
   {
     to: "/quote",
     label: "Get a Quote",
     end: false,
     bgImage: "/images/menu-band-7.jpg",
-    color: "#081A33",
-    shadow: "0 1px 2px rgba(255,255,255,0.75)",
+    lightBg: true,
   },
 ] as const;
 
@@ -94,23 +87,25 @@ export function Header() {
         <Link
           to="/"
           onClick={() => setMobileOpen(false)}
-          className="bg-[#081A33] text-white px-3.5 sm:px-5 lg:px-6 flex items-center gap-2.5 sm:gap-3 shrink-0 min-w-0 focus-visible:outline-2 focus-visible:outline-offset-[-2px] focus-visible:outline-[#45BCFF]"
+          className="bg-[#081A33] text-white px-3 sm:px-5 lg:px-6 flex items-center gap-2 sm:gap-3 min-w-0 lg:shrink-0 focus-visible:outline-2 focus-visible:outline-offset-[-2px] focus-visible:outline-[#45BCFF]"
         >
           <img
             src="/images/logo-circle.jpg"
             alt="Paul's Roofing official emblem"
-            className="w-11 h-11 rounded-full object-cover shrink-0 ring-1 ring-[#45BCFF]/50"
+            className="w-10 h-10 sm:w-11 sm:h-11 rounded-full object-cover shrink-0 ring-1 ring-[#45BCFF]/50"
           />
-          <div className="min-w-0 leading-tight">
-            <div className="text-[10px] sm:text-xs font-bold tracking-[0.08em] uppercase text-[#C9DDF3] leading-[1.25]">
-              Atlantic Canada&apos;s
-              <br />
-              Trusted Roofers
+          <div className="min-w-0 leading-none">
+            <div className="font-display text-sm sm:text-lg font-extrabold tracking-tight whitespace-nowrap">
+              <span className="text-white">PAUL&apos;S</span>{" "}
+              <span className="text-[#45BCFF]">ROOFING</span>
+            </div>
+            <div className="mt-1 text-[7.5px] sm:text-[9px] font-semibold tracking-[0.06em] sm:tracking-[0.09em] uppercase text-[#C9DDF3] leading-tight sm:whitespace-nowrap">
+              ATLANTIC CANADA&apos;S TRUSTED ROOFERS
             </div>
           </div>
         </Link>
 
-        <div className="flex-1 bg-white px-3 sm:px-5 lg:px-6 flex items-center justify-end lg:justify-between gap-4 sm:gap-6 min-w-0">
+        <div className="flex-1 bg-white px-3 sm:px-5 lg:px-6 flex items-center justify-end lg:justify-between gap-2.5 sm:gap-6 min-w-0">
           <nav className="hidden lg:flex items-center gap-6 xl:gap-7" aria-label="Primary navigation">
             {NAV_LINKS.map((link) => (
               <NavLink
@@ -129,12 +124,12 @@ export function Header() {
             ))}
           </nav>
 
-          <div className="flex items-center gap-2.5 sm:gap-3 shrink-0">
+          <div className="flex items-center gap-2 sm:gap-3 shrink-0">
             <NavLink
               to="/quote"
               onClick={() => setMobileOpen(false)}
               className={({ isActive }) =>
-                `inline-flex items-center justify-center px-3.5 sm:px-4 py-2 min-h-10 font-display text-xs sm:text-sm font-extrabold whitespace-nowrap shrink-0 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#081A33] ${
+                `${mobileOpen ? "hidden lg:inline-flex" : "inline-flex"} items-center justify-center px-3 sm:px-4 py-2 min-h-10 font-display text-xs sm:text-sm font-extrabold whitespace-nowrap shrink-0 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#081A33] ${
                   isActive ? "btn-call-glow" : "btn-quote-glow"
                 }`
               }
@@ -172,16 +167,22 @@ export function Header() {
                   backgroundSize: "cover",
                   backgroundPosition: "center",
                   backgroundRepeat: "no-repeat",
-                  color: item.color,
-                  textShadow: item.shadow,
                 }}
                 className={({ isActive }) =>
-                  `w-full flex-1 flex items-center min-h-[72px] px-6 py-4 text-2xl leading-none font-display font-bold transition-[filter] duration-150 hover:brightness-105 focus-visible:outline-2 focus-visible:outline-offset-[-4px] focus-visible:outline-[#45BCFF] ${
-                    isActive ? "underline underline-offset-8 decoration-[3px]" : ""
-                  }`
+                  `relative w-full flex-1 flex items-center min-h-[68px] px-6 py-3.5 text-[25px] leading-none font-display font-extrabold tracking-tight transition-opacity active:opacity-90 focus-visible:outline-2 focus-visible:outline-offset-[-4px] focus-visible:outline-[#45BCFF] ${
+                    item.lightBg
+                      ? "text-[#081A33] [text-shadow:0_1px_2px_rgba(255,255,255,0.95)]"
+                      : "text-white [text-shadow:0_2px_8px_rgba(0,0,0,0.65)]"
+                  } ${isActive ? "underline underline-offset-8 decoration-[3px]" : ""}`
                 }
               >
-                {item.label}
+                <span
+                  aria-hidden="true"
+                  className={`pointer-events-none absolute inset-0 ${
+                    item.lightBg ? "bg-white/15" : "bg-black/10"
+                  }`}
+                />
+                <span className="relative z-10">{item.label}</span>
               </NavLink>
             ))}
           </div>

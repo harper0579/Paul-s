@@ -76,23 +76,33 @@ function ArticleDetailView({ article }: { article: Article }) {
   }
 
   return (
-    <section className="py-10 lg:py-14 bg-[#EFF5FB] min-h-[70vh]">
-      <div className="max-w-3xl mx-auto px-4 lg:px-6">
-        <div className="flex flex-wrap items-center justify-between gap-3 mb-6">
-          <Link
-            to="/blog"
-            className="inline-flex items-center gap-1.5 text-sm font-semibold text-[#0B6CB8] hover:underline"
-          >
-            <ArrowLeft className="w-4 h-4" />
-            All roofing guides
-          </Link>
+    <section className="pb-12 md:py-10 lg:py-14 bg-[#EFF5FB] min-h-[70vh]">
+      <div className="max-w-[1100px] mx-auto px-4 md:px-6 pt-5 pb-4 md:pt-0 md:pb-6 flex flex-wrap items-center justify-between gap-3">
+        <Link
+          to="/blog"
+          className="inline-flex items-center gap-1.5 text-sm font-semibold text-[#0B6CB8] hover:underline"
+        >
+          <ArrowLeft className="w-4 h-4" />
+          All roofing guides
+        </Link>
 
-          <div className="text-xs font-semibold text-[#47617F]">
-            {article.cat}
-            {article.town ? ` · ${article.town}` : ""}
-          </div>
+        <div className="text-xs font-semibold text-[#47617F]">
+          {article.cat}
+          {article.town ? ` · ${article.town}` : ""}
         </div>
+      </div>
 
+      {article.image && (
+        <div className="w-full md:max-w-[1100px] md:mx-auto md:px-6 mb-6 md:mb-8">
+          <img
+            src={article.image}
+            alt={article.title}
+            className="w-full h-auto block rounded-none md:rounded-[12px]"
+          />
+        </div>
+      )}
+
+      <div className="max-w-[800px] mx-auto px-4 md:px-6">
         <article className="rounded-2xl border border-[#C3D6EA] bg-white p-6 sm:p-10 space-y-6">
           <header>
             <h1 className="font-display text-2xl sm:text-4xl font-extrabold text-[#081A33] leading-tight">
@@ -282,7 +292,7 @@ export function BlogSection() {
 
   return (
     <section id="handbook" className="scroll-mt-20 py-14 lg:py-16 bg-[#EFF5FB]">
-      <div className="max-w-6xl mx-auto px-4 lg:px-6">
+      <div className="max-w-7xl mx-auto px-4 md:px-6">
         <p className="text-xs font-bold tracking-wider uppercase text-[#0B6CB8]">
           Blog &middot; Homeowner&apos;s Handbook
         </p>
@@ -352,9 +362,11 @@ export function BlogSection() {
             total
           </p>
         </div>
+      </div>
 
-        {filtered.length === 0 ? (
-          <div className="mt-8 rounded-xl border border-[#C3D6EA] bg-white p-8 text-center">
+      {filtered.length === 0 ? (
+        <div className="mt-8 max-w-7xl mx-auto px-4 md:px-6">
+          <div className="rounded-xl border border-[#C3D6EA] bg-white p-8 text-center">
             <p className="text-base text-[#2A3D57]">
               No articles match that search. Clear the search or pick All to see everything.
             </p>
@@ -369,68 +381,70 @@ export function BlogSection() {
               Reset filters
             </button>
           </div>
-        ) : (
-          <div className="mt-6 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
+        </div>
+      ) : (
+        <div className="mt-6 w-full md:max-w-7xl md:mx-auto md:px-6">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
             {filtered.slice(0, shown).map((article) => (
               <article
                 key={article.id}
-                className="rounded-xl border border-[#C3D6EA] bg-white p-6 flex flex-col justify-between hover:border-[#8FB4DC] transition-colors duration-150"
+                className="rounded-none md:rounded-xl border-y md:border border-[#C3D6EA] bg-white overflow-hidden flex flex-col justify-between hover:border-[#8FB4DC] transition-colors duration-150"
               >
                 <div>
-                  <div className="flex flex-wrap items-center gap-x-2 gap-y-1 text-xs font-semibold text-[#0B6CB8]">
-                    <span>{article.cat}</span>
-                    {article.town && (
-                      <>
-                        <span aria-hidden="true">&middot;</span>
-                        <span>{article.town}</span>
-                      </>
-                    )}
-                    <span aria-hidden="true">&middot;</span>
-                    <time dateTime={article.date} className="text-[#47617F] font-medium tabular-nums">
-                      {formatArticleDate(article.date)}
-                    </time>
-                  </div>
-
-                  <h2 className="mt-2.5 font-display text-lg font-bold text-[#081A33] leading-snug">
-                    <Link
-                      to={`/blog/${article.id}`}
-                      className="hover:text-[#0B6CB8] transition-colors"
-                    >
-                      {article.title}
+                  {article.image && (
+                    <Link to={`/blog/${article.id}`} className="block w-full">
+                      <img
+                        src={article.image}
+                        alt={article.title}
+                        loading="lazy"
+                        className="w-full h-auto block rounded-none md:rounded-t-xl"
+                      />
                     </Link>
-                  </h2>
+                  )}
 
-                  <p className="mt-2 text-sm text-[#47617F] leading-relaxed">{article.excerpt}</p>
+                  <div className="px-4 pt-5 md:px-6 md:pt-5">
+                    <h2 className="font-display text-lg font-bold text-[#081A33] leading-snug">
+                      <Link
+                        to={`/blog/${article.id}`}
+                        className="hover:text-[#0B6CB8] transition-colors"
+                      >
+                        {article.title}
+                      </Link>
+                    </h2>
+
+                    <p className="mt-2 text-sm text-[#47617F] leading-relaxed">{article.excerpt}</p>
+                  </div>
                 </div>
 
-                <div className="mt-5 pt-4 border-t border-[#EFF5FB] flex items-center justify-between gap-3">
-                  <span className="text-xs font-semibold text-[#47617F] tabular-nums">
-                    {article.read} min read
-                  </span>
+                <div className="px-4 pb-5 pt-4 md:px-6 md:pb-6 mt-3 flex items-center justify-between gap-3">
                   <Link
                     to={`/blog/${article.id}`}
-                    className="px-4 py-2 min-h-10 inline-flex items-center rounded-lg bg-[#0E8FE8] hover:bg-[#0B6CB8] text-white font-display text-xs sm:text-sm font-bold whitespace-nowrap shrink-0 transition-colors duration-150"
+                    className="inline-flex items-center gap-1 font-display text-sm font-bold text-[#0B6CB8] hover:text-[#081A33] hover:underline transition-colors"
                   >
-                    Read article
+                    Read More
                   </Link>
+
+                  <span className="text-xs font-medium text-[#47617F] tabular-nums">
+                    {article.read} min read
+                  </span>
                 </div>
               </article>
             ))}
           </div>
-        )}
+        </div>
+      )}
 
-        {filtered.length > shown && (
-          <div className="mt-8 text-center">
-            <button
-              type="button"
-              onClick={() => setShown((s) => s + PAGE_SIZE)}
-              className="px-6 py-3 min-h-11 rounded-lg bg-[#081A33] hover:bg-[#0B6CB8] text-white font-display text-sm font-bold cursor-pointer transition-colors duration-150"
-            >
-              Load more articles ({filtered.length - shown} remaining)
-            </button>
-          </div>
-        )}
-      </div>
+      {filtered.length > shown && (
+        <div className="mt-8 max-w-7xl mx-auto px-4 md:px-6 text-center">
+          <button
+            type="button"
+            onClick={() => setShown((s) => s + PAGE_SIZE)}
+            className="px-6 py-3 min-h-11 rounded-lg bg-[#081A33] hover:bg-[#0B6CB8] text-white font-display text-sm font-bold cursor-pointer transition-colors duration-150"
+          >
+            Load more articles ({filtered.length - shown} remaining)
+          </button>
+        </div>
+      )}
     </section>
   );
 }
