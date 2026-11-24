@@ -111,11 +111,82 @@ export function QuoteSection({ prefill }: QuoteSectionProps) {
         return;
       }
 
+      let emailDispatched = Boolean(data.emailDispatched);
+      let message: string = data.message;
+      const recipient: string = data.recipient || CONTACT.email;
+
+      // Web3Forms free keys are designed for direct browser requests
+      if (!emailDispatched) {
+        const accessKey =
+          (import.meta.env.VITE_WEB3FORMS_ACCESS_KEY as string | undefined)?.trim() ||
+          "f092d881-d9fe-4100-89cd-bf9879b1592f";
+
+        if (accessKey) {
+          try {
+            const prefix =
+              urgency === "emergency" ? "[URGENT 24/7 EMERGENCY]" : "[Quote Request]";
+            const subject = `${prefix} ${projectType} (${roofType}) — ${name}${
+              town ? ` in ${town}` : ""
+            } [${data.referenceId}]`;
+
+            const web3Res = await fetch("https://api.web3forms.com/submit", {
+              method: "POST",
+              headers: {
+                "Content-Type": "application/json",
+                Accept: "application/json",
+              },
+              body: JSON.stringify({
+                access_key: accessKey,
+                subject,
+                from_name: name.trim(),
+                email: email.trim() || undefined,
+                phone: phone.trim(),
+                town: town.trim() || "Not provided",
+                urgency:
+                  urgency === "emergency"
+                    ? "24/7 Emergency Leak — Urgent"
+                    : "Standard Quote / Inspection",
+                project_type: projectType,
+                roof_type: roofType,
+                reference_id: data.referenceId,
+                message: [
+                  `Reference: ${data.referenceId}`,
+                  `Urgency: ${
+                    urgency === "emergency"
+                      ? "24/7 Emergency Leak — Urgent"
+                      : "Standard Quote / Inspection"
+                  }`,
+                  `Name: ${name.trim()}`,
+                  `Phone: ${phone.trim()}`,
+                  `Email: ${email.trim() || "Not provided"}`,
+                  `Town: ${town.trim() || "Not provided"}`,
+                  `Project Type: ${projectType}`,
+                  `Roof Type: ${roofType}`,
+                  "",
+                  "Job Details:",
+                  description.trim() || "No additional details provided.",
+                ].join("\n"),
+              }),
+            });
+            const web3Data = await web3Res.json().catch(() => ({}));
+            if (web3Res.ok && web3Data?.success) {
+              emailDispatched = true;
+              message =
+                urgency === "emergency"
+                  ? `Urgent request ${data.referenceId} sent for ${name}. For an active leak right now, please also call ${CONTACT.phoneDisplay} — Paul answers 24/7.`
+                  : `Quote request ${data.referenceId} sent for ${name}. Paul will follow up during business hours (Mon–Fri 6 a.m.–7 p.m.).`;
+            }
+          } catch {
+            // Keep logged server reference and show mailto fallback
+          }
+        }
+      }
+
       setConfirmation({
         referenceId: data.referenceId,
-        message: data.message,
-        emailDispatched: Boolean(data.emailDispatched),
-        recipient: data.recipient || CONTACT.email,
+        message,
+        emailDispatched,
+        recipient,
         mailtoHref: buildMailtoFallback(data.referenceId),
       });
     } catch {
