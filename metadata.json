@@ -1,0 +1,8 @@
+{
+  "name": "Paul's Roofing — Quispamsis & Southern NB",
+  "description": "Metal roofing, architectural shingles (IKO & BP), repairs, winter ice dam help, and a 36-article homeowner roofing handbook for Quispamsis, Saint John, Hampton, and Southern New Brunswick.",
+  "requestFramePermissions": [],
+  "majorCapabilities": [
+    "MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"
+  ]
+}

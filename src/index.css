@@ -1,0 +1,66 @@
+@import "tailwindcss";
+
+@layer base {
+  :root {
+    --bg: #ffffff;
+    --bg-alt: #eff5fb;
+    --panel: #ffffff;
+    --panel-tint: #e4effa;
+    --line: #c3d6ea;
+    --line-bright: #8fb4dc;
+    --ink: #081a33;
+    --body: #2a3d57;
+    --muted: #47617f;
+    --blue: #0e8fe8;
+    --blue-deep: #0b6cb8;
+    --tint: #e1effc;
+    --green: #15803d;
+    --red: #b91c1c;
+    --footer-bg: #081a33;
+  }
+
+  html {
+    scroll-behavior: smooth;
+    font-family: "Public Sans", system-ui, -apple-system, sans-serif;
+    background-color: var(--bg);
+    color: var(--body);
+    -webkit-font-smoothing: antialiased;
+  }
+
+  body {
+    margin: 0;
+    background-color: var(--bg);
+    color: var(--body);
+    line-height: 1.6;
+  }
+
+  h1, h2, h3, h4 {
+    font-family: "Bricolage Grotesque", "Public Sans", sans-serif;
+    color: var(--ink);
+    letter-spacing: -0.015em;
+    text-wrap: balance;
+  }
+
+  ::selection {
+    background-color: var(--blue-deep);
+    color: #ffffff;
+  }
+}
+
+.font-display {
+  font-family: "Bricolage Grotesque", "Public Sans", sans-serif;
+}
+
+.tabular-nums {
+  font-variant-numeric: tabular-nums;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  *, *::before, *::after {
+    transition-duration: 0.01ms !important;
+    animation-duration: 0.01ms !important;
+  }
+}
