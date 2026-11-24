@@ -15,57 +15,57 @@ const MOBILE_MENU_ITEMS = [
     to: "/",
     label: "Home",
     end: true,
-    bgPos: "0% 0%",
+    bgImage: "/images/menu-band-1.jpg",
     color: "#FFFFFF",
-    shadow: "0 2px 8px rgba(0,0,0,0.5)",
+    shadow: "0 2px 10px rgba(0,0,0,0.65)",
   },
   {
     to: "/services",
     label: "Services",
     end: false,
-    bgPos: "0% 16.6%",
+    bgImage: "/images/menu-band-2.jpg",
     color: "#FFFFFF",
-    shadow: "0 2px 8px rgba(0,0,0,0.5)",
+    shadow: "0 2px 10px rgba(0,0,0,0.65)",
   },
   {
     to: "/winter-help",
     label: "Winter Help",
     end: false,
-    bgPos: "0% 33.3%",
+    bgImage: "/images/menu-band-3.jpg",
     color: "#FFFFFF",
-    shadow: "0 2px 8px rgba(0,0,0,0.5)",
+    shadow: "0 2px 10px rgba(0,0,0,0.65)",
   },
   {
     to: "/our-work",
     label: "Our Work",
     end: false,
-    bgPos: "0% 50%",
+    bgImage: "/images/menu-band-4.jpg",
     color: "#081A33",
-    shadow: "0 1px 4px rgba(255,255,255,0.6)",
+    shadow: "0 1px 2px rgba(255,255,255,0.75)",
   },
   {
     to: "/about",
     label: "About & FAQ",
     end: false,
-    bgPos: "0% 66.6%",
+    bgImage: "/images/menu-band-5.jpg",
     color: "#FFFFFF",
-    shadow: "0 2px 8px rgba(0,0,0,0.5)",
+    shadow: "0 2px 10px rgba(0,0,0,0.65)",
   },
   {
     to: "/blog",
     label: "Blog",
     end: false,
-    bgPos: "0% 83.3%",
+    bgImage: "/images/menu-band-6.jpg",
     color: "#FFFFFF",
-    shadow: "0 2px 8px rgba(0,0,0,0.5)",
+    shadow: "0 2px 10px rgba(0,0,0,0.65)",
   },
   {
     to: "/quote",
     label: "Get a Quote",
     end: false,
-    bgPos: "0% 100%",
+    bgImage: "/images/menu-band-7.jpg",
     color: "#081A33",
-    shadow: "0 1px 4px rgba(255,255,255,0.6)",
+    shadow: "0 1px 2px rgba(255,255,255,0.75)",
   },
 ] as const;
 
@@ -157,7 +157,7 @@ export function Header() {
 
       {mobileOpen && (
         <nav
-          className="lg:hidden fixed top-16 inset-x-0 bottom-0 z-50 overflow-y-auto bg-white"
+          className="lg:hidden fixed top-16 inset-x-0 bottom-0 z-50 overflow-y-auto bg-[#081A33]"
           aria-label="Mobile navigation"
         >
           <div className="min-h-full w-full flex flex-col">
@@ -168,16 +168,16 @@ export function Header() {
                 end={item.end}
                 onClick={() => setMobileOpen(false)}
                 style={{
-                  backgroundImage: "url('/images/menu-panels-bg.jpg')",
-                  backgroundSize: "100% 700%",
-                  backgroundPosition: item.bgPos,
+                  backgroundImage: `url('${item.bgImage}')`,
+                  backgroundSize: "cover",
+                  backgroundPosition: "center",
                   backgroundRepeat: "no-repeat",
                   color: item.color,
                   textShadow: item.shadow,
                 }}
                 className={({ isActive }) =>
-                  `w-full flex-1 flex items-center min-h-[64px] px-6 py-4 text-2xl leading-none font-display font-bold ${
-                    isActive ? "underline underline-offset-8 decoration-2" : ""
+                  `w-full flex-1 flex items-center min-h-[72px] px-6 py-4 text-2xl leading-none font-display font-bold transition-[filter] duration-150 hover:brightness-105 focus-visible:outline-2 focus-visible:outline-offset-[-4px] focus-visible:outline-[#45BCFF] ${
+                    isActive ? "underline underline-offset-8 decoration-[3px]" : ""
                   }`
                 }
               >
