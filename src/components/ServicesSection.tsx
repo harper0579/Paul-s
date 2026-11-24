@@ -85,7 +85,7 @@ export function ServicesSection() {
               <div className="lg:col-span-6 flex flex-col justify-between gap-6">
                 <div className="overflow-hidden rounded-xl border border-[#C3D6EA] bg-[#081A33]">
                   <img
-                    src="/assets/aistudio/image_20261119_165746_b2f595d0.jpg"
+                    src="/images/metal-sunset-panels.jpg"
                     alt="New Brunswick home with dark charcoal standing-seam metal roofing at sunset with four metal roofing panels laid out in front and the official Paul's Roofing emblem."
                     className="w-full h-auto block"
                     loading="lazy"
@@ -184,7 +184,7 @@ export function ServicesSection() {
                     </p>
                     <div className="overflow-hidden rounded-lg border border-[#C3D6EA] bg-white">
                       <img
-                        src="/assets/aistudio/August_2025_Color_Wall_350d67df.jpg"
+                        src="/images/color-wall-24.jpg"
                         alt="Showroom wall of 24 real steel roofing panel samples including Copper, Shiny Black, Burnished Slate, Charcoal, Hartford Green, Burgundy, Crimson Red, Gallery Blue, Stone, Bright White, Gold, Tan, and Galvalume."
                         loading="lazy"
                         referrerPolicy="no-referrer"
@@ -204,17 +204,29 @@ export function ServicesSection() {
                 className="rounded-xl border border-[#C3D6EA] bg-white p-6 flex flex-col justify-between"
               >
                 <div>
-                  {svc.hasVisualizers && (
-                    <div className="mb-4 overflow-hidden rounded-lg border border-[#C3D6EA] bg-[#081A33]">
-                      <img
-                        src="/assets/aistudio/image_cf4540c8.png"
-                        alt="Two-storey Southern New Brunswick home with charcoal architectural asphalt shingles and the official Paul's Roofing emblem."
-                        loading="lazy"
-                        referrerPolicy="no-referrer"
-                        className="w-full h-auto block"
-                      />
-                    </div>
-                  )}
+                  <button
+                    type="button"
+                    onClick={() =>
+                      navigate("/quote", {
+                        state: {
+                          projectType: svc.defaultProjectType,
+                          roofType: svc.defaultRoofType,
+                          description: `Interested in ${svc.title}.`,
+                          timestamp: Date.now(),
+                        },
+                      })
+                    }
+                    className="mb-4 block w-full overflow-hidden rounded-lg border border-[#C3D6EA] bg-[#081A33] cursor-pointer focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#0B6CB8]"
+                    aria-label={`Request a quote for ${svc.title}`}
+                  >
+                    <img
+                      src={svc.imageSrc}
+                      alt={svc.imageAlt}
+                      loading="lazy"
+                      referrerPolicy="no-referrer"
+                      className="w-full h-auto block"
+                    />
+                  </button>
                   <h2 className="font-display text-xl font-bold text-[#081A33]">{svc.title}</h2>
                   <p className="mt-2.5 text-sm sm:text-base text-[#47617F] leading-relaxed">
                     {svc.description}
@@ -229,28 +241,46 @@ export function ServicesSection() {
                   </ul>
                 </div>
 
-                {svc.hasVisualizers && (
-                  <div className="mt-5 pt-4 border-t border-[#EFF5FB] flex flex-wrap gap-4 text-sm">
-                    <a
-                      href={CONTACT.ikoVisualizerHref}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="inline-flex items-center gap-1 font-semibold text-[#0B6CB8] hover:underline"
-                    >
-                      IKO Roof Viewer
-                      <ArrowUpRight className="w-3.5 h-3.5" />
-                    </a>
-                    <a
-                      href={CONTACT.bpVisualizerHref}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="inline-flex items-center gap-1 font-semibold text-[#0B6CB8] hover:underline"
-                    >
-                      BP Canada Visualizer
-                      <ArrowUpRight className="w-3.5 h-3.5" />
-                    </a>
-                  </div>
-                )}
+                <div className="mt-5 pt-4 border-t border-[#EFF5FB] space-y-3">
+                  {svc.hasVisualizers && (
+                    <div className="flex flex-wrap gap-4 text-sm">
+                      <a
+                        href={CONTACT.ikoVisualizerHref}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="inline-flex items-center gap-1 font-semibold text-[#0B6CB8] hover:underline"
+                      >
+                        IKO Roof Viewer
+                        <ArrowUpRight className="w-3.5 h-3.5" />
+                      </a>
+                      <a
+                        href={CONTACT.bpVisualizerHref}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="inline-flex items-center gap-1 font-semibold text-[#0B6CB8] hover:underline"
+                      >
+                        BP Canada Visualizer
+                        <ArrowUpRight className="w-3.5 h-3.5" />
+                      </a>
+                    </div>
+                  )}
+                  <button
+                    type="button"
+                    onClick={() =>
+                      navigate("/quote", {
+                        state: {
+                          projectType: svc.defaultProjectType,
+                          roofType: svc.defaultRoofType,
+                          description: `Interested in ${svc.title}.`,
+                          timestamp: Date.now(),
+                        },
+                      })
+                    }
+                    className="btn-quote-glow w-full inline-flex items-center justify-center px-4 py-2.5 min-h-10 font-display text-sm font-extrabold cursor-pointer"
+                  >
+                    Get a Quote
+                  </button>
+                </div>
               </article>
             ))}
           </div>
@@ -268,7 +298,17 @@ export function ServicesSection() {
             home.
           </p>
 
-          <div className="mt-8 rounded-2xl border border-[#C3D6EA] bg-white overflow-hidden">
+          <div className="mt-8 overflow-hidden rounded-2xl border border-[#C3D6EA] bg-[#081A33]">
+            <img
+              src="/images/metal-vs-shingle-compare.jpg"
+              alt="Side-by-side comparison showing architectural shingles and standing-seam metal roofing with key differences in lifespan, initial cost, maintenance, weather resistance, and energy efficiency."
+              loading="lazy"
+              referrerPolicy="no-referrer"
+              className="w-full h-auto block"
+            />
+          </div>
+
+          <div className="mt-6 rounded-2xl border border-[#C3D6EA] bg-white overflow-hidden">
             <div className="overflow-x-auto">
               <table className="w-full text-left border-collapse">
                 <thead>

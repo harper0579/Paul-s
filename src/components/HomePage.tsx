@@ -74,7 +74,7 @@ export function HomePage() {
             <article className="lg:col-span-6 rounded-2xl border border-[#C3D6EA] bg-white overflow-hidden flex flex-col justify-between">
               <div className="bg-[#050D20] overflow-hidden">
                 <img
-                  src="/assets/aistudio/image_20261119_165746_b2f595d0.jpg"
+                  src="/images/metal-sunset-panels.jpg"
                   alt="New Brunswick home with dark charcoal standing-seam metal roofing at sunset and four colour panels in front, with the official Paul's Roofing emblem."
                   className="w-full h-auto block"
                   loading="lazy"
@@ -356,7 +356,7 @@ export function HomePage() {
 
           <div className="lg:col-span-6 overflow-hidden rounded-2xl border border-white/15 bg-[#081A33]">
             <img
-              src="/assets/aistudio/Gemini_Generated_Image_i1ydzdi1ydzdi1yd_1e49a471.jpg"
+              src="/images/pauls-gmc-truck.jpg"
               alt="Paul's Roofing GMC service truck with ladders outside a dark metal-roofed home — Serving Quispamsis, NB and surrounding areas."
               loading="lazy"
               referrerPolicy="no-referrer"

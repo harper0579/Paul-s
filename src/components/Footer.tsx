@@ -11,7 +11,7 @@ export function Footer() {
             <div>
               <Link to="/" className="inline-block">
                 <img
-                  src="/assets/aistudio/image_2285dc99.png"
+                  src="/images/logo-footer-emblem.png"
                   alt="Paul's Roofing — Atlantic Canada's Trusted Roofing Experts official emblem"
                   loading="lazy"
                   referrerPolicy="no-referrer"

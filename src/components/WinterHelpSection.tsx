@@ -44,7 +44,7 @@ export function WinterHelpSection() {
           <div className="lg:col-span-5">
             <div className="overflow-hidden rounded-2xl border border-[#C3D6EA] bg-[#081A33] max-w-md lg:ml-auto">
               <img
-                src="/assets/aistudio/image_b39e51-stop-with-the-30-years-strong-and-better-call-paul_d90b71d9.jpg"
+                src="/images/winter-bridge.jpg"
                 alt="Misty Atlantic morning over the Damascus Covered Bridge with the official Paul's Roofing emblem."
                 loading="lazy"
                 referrerPolicy="no-referrer"

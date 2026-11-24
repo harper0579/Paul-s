@@ -110,7 +110,7 @@ export function AboutAndAreasSection() {
             <div className="lg:col-span-6">
               <div className="h-full overflow-hidden rounded-2xl border border-[#C3D6EA] bg-[#081A33]">
                 <img
-                  src="/assets/aistudio/image_20261119_165749_a82f68e5.jpg"
+                  src="/images/work-white-siding-metal.jpg"
                   alt="Five white Southern New Brunswick homes with standing-seam metal roofs in red, blue, green, charcoal and copper tones with the official Paul's Roofing emblem."
                   loading="lazy"
                   referrerPolicy="no-referrer"
@@ -187,7 +187,7 @@ export function AboutAndAreasSection() {
             </div>
             <div className="lg:col-span-6 overflow-hidden rounded-2xl border border-[#C3D6EA] bg-[#081A33]">
               <img
-                src="/assets/aistudio/image_20261119_170401_f37b1277.jpg"
+                src="/images/about-saint-john-harbour.jpg"
                 alt="Aerial view across Saint John skyline and Atlantic harbour communities served by Paul's Roofing."
                 loading="lazy"
                 referrerPolicy="no-referrer"

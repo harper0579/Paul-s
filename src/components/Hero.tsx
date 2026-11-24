@@ -7,7 +7,7 @@ export function Hero() {
     <section className="bg-[#050D20] text-white">
       <div className="relative bg-[#050D20] overflow-hidden">
         <img
-          src="/assets/aistudio/image_b39e51-stop-with-the-30-years-strong-and-better-call-paul-try-the-first-damascus-bridge-image_f8b7f0a6.jpg"
+          src="/images/hero-damascus-bridge.jpg"
           alt="Damascus covered bridge near Hampton, New Brunswick at sunset with the Paul's Roofing emblem over the bridge and river."
           className="w-full h-auto md:max-h-[540px] md:w-auto md:mx-auto object-contain block"
           fetchPriority="high"
