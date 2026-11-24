@@ -1,6 +1,8 @@
 import { useEffect, useState, type FormEvent } from "react";
-import { AlertTriangle, CheckCircle2, Mail, Phone } from "lucide-react";
+import { AlertTriangle, CheckCircle2, Mail, Phone, Send } from "lucide-react";
 import { CONTACT } from "../data/siteContent";
+import { getAccessToken, googleSignIn } from "../lib/gmailAuth";
+import { sendGmailMessage } from "../lib/gmailApi";
 
 export interface QuotePrefill {
   urgency?: "standard" | "emergency";
@@ -29,12 +31,18 @@ export function QuoteSection({ prefill }: QuoteSectionProps) {
   const [town, setTown] = useState("");
   const [errorMsg, setErrorMsg] = useState("");
   const [submitting, setSubmitting] = useState(false);
+  const [gmailConfirmOpen, setGmailConfirmOpen] = useState(false);
+  const [gmailSending, setGmailSending] = useState(false);
+  const [gmailSentNote, setGmailSentNote] = useState("");
+  const [gmailError, setGmailError] = useState("");
   const [confirmation, setConfirmation] = useState<{
     referenceId: string;
     message: string;
     emailDispatched: boolean;
     recipient: string;
     mailtoHref: string;
+    subject: string;
+    body: string;
   } | null>(null);
 
   useEffect(() => {
@@ -182,12 +190,30 @@ export function QuoteSection({ prefill }: QuoteSectionProps) {
         }
       }
 
+      const subject = `${urgency === "emergency" ? "[URGENT 24/7 EMERGENCY] " : "[Quote Request] "}${projectType} (${roofType}) — ${name}${town ? ` in ${town}` : ""} [${data.referenceId}]`;
+      const bodyText = [
+        `Reference: ${data.referenceId}`,
+        `Urgency: ${urgency === "emergency" ? "24/7 Emergency Leak" : "Standard Quote / Inspection"}`,
+        `Name: ${name}`,
+        `Phone: ${phone}`,
+        `Email: ${email || "Not provided"}`,
+        `Town: ${town || "Not provided"}`,
+        `Project: ${projectType}`,
+        `Roof: ${roofType}`,
+        "",
+        description || "No additional notes.",
+      ].join("\n");
+
+      setGmailSentNote("");
+      setGmailError("");
       setConfirmation({
         referenceId: data.referenceId,
         message,
         emailDispatched,
         recipient,
         mailtoHref: buildMailtoFallback(data.referenceId),
+        subject,
+        body: bodyText,
       });
     } catch {
       setErrorMsg(
@@ -251,6 +277,14 @@ export function QuoteSection({ prefill }: QuoteSectionProps) {
                     Reference: {confirmation.referenceId} &middot; Destination:{" "}
                     {confirmation.recipient}
                   </p>
+                  {gmailSentNote && (
+                    <p className="mt-2 text-xs font-semibold text-[#15803D]">{gmailSentNote}</p>
+                  )}
+                  {gmailError && (
+                    <p className="mt-2 text-xs font-semibold text-[#B91C1C]" role="alert">
+                      {gmailError}
+                    </p>
+                  )}
                   <div className="mt-5 flex flex-wrap gap-3">
                     <a
                       href={CONTACT.phoneHref}
@@ -270,9 +304,35 @@ export function QuoteSection({ prefill }: QuoteSectionProps) {
                     )}
                     <button
                       type="button"
+                      onClick={async () => {
+                        setGmailError("");
+                        try {
+                          let token = getAccessToken();
+                          if (!token) {
+                            const res = await googleSignIn();
+                            token = res.accessToken;
+                          }
+                          if (token) setGmailConfirmOpen(true);
+                        } catch (err) {
+                          setGmailError(
+                            err instanceof Error
+                              ? err.message
+                              : "Google sign-in is required to send via Gmail."
+                          );
+                        }
+                      }}
+                      className="inline-flex items-center gap-2 px-4 py-2.5 min-h-10 rounded-lg border border-[#C3D6EA] bg-white hover:border-[#0B6CB8] text-sm font-semibold text-[#081A33] cursor-pointer"
+                    >
+                      <Send className="w-4 h-4" />
+                      Send via Gmail
+                    </button>
+                    <button
+                      type="button"
                       onClick={() => {
                         setConfirmation(null);
                         setDescription("");
+                        setGmailSentNote("");
+                        setGmailError("");
                       }}
                       className="px-4 py-2.5 min-h-10 rounded-lg border border-[#C3D6EA] text-sm font-semibold text-[#081A33] hover:bg-[#EFF5FB] cursor-pointer"
                     >
@@ -499,6 +559,78 @@ export function QuoteSection({ prefill }: QuoteSectionProps) {
           )}
         </div>
       </div>
+
+      {gmailConfirmOpen && confirmation && (
+        <div
+          role="dialog"
+          aria-modal="true"
+          aria-labelledby="confirmQuoteGmailTitle"
+          className="fixed inset-0 z-50 bg-[#050D20]/80 flex items-center justify-center p-4"
+        >
+          <div className="bg-white w-full max-w-md rounded-2xl border border-[#C3D6EA] p-6 space-y-4">
+            <h3
+              id="confirmQuoteGmailTitle"
+              className="font-display text-lg font-bold text-[#081A33]"
+            >
+              Send this quote request via your Gmail?
+            </h3>
+            <div className="text-sm text-[#2A3D57] space-y-1.5">
+              <p>
+                <strong className="text-[#081A33]">To:</strong> {confirmation.recipient}
+              </p>
+              <p>
+                <strong className="text-[#081A33]">Subject:</strong> {confirmation.subject}
+              </p>
+            </div>
+            <pre className="rounded-lg bg-[#EFF5FB] border border-[#C3D6EA] p-3 text-xs text-[#2A3D57] whitespace-pre-wrap max-h-40 overflow-y-auto font-sans">
+              {confirmation.body}
+            </pre>
+            <div className="flex justify-end gap-2 pt-1">
+              <button
+                type="button"
+                disabled={gmailSending}
+                onClick={() => setGmailConfirmOpen(false)}
+                className="px-4 py-2 min-h-10 rounded-lg border border-[#C3D6EA] text-sm font-semibold text-[#081A33] cursor-pointer"
+              >
+                Cancel
+              </button>
+              <button
+                type="button"
+                disabled={gmailSending}
+                onClick={async () => {
+                  const token = getAccessToken();
+                  if (!token) {
+                    setGmailConfirmOpen(false);
+                    setGmailError("Google session expired. Please click Send via Gmail again.");
+                    return;
+                  }
+                  setGmailSending(true);
+                  setGmailError("");
+                  try {
+                    await sendGmailMessage(token, {
+                      to: confirmation.recipient,
+                      subject: confirmation.subject,
+                      body: confirmation.body,
+                    });
+                    setGmailSentNote(`Sent directly via your Gmail to ${confirmation.recipient}.`);
+                    setGmailConfirmOpen(false);
+                  } catch (err) {
+                    setGmailError(
+                      err instanceof Error ? err.message : "Failed to send email via Gmail."
+                    );
+                    setGmailConfirmOpen(false);
+                  } finally {
+                    setGmailSending(false);
+                  }
+                }}
+                className="px-5 py-2 min-h-10 rounded-lg bg-[#0E8FE8] hover:bg-[#0B6CB8] text-white font-display text-sm font-bold cursor-pointer disabled:opacity-60"
+              >
+                {gmailSending ? "Sending..." : "Confirm & Send"}
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
     </section>
   );
 }

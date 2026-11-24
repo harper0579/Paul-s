@@ -12,6 +12,7 @@ import { WorkGallerySection } from "./components/WorkGallerySection";
 import { AboutAndAreasSection } from "./components/AboutAndAreasSection";
 import { BlogSection } from "./components/BlogSection";
 import { QuoteSection, type QuotePrefill } from "./components/QuoteSection";
+import { GmailWorkspaceSection } from "./components/GmailWorkspaceSection";
 import { Footer } from "./components/Footer";
 
 function scrollToQuote() {
@@ -86,6 +87,7 @@ export default function App() {
           onClearExternalOpen={handleClearExternalOpen}
         />
         <QuoteSection prefill={quotePrefill} />
+        <GmailWorkspaceSection />
       </main>
       <Footer />
     </div>

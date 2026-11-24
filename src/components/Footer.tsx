@@ -63,6 +63,11 @@ export function Footer() {
                     Get a Quote
                   </a>
                 </li>
+                <li>
+                  <a href="#gmail" className="hover:text-white hover:underline">
+                    Gmail Quote Desk
+                  </a>
+                </li>
               </ul>
             </div>
 
