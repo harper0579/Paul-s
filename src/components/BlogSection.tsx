@@ -292,20 +292,33 @@ export function BlogSection() {
 
   return (
     <section id="handbook" className="scroll-mt-20 py-14 lg:py-16 bg-[#EFF5FB]">
-      <div className="max-w-7xl mx-auto px-4 md:px-6">
-        <p className="text-xs font-bold tracking-wider uppercase text-[#0B6CB8]">
-          Blog &middot; Homeowner&apos;s Handbook
-        </p>
-        <h1 className="mt-2 font-display text-3xl sm:text-4xl font-extrabold text-[#081A33]">
-          Roofing Tips &amp; Blog — Paul&apos;s Roofing Quispamsis NB
-        </h1>
-        <p className="mt-3 text-base text-[#2A3D57] max-w-3xl leading-relaxed">
-          Straight answers on metal roofing, architectural shingles, roof repair, ice dams, gutters
-          and winter prep for homeowners across Southern New Brunswick. Every guide comes from 30
-          years on the roof — no sales talk, just what to check, what it means, and when to call.
-        </p>
+      <div className="max-w-7xl mx-auto px-4 md:px-6 mb-8">
+        {/* White-on-Navy Blog Hero Banner */}
+        <div className="rounded-2xl border border-[#1E3A5F] bg-[#081A33] shadow-md overflow-hidden relative">
+          <div
+            className="absolute inset-0 bg-cover bg-right lg:bg-[linear-gradient(90deg,#081A33_0%,#081A33_48%,rgba(8,26,51,0.75)_72%,rgba(8,26,51,0.15)_100%)] opacity-35 lg:opacity-90 pointer-events-none"
+            style={{ backgroundImage: "url('/images/blog-hero.webp')" }}
+            aria-hidden="true"
+          />
+          <div className="relative z-10 max-w-2xl p-6 sm:p-8 lg:p-10">
+            <p className="text-xs font-bold tracking-widest uppercase text-[#45BCFF]">
+              BLOG &middot; HOMEOWNER&apos;S HANDBOOK
+            </p>
+            <h1 className="mt-2 font-display text-2xl sm:text-3xl lg:text-4xl font-extrabold text-white tracking-tight">
+              Roofing Tips &amp; Blog &mdash; Paul&apos;s Roofing Quispamsis NB
+            </h1>
+            <p className="mt-3 text-sm sm:text-base text-[#C9DDF3] leading-relaxed">
+              Straight answers on metal roofing, architectural shingles, roof repair, ice dams, gutters
+              and winter prep for homeowners across Southern New Brunswick. Every guide comes from 30
+              years on the roof &mdash; no sales talk, just what to check, what it means, and when to call.
+            </p>
+          </div>
+        </div>
+      </div>
 
-        <div className="mt-8 space-y-4">
+      {/* Clean Search & Filter Bar Toolbar Card */}
+      <div className="max-w-7xl mx-auto px-4 md:px-6 mb-6">
+        <div className="bg-white border border-[#C3D6EA] rounded-2xl p-4 sm:p-5 shadow-xs flex flex-col gap-4">
           <div className="relative max-w-xl">
             <label htmlFor="blogSearch" className="sr-only">
               Search articles

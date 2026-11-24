@@ -1,0 +1,14 @@
+Upgrade the top header section of the `/blog` page to a white-on-navy hero card matching our site's visual system:
+
+1. White-on-Navy Blog Hero Banner (`max-w-7xl mx-auto mb-8`):
+   - Replace the plain text header at the top of `/blog` with a sleek rounded-2xl dark navy hero card (`bg-[#081A33] border border-[#1E3A5F] shadow-md overflow-hidden relative`) using `/images/blog-hero.webp` as the right-aligned background visual with a smooth navy gradient (`linear-gradient(90deg, #081A33 0%, #081A33 48%, rgba(8,26,51,0.75) 72%, rgba(8,26,51,0.15) 100%)`) on desktop (`lg:`) and a solid `#081A33` header block on mobile.
+   - Inside the left side (`max-w-2xl p-6 sm:p-8 lg:p-10`), render our existing text in crisp white and light blue:
+     - Eyebrow (`text-[#45BCFF] text-xs font-bold tracking-widest uppercase`): `BLOG · HOMEOWNER'S HANDBOOK`
+     - H1 (`text-white text-2xl sm:text-3xl lg:text-4xl font-extrabold tracking-tight mt-2`): `Roofing Tips & Blog — Paul's Roofing Quispamsis NB`
+     - Subtitle (`text-[#C9DDF3] text-sm sm:text-base leading-relaxed mt-3`): keep the exact existing paragraph unchanged.
+
+2. Clean Search & Filter Bar Below the Hero (`max-w-7xl mx-auto mb-6`):
+   - Place the search input and category filter pills (`All`, `Metal Roofing`, `Shingles`, `Ice Dams & Winter`, `Repairs & Leaks`, `Cost & Financing`, `Maintenance`, `Gutters & Exterior`, `Towns`) in a clean white toolbar card (`bg-white border border-[#C3D6EA] rounded-2xl p-4 sm:p-5 shadow-xs flex flex-col gap-4`) right above the 3-column article grid.
+   - Keep the "Showing X of 36 articles · 36 guides in total" counter aligned cleanly underneath.
+
+Do not change any blog titles, slugs, excerpts, article images, or article body text.

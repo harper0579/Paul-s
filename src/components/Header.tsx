@@ -75,7 +75,7 @@ export function Header() {
   }, [mobileOpen]);
 
   return (
-    <header className="sticky top-0 z-50 h-16 bg-white border-b border-[#C3D6EA]">
+    <header className="sticky top-0 z-50 h-16 bg-white border-b border-[#C3D6EA] relative before:content-[''] before:hidden lg:before:block before:absolute before:inset-y-0 before:left-0 before:w-1/2 before:bg-[#081A33] before:-z-10">
       <a
         href="#main-content"
         className="sr-only focus:not-sr-only focus:fixed focus:top-2 focus:left-2 focus:z-[60] focus:px-4 focus:py-2.5 focus:rounded-lg focus:bg-[#0B6CB8] focus:text-white focus:font-semibold"
@@ -83,7 +83,7 @@ export function Header() {
         Skip to content
       </a>
 
-      <div className="h-full flex items-stretch justify-between">
+      <div className="max-w-7xl mx-auto h-full flex items-stretch justify-between px-0 lg:px-6">
         <Link
           to="/"
           onClick={() => setMobileOpen(false)}
