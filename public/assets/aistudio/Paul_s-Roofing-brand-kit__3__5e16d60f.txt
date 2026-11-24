@@ -1,0 +1,30 @@
+ONE JOB ONLY: Upgrade the Winter Help section to match the Services page polish. Do not change any wording, headings, phone numbers, or routes. Do not generate, edit, crop, or add logos/text overlays to any images.
+
+I just uploaded the 4 images. Save them exactly as named into public/images/:
+- winter-ice-dams.webp
+- winter-emergency-leak.webp
+- winter-snow-rails.webp
+- winter-inspection.webp
+
+TOP WINTER HELP HERO CAROUSEL (above the 4 cards):
+Container: max-w-7xl mx-auto, mb-8
+Build a clean interactive React state carousel with useState for activeIndex. Cycle through these 4 slides, 1 active slide at a time:
+1) Tab: "Ice Dam Help" -> Image: /images/winter-ice-dams.webp, Link: /blog/ice-dams-quispamsis-rothesay
+2) Tab: "24/7 Emergency Leak" -> Image: /images/winter-emergency-leak.webp, Link: tel:5062714162
+3) Tab: "Snow Rails" -> Image: /images/winter-snow-rails.webp, Link: /quote
+4) Tab: "Winter Inspection" -> Image: /images/winter-inspection.webp, Link: /quote
+
+Slide frame: rounded-2xl card, border border-[#C3D6EA] bg-white shadow-md overflow-hidden
+Image: show full uncropped 16:9 image, width: 100%, height: auto, NO object-fit: cover, NO extra text/logo overlay on top of the image.
+Controls: Left/Right chevron arrow buttons (ChevronLeft, ChevronRight from lucide-react) on the sides, a 4-pill switcher bar above or below the frame so users can jump straight to any topic, and gentle auto-advance every 6 seconds that pauses on hover (onMouseEnter / onMouseLeave).
+
+CLEAN 4-CARD GRID BELOW (no repeated images/logos inside the cards):
+Keep the 4 white cards (Ice Dam Help, Emergency Leak Repair — 24/7, Snow Rails for Metal Roofs, Winter Roof Inspection) in grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 max-w-7xl mx-auto.
+Do NOT put images or logos inside these 4 cards.
+Clicking or hovering a card highlights/syncs with its matching slide in the carousel above.
+Upgrade the primary buttons to our signature glossy blue pill button (btn-quote-glow): "Read the ice dam guide", "Call (506) 271-4162", "Ask about snow rails", "Book a free inspection". Keep "Send 24/7 emergency request" as the red-outlined secondary pill below the Call button.
+
+FULL-WIDTH SAFETY BANNER:
+Make the warm amber Safety First notice box span the full width of the 4-column grid: w-full max-w-7xl mx-auto.
+
+Apply to mobile and desktop. No other sections.
