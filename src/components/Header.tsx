@@ -87,22 +87,13 @@ export function Header() {
         <Link
           to="/"
           onClick={() => setMobileOpen(false)}
-          className="bg-[#081A33] text-white px-3 sm:px-5 lg:px-6 flex items-center gap-2 sm:gap-3 min-w-0 lg:shrink-0 focus-visible:outline-2 focus-visible:outline-offset-[-2px] focus-visible:outline-[#45BCFF]"
+          className="bg-[#081A33] text-white px-3 sm:px-4 lg:px-6 flex items-center min-w-0 lg:shrink-0 focus-visible:outline-2 focus-visible:outline-offset-[-2px] focus-visible:outline-[#45BCFF]"
         >
           <img
-            src="/images/logo-circle.jpg"
-            alt="Paul's Roofing official emblem"
-            className="w-10 h-10 sm:w-11 sm:h-11 rounded-full object-cover shrink-0 ring-1 ring-[#45BCFF]/50"
+            src="/images/header-logo.png"
+            alt="Paul's Roofing — Atlantic Canada's Trusted Roofing Experts"
+            className="h-9 sm:h-11 w-auto object-contain"
           />
-          <div className="min-w-0 leading-none">
-            <div className="font-display text-sm sm:text-lg font-extrabold tracking-tight whitespace-nowrap">
-              <span className="text-white">PAUL&apos;S</span>{" "}
-              <span className="text-[#45BCFF]">ROOFING</span>
-            </div>
-            <div className="mt-1 text-[7.5px] sm:text-[9px] font-semibold tracking-[0.06em] sm:tracking-[0.09em] uppercase text-[#C9DDF3] leading-tight sm:whitespace-nowrap">
-              ATLANTIC CANADA&apos;S TRUSTED ROOFERS
-            </div>
-          </div>
         </Link>
 
         <div className="flex-1 bg-white px-3 sm:px-5 lg:px-6 flex items-center justify-end lg:justify-between gap-2.5 sm:gap-6 min-w-0">

@@ -105,9 +105,9 @@ export const SECONDARY_SERVICES = [
       "Excellent manufacturer warranties",
     ],
     hasVisualizers: true,
-    imageSrc: "/images/service-shingles.png",
+    imageSrc: "/images/banner-asphalt-shingles.png",
     imageAlt:
-      "Two-storey Southern New Brunswick home with charcoal architectural asphalt shingles and the official Paul's Roofing emblem.",
+      "Quality Asphalt Shingles — Expertly Installed by Paul's Roofing",
     defaultProjectType: "Replacement",
     defaultRoofType: "Shingles",
   },
@@ -122,9 +122,9 @@ export const SECONDARY_SERVICES = [
       "Comprehensive exterior inspections",
     ],
     hasVisualizers: false,
-    imageSrc: "/images/service-exterior-maintenance.jpg",
+    imageSrc: "/images/banner-exterior-maintenance.png",
     imageAlt:
-      "Exterior Maintenance — Soffit, Fascia, Drip Edge, Gutters expertly installed by Paul's Roofing.",
+      "Exterior Maintenance: Soffit, Fascia, Drip Edge, Gutters — Expertly Installed by Paul's Roofing",
     defaultProjectType: "Repair / Leak",
     defaultRoofType: "Unsure",
   },
@@ -139,9 +139,9 @@ export const SECONDARY_SERVICES = [
       "Emergency leak sealing",
     ],
     hasVisualizers: false,
-    imageSrc: "/images/service-chimney-flashing.jpg",
+    imageSrc: "/images/banner-chimney-flashing.png",
     imageAlt:
-      "Chimney Flashing and Leak Repair expertly installed by Paul's Roofing.",
+      "Chimney Flashing & Leak Repair — Expertly Installed by Paul's Roofing",
     defaultProjectType: "Repair / Leak",
     defaultRoofType: "Unsure",
   },
@@ -442,5 +442,17 @@ export const FAQ_ITEMS: FaqItem[] = [
     question: "How long does a roof replacement take?",
     answer:
       "It depends on the roof — size, pitch, layers to remove and weather. Paul gives you a realistic window in your written quote and updates you if hidden deck damage changes the plan. On installation days, plan for the driveway to be a work zone, and expect noise and vibration during tear-off. You don't need to leave the house, but being reachable by phone helps if the crew finds something that needs a decision.",
+  },
+  {
+    slug: "roofing-warranties-explained",
+    question: "What roofing warranties are included?",
+    answer:
+      "Paul's Roofing provides a comprehensive workmanship guarantee on all installations. For metal roofs, you receive a 40-year manufacturer paint warranty against chipping, cracking, or peeling, plus a lifetime steel material warranty. For architectural shingles, you get top-tier manufacturer warranties from trusted Canadian makers like IKO and BP.",
+  },
+  {
+    slug: "local-permits-building-codes",
+    question: "Do I need local building permits for roofing in Quispamsis or Saint John?",
+    answer:
+      "For standard re-roofing (replacing existing shingles or installing metal over existing decks without structural changes), municipal permits are typically not required across Quispamsis, Rothesay, and Saint John. However, if structural framing, new truss work, or commercial projects are involved, local building codes apply. Paul handles all code-compliant installation practices to ensure your roof meets or exceeds New Brunswick standards.",
   },
 ];

@@ -200,24 +200,24 @@ export function ServicesSection() {
             {SECONDARY_SERVICES.map((svc) => (
               <article
                 key={svc.title}
-                className="flex flex-col md:flex-row items-stretch bg-white border border-[#C3D6EA] rounded-2xl overflow-hidden shadow-sm"
+                className="rounded-2xl border border-[#C3D6EA] bg-white overflow-hidden shadow-sm hover:border-[#0E8FE8] transition-all flex flex-col justify-between"
               >
-                <div className="w-full md:w-[320px] shrink-0 bg-[#081A33] overflow-hidden">
+                <div className="w-full bg-[#081A33] overflow-hidden">
                   <img
                     src={svc.imageSrc}
                     alt={svc.imageAlt}
                     loading="lazy"
                     referrerPolicy="no-referrer"
-                    className="w-full h-full object-cover min-h-[220px]"
+                    className="w-full h-auto block"
                   />
                 </div>
                 <div className="p-6 flex-1 flex flex-col justify-between">
                   <div>
-                    <h3 className="font-display text-xl font-bold text-[#081A33]">{svc.title}</h3>
+                    <h2 className="font-display text-xl sm:text-2xl font-bold text-[#081A33]">{svc.title}</h2>
                     <p className="mt-2 text-sm sm:text-base text-[#47617F] leading-relaxed">
                       {svc.description}
                     </p>
-                    <ul className="mt-3 space-y-1.5 text-sm text-[#2A3D57]">
+                    <ul className="mt-3 grid grid-cols-1 sm:grid-cols-2 gap-2 text-sm text-[#2A3D57]">
                       {svc.bullets.map((bullet) => (
                         <li key={bullet} className="flex items-start gap-2">
                           <Check className="w-4 h-4 text-[#0B6CB8] shrink-0 mt-0.5" />

@@ -38,24 +38,14 @@ export function HomePage() {
             </Link>
           </div>
 
-          <div className="mt-7 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
-            {WHY_ITEMS.map((item, idx) => {
-              const Icon = idx === 0 ? Award : idx === 1 ? ShieldCheck : idx === 2 ? MapPin : Layers;
-              return (
-                <div
-                  key={item.title}
-                  className="bg-white border border-[#C3D6EA] rounded-2xl p-6 shadow-xs hover:border-[#0E8FE8] transition-all flex flex-col gap-3"
-                >
-                  <div className="w-11 h-11 rounded-xl bg-[#EBF4FC] border border-[#C3D6EA] text-[#0B6CB8] flex items-center justify-center shrink-0">
-                    <Icon className="w-5 h-5" />
-                  </div>
-                  <div>
-                    <h3 className="font-display text-lg font-bold text-[#081A33]">{item.title}</h3>
-                    <p className="mt-2 text-sm text-[#47617F] leading-relaxed">{item.description}</p>
-                  </div>
-                </div>
-              );
-            })}
+          <div className="mt-7 overflow-hidden rounded-2xl border border-[#C3D6EA] bg-[#081A33] shadow-sm">
+            <img
+              src="/images/why-choose-us.jpg"
+              alt="Why choose Paul's Roofing — Metal Roofing Specialists, Licensed & Insured, Locally Owned, and Premium Materials."
+              loading="lazy"
+              referrerPolicy="no-referrer"
+              className="w-full h-auto block"
+            />
           </div>
         </div>
       </section>
@@ -127,12 +117,12 @@ export function HomePage() {
                         Preview metal colours
                         <ArrowRight className="w-4 h-4" />
                       </Link>
-                      <Link
-                        to="/services#compare"
+                      <a
+                        href="#compare"
                         className="inline-flex items-center gap-1.5 text-sm font-semibold text-[#081A33] hover:text-[#0B6CB8] hover:underline"
                       >
                         Compare metal vs. shingles
-                      </Link>
+                      </a>
                     </div>
                     <Link
                       to="/quote"
@@ -154,37 +144,36 @@ export function HomePage() {
             {SECONDARY_SERVICES.map((svc) => (
               <article
                 key={svc.title}
-                className="flex flex-col md:flex-row items-stretch bg-white border border-[#C3D6EA] rounded-2xl overflow-hidden shadow-sm"
+                className="rounded-2xl border border-[#C3D6EA] bg-white overflow-hidden shadow-sm hover:border-[#0E8FE8] transition-all flex flex-col justify-between"
               >
-                <div className="w-full md:w-[320px] shrink-0 bg-[#081A33] aspect-video md:aspect-auto overflow-hidden flex items-center justify-center">
+                <div className="w-full bg-[#081A33] overflow-hidden">
                   <img
                     src={svc.imageSrc}
                     alt={svc.imageAlt}
                     loading="lazy"
                     referrerPolicy="no-referrer"
-                    className="w-full h-full object-contain bg-[#081A33]"
+                    className="w-full h-auto block"
                   />
                 </div>
-                <div className="p-6 flex-1 flex flex-col justify-between">
-                  <div>
-                    <h3 className="font-display text-xl font-bold text-[#081A33]">{svc.title}</h3>
-                    <p className="mt-2 text-sm sm:text-base text-[#47617F] leading-relaxed">
+                <div className="p-5 sm:p-6 flex flex-col lg:flex-row lg:items-center justify-between gap-4">
+                  <div className="flex-1 min-w-0">
+                    <p className="text-sm sm:text-base text-[#47617F] leading-relaxed">
                       {svc.description}
                     </p>
-                    <ul className="mt-3 space-y-1.5 text-sm text-[#2A3D57]">
+                    <ul className="mt-3 flex flex-wrap gap-x-5 gap-y-1.5 text-xs sm:text-sm text-[#2A3D57]">
                       {svc.bullets.map((bullet) => (
-                        <li key={bullet} className="flex items-start gap-2">
-                          <Check className="w-4 h-4 text-[#0B6CB8] shrink-0 mt-0.5" />
+                        <li key={bullet} className="inline-flex items-center gap-1.5">
+                          <Check className="w-3.5 h-3.5 text-[#0B6CB8] shrink-0" />
                           <span>{bullet}</span>
                         </li>
                       ))}
                     </ul>
                   </div>
 
-                  <div className="mt-5 pt-4 border-t border-[#EFF5FB] flex flex-wrap items-center justify-between gap-4">
+                  <div className="flex items-center gap-4 shrink-0 pt-3 lg:pt-0 border-t lg:border-t-0 border-[#EFF5FB]">
                     <Link
                       to="/services"
-                      className="inline-flex items-center gap-1.5 text-sm font-bold text-[#0B6CB8] hover:underline"
+                      className="inline-flex items-center gap-1.5 text-xs sm:text-sm font-bold text-[#0B6CB8] hover:underline whitespace-nowrap"
                     >
                       View service details &rarr;
                     </Link>
@@ -196,7 +185,7 @@ export function HomePage() {
                         description: `Interested in ${svc.title}.`,
                         timestamp: Date.now(),
                       }}
-                      className="btn-quote-glow inline-flex items-center justify-center px-4 py-2.5 min-h-10 font-display text-sm font-extrabold cursor-pointer"
+                      className="btn-quote-glow inline-flex items-center justify-center px-4 py-2.5 min-h-10 font-display text-sm font-extrabold cursor-pointer whitespace-nowrap"
                     >
                       Get a Quote
                     </Link>
@@ -204,6 +193,44 @@ export function HomePage() {
                 </div>
               </article>
             ))}
+          </div>
+        </div>
+      </section>
+
+      <section id="compare" className="scroll-mt-20 py-12 lg:py-14 bg-white border-b border-[#C3D6EA]">
+        <div className="max-w-6xl mx-auto px-4 lg:px-6">
+          <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4">
+            <div>
+              <p className="text-xs font-bold tracking-wider uppercase text-[#0B6CB8]">Straight talk</p>
+              <h2 className="mt-2 font-display text-2xl sm:text-3xl font-extrabold text-[#081A33]">
+                Metal vs. shingle: an honest comparison
+              </h2>
+              <p className="mt-2 text-base text-[#47617F] max-w-2xl">
+                No sales pitch — here&apos;s how the two materials actually stack up for a New Brunswick home.
+              </p>
+            </div>
+            <Link
+              to="/quote"
+              state={{
+                projectType: "Replacement",
+                roofType: "Unsure",
+                description: "Looking for advice comparing metal vs. shingles for my home.",
+                timestamp: Date.now(),
+              }}
+              className="btn-quote-glow inline-flex items-center justify-center px-5 py-2.5 min-h-11 font-display text-sm font-extrabold cursor-pointer whitespace-nowrap"
+            >
+              Get an Itemized Quote
+            </Link>
+          </div>
+
+          <div className="mt-8 overflow-hidden rounded-2xl border border-[#C3D6EA] bg-[#081A33] shadow-sm">
+            <img
+              src="/images/metal-vs-shingle-compare.jpg"
+              alt="Side-by-side comparison showing architectural shingles and standing-seam metal roofing with key differences in lifespan, initial cost, maintenance, weather resistance, and energy efficiency."
+              loading="lazy"
+              referrerPolicy="no-referrer"
+              className="w-full h-auto block"
+            />
           </div>
         </div>
       </section>

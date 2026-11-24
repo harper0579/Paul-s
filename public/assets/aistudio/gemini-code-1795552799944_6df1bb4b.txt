@@ -1,0 +1,29 @@
+Upgrade the site Footer (`Footer.tsx`) to use `/images/footer-bg.webp` as its full-width background while keeping every single word, link, phone number, email, and route intact:
+
+1. Footer Background & Overlay:
+   - Apply `/images/footer-bg.webp` as the full-width background (`bg-[#081A33] bg-cover bg-right bg-no-repeat relative overflow-hidden border-t border-[#1E3A5F]`).
+   - Add a subtle left-to-right dark navy scrim (`bg-gradient-to-r from-[#081A33]/90 via-[#081A33]/80 to-[#081A33]/40`) so all white text stays crisp and readable on desktop and mobile while letting the glowing blue left accents and right-side rainbow metal panels shine through.
+
+2. 4-Column Layout (`max-w-7xl mx-auto px-4 sm:px-6 py-12 relative z-10`):
+   - Column 1 (Brand): Keep our circular glowing Paul's Roofing emblem (transparent background, no dark square box around it) above:
+     `Your trusted roofing partner in Southern New Brunswick for over 30 years. Quality and reliability you can count on.`
+   - Column 2 (`QUICK LINKS` in crisp gold/amber `#F5C451` uppercase tracking-wider text-xs font-bold with a small `lucide-react` icon):
+     - `Services & Compare`
+     - `Winter Help`
+     - `Our Work`
+     - `About, Areas & FAQ`
+     - `Blog & Handbook`
+     - `Get a Quote`
+     - `XML Sitemap & Crawler`
+   - Column 3 (`CONTACT` in `#F5C451` with icon):
+     - `Call (506) 271-4162` (with phone icon, `tel:5062714162`)
+     - `paul@paulroofs.com` (with mail icon, `mailto:paul@paulroofs.com`)
+     - `Facebook` (with icon)
+     - `Quispamsis, New Brunswick` (with map-pin icon)
+   - Column 4 (`BUSINESS HOURS` in `#F5C451` with clock icon):
+     - `Quotes and installs: Mon–Fri 6:00 a.m. to 7:00 p.m. Emergency leaks: call anytime, 24/7.`
+
+3. Bottom Legal Bar (`border-t border-white/15 mt-10 pt-6 text-xs text-[#9BB4CE]`):
+   - Keep the exact bottom lines unchanged:
+     - `© 2026 Paul's Roofing. All rights reserved.` · `Based in Quispamsis, serving Southern NB` · `Metal systems by Community Metal & Dairy Town Exteriors · Shingles by IKO & BP`
+     - `Your quote details are only used to contact you about your roof.`
