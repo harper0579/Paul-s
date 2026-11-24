@@ -113,7 +113,7 @@ export const ARTICLES: Article[] = [
           },
           {
             "text": "Services",
-            "href": "#services",
+            "href": "/services",
             "external": false
           },
           {
@@ -162,7 +162,7 @@ export const ARTICLES: Article[] = [
           },
           {
             "text": "comparison table",
-            "href": "#compare",
+            "href": "/services#compare",
             "external": false
           },
           {
@@ -227,7 +227,7 @@ export const ARTICLES: Article[] = [
           },
           {
             "text": "free estimate",
-            "href": "#quote",
+            "href": "/quote",
             "external": false
           },
           {
@@ -335,7 +335,7 @@ export const ARTICLES: Article[] = [
           },
           {
             "text": "our process",
-            "href": "#about",
+            "href": "/about",
             "external": false
           },
           {
@@ -396,7 +396,7 @@ export const ARTICLES: Article[] = [
           },
           {
             "text": "exterior maintenance",
-            "href": "#services",
+            "href": "/services",
             "external": false
           },
           {
@@ -524,7 +524,7 @@ export const ARTICLES: Article[] = [
           },
           {
             "text": "About section",
-            "href": "#about",
+            "href": "/about",
             "external": false
           },
           {
@@ -579,7 +579,7 @@ export const ARTICLES: Article[] = [
           },
           {
             "text": "metal vs shingle comparison",
-            "href": "#compare",
+            "href": "/services#compare",
             "external": false
           },
           {
@@ -632,7 +632,7 @@ export const ARTICLES: Article[] = [
           },
           {
             "text": "comparison table",
-            "href": "#compare",
+            "href": "/services#compare",
             "external": false
           },
           {
@@ -690,7 +690,7 @@ export const ARTICLES: Article[] = [
           },
           {
             "text": "free, itemized quote",
-            "href": "#quote",
+            "href": "/quote",
             "external": false
           },
           {
@@ -798,7 +798,7 @@ export const ARTICLES: Article[] = [
           },
           {
             "text": "metal vs shingle table",
-            "href": "#compare",
+            "href": "/services#compare",
             "external": false
           },
           {
@@ -806,7 +806,7 @@ export const ARTICLES: Article[] = [
           },
           {
             "text": "free itemized quote",
-            "href": "#quote",
+            "href": "/quote",
             "external": false
           },
           {
@@ -909,7 +909,7 @@ export const ARTICLES: Article[] = [
           },
           {
             "text": "free estimate",
-            "href": "#quote",
+            "href": "/quote",
             "external": false
           },
           {
@@ -1012,7 +1012,7 @@ export const ARTICLES: Article[] = [
           },
           {
             "text": "metal vs shingle table",
-            "href": "#compare",
+            "href": "/services#compare",
             "external": false
           },
           {
@@ -1127,7 +1127,7 @@ export const ARTICLES: Article[] = [
           },
           {
             "text": "architectural shingles under Services",
-            "href": "#services",
+            "href": "/services",
             "external": false
           },
           {
@@ -1206,7 +1206,7 @@ export const ARTICLES: Article[] = [
             },
             {
               "text": "Services",
-              "href": "#services",
+              "href": "/services",
               "external": false
             }
           ],
@@ -1322,7 +1322,7 @@ export const ARTICLES: Article[] = [
           },
           {
             "text": "24/7 emergency service",
-            "href": "#quote",
+            "href": "/quote",
             "external": false
           },
           {
@@ -1438,7 +1438,7 @@ export const ARTICLES: Article[] = [
           },
           {
             "text": "emergency roof repair",
-            "href": "#handbook",
+            "href": "/blog",
             "external": false
           },
           {
@@ -1628,7 +1628,7 @@ export const ARTICLES: Article[] = [
           },
           {
             "text": "Services",
-            "href": "#services",
+            "href": "/services",
             "external": false
           },
           {
@@ -1731,7 +1731,7 @@ export const ARTICLES: Article[] = [
           },
           {
             "text": "free inspection",
-            "href": "#quote",
+            "href": "/quote",
             "external": false
           },
           {
@@ -1826,7 +1826,7 @@ export const ARTICLES: Article[] = [
           },
           {
             "text": "exterior maintenance service",
-            "href": "#services",
+            "href": "/services",
             "external": false
           },
           {
@@ -1937,7 +1937,7 @@ export const ARTICLES: Article[] = [
           },
           {
             "text": "free inspection",
-            "href": "#quote",
+            "href": "/quote",
             "external": false
           },
           {
@@ -2057,7 +2057,7 @@ export const ARTICLES: Article[] = [
           },
           {
             "text": "our replacement guide",
-            "href": "#handbook",
+            "href": "/blog",
             "external": false
           },
           {
@@ -2160,7 +2160,7 @@ export const ARTICLES: Article[] = [
           },
           {
             "text": "Services",
-            "href": "#services",
+            "href": "/services",
             "external": false
           },
           {
@@ -2168,7 +2168,7 @@ export const ARTICLES: Article[] = [
           },
           {
             "text": "free quote in Hampton",
-            "href": "#quote",
+            "href": "/quote",
             "external": false
           },
           {
@@ -2266,7 +2266,7 @@ export const ARTICLES: Article[] = [
           },
           {
             "text": "free quote",
-            "href": "#quote",
+            "href": "/quote",
             "external": false
           },
           {
@@ -2364,7 +2364,7 @@ export const ARTICLES: Article[] = [
           },
           {
             "text": "free inspection",
-            "href": "#quote",
+            "href": "/quote",
             "external": false
           },
           {
@@ -2464,7 +2464,7 @@ export const ARTICLES: Article[] = [
           },
           {
             "text": "quote form",
-            "href": "#quote",
+            "href": "/quote",
             "external": false
           },
           {
@@ -2559,7 +2559,7 @@ export const ARTICLES: Article[] = [
           },
           {
             "text": "Paul's Roofing services",
-            "href": "#services",
+            "href": "/services",
             "external": false
           },
           {
@@ -2678,7 +2678,7 @@ export const ARTICLES: Article[] = [
           },
           {
             "text": "free estimate",
-            "href": "#quote",
+            "href": "/quote",
             "external": false
           },
           {
@@ -2780,7 +2780,7 @@ export const ARTICLES: Article[] = [
           },
           {
             "text": "what we install",
-            "href": "#services",
+            "href": "/services",
             "external": false
           },
           {
@@ -2788,7 +2788,7 @@ export const ARTICLES: Article[] = [
           },
           {
             "text": "quote form",
-            "href": "#quote",
+            "href": "/quote",
             "external": false
           },
           {
@@ -2891,7 +2891,7 @@ export const ARTICLES: Article[] = [
           },
           {
             "text": "quote form",
-            "href": "#quote",
+            "href": "/quote",
             "external": false
           },
           {
@@ -2996,7 +2996,7 @@ export const ARTICLES: Article[] = [
           },
           {
             "text": "quote form",
-            "href": "#quote",
+            "href": "/quote",
             "external": false
           },
           {
@@ -3186,7 +3186,7 @@ export const ARTICLES: Article[] = [
           },
           {
             "text": "ice dam guide",
-            "href": "#handbook",
+            "href": "/blog",
             "external": false
           },
           {
@@ -3281,7 +3281,7 @@ export const ARTICLES: Article[] = [
           },
           {
             "text": "exterior maintenance service",
-            "href": "#services",
+            "href": "/services",
             "external": false
           },
           {
@@ -3371,7 +3371,7 @@ export const ARTICLES: Article[] = [
           },
           {
             "text": "Chimneys & More service",
-            "href": "#services",
+            "href": "/services",
             "external": false
           },
           {
@@ -3471,7 +3471,7 @@ export const ARTICLES: Article[] = [
           },
           {
             "text": "quote form",
-            "href": "#quote",
+            "href": "/quote",
             "external": false
           },
           {
@@ -3571,7 +3571,7 @@ export const ARTICLES: Article[] = [
           },
           {
             "text": "Services",
-            "href": "#services",
+            "href": "/services",
             "external": false
           },
           {
@@ -3748,7 +3748,7 @@ export const ARTICLES: Article[] = [
           },
           {
             "text": "architectural shingles under Services",
-            "href": "#services",
+            "href": "/services",
             "external": false
           },
           {

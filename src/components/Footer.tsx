@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import { Phone } from "lucide-react";
 import { CONTACT } from "../data/siteContent";
 
@@ -8,15 +9,17 @@ export function Footer() {
         <div className="max-w-6xl mx-auto px-4 lg:px-6">
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
             <div>
-              <img
-                src="/images/logo-footer.jpg"
-                alt="Paul's Roofing logo — blue rooftops over the words Paul's Roofing"
-                width={1161}
-                height={536}
-                loading="lazy"
-                referrerPolicy="no-referrer"
-                className="w-44 h-auto rounded-lg bg-white p-1.5"
-              />
+              <Link to="/" className="inline-block">
+                <img
+                  src="/images/logo-footer.jpg"
+                  alt="Paul's Roofing logo — blue rooftops over the words Paul's Roofing"
+                  width={1161}
+                  height={536}
+                  loading="lazy"
+                  referrerPolicy="no-referrer"
+                  className="w-44 h-auto rounded-lg bg-white p-1.5"
+                />
+              </Link>
               <p className="mt-3 text-sm text-[#C9DDF3] leading-relaxed">
                 Your trusted roofing partner in Southern New Brunswick for over 30 years. Quality
                 and reliability you can count on.
@@ -29,44 +32,39 @@ export function Footer() {
               </h4>
               <ul className="mt-3 space-y-2 text-sm">
                 <li>
-                  <a href="#services" className="hover:text-white hover:underline">
-                    Services
-                  </a>
+                  <Link to="/services" className="hover:text-white hover:underline">
+                    Services &amp; Compare
+                  </Link>
                 </li>
                 <li>
-                  <a href="#winter" className="hover:text-white hover:underline">
+                  <Link to="/winter-help" className="hover:text-white hover:underline">
                     Winter Help
-                  </a>
+                  </Link>
                 </li>
                 <li>
-                  <a href="#work" className="hover:text-white hover:underline">
+                  <Link to="/our-work" className="hover:text-white hover:underline">
                     Our Work
-                  </a>
+                  </Link>
                 </li>
                 <li>
-                  <a href="#compare" className="hover:text-white hover:underline">
-                    Metal vs Shingle
-                  </a>
+                  <Link to="/about" className="hover:text-white hover:underline">
+                    About, Areas &amp; FAQ
+                  </Link>
                 </li>
                 <li>
-                  <a href="#handbook" className="hover:text-white hover:underline">
+                  <Link to="/blog" className="hover:text-white hover:underline">
                     Blog &amp; Handbook
-                  </a>
+                  </Link>
                 </li>
                 <li>
-                  <a href="#faq" className="hover:text-white hover:underline">
-                    FAQ
-                  </a>
-                </li>
-                <li>
-                  <a href="#quote" className="hover:text-white hover:underline">
+                  <Link to="/quote" className="hover:text-white hover:underline">
                     Get a Quote
-                  </a>
+                  </Link>
                 </li>
                 <li>
-                  <a href="#gmail" className="hover:text-white hover:underline">
+                  <Link to="/gmail" className="hover:text-white hover:underline">
                     Gmail Quote Desk
-                  </a>
+                  </Link>
                 </li>
               </ul>
             </div>
@@ -132,12 +130,12 @@ export function Footer() {
           <Phone className="w-4 h-4" />
           Call Paul
         </a>
-        <a
-          href="#quote"
+        <Link
+          to="/quote"
           className="flex-1 inline-flex items-center justify-center min-h-11 rounded-lg bg-[#0E8FE8] text-white font-display text-sm font-bold"
         >
           Free Quote
-        </a>
+        </Link>
       </div>
     </>
   );

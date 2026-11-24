@@ -368,7 +368,7 @@ export const FAQ_ITEMS: FaqItem[] = [
     slug: "free-inspections-and-quotes",
     question: "Do you offer free inspections and quotes?",
     answer:
-      "Yes — free roof inspections and detailed, itemized quotes across our whole service area: Quispamsis, Rothesay, Saint John, Hampton, Grand Bay-Westfield, Sussex, St. Martins and the Kingston Peninsula. Use the quote form below, or tap Call or Email.",
+      "Yes — free roof inspections and detailed, itemized quotes across our whole service area: Quispamsis, Rothesay, Saint John, Hampton, Grand Bay-Westfield, Sussex, St. Martins and the Kingston Peninsula. Use the Get a Quote page, or tap Call or Email.",
   },
   {
     slug: "active-roof-leak-emergency",
@@ -380,7 +380,7 @@ export const FAQ_ITEMS: FaqItem[] = [
     slug: "ice-dams-causes-and-fix",
     question: "What causes ice dams, and can they be stopped?",
     answer:
-      "Heat escaping into your attic melts snow on the upper roof; the water refreezes at the cold eave and backs up under the roofing. The lasting fix is attic air sealing, proper insulation and ventilation, plus ice-and-water shield at the eaves on your next roof. There's a full guide in the blog below.",
+      "Heat escaping into your attic melts snow on the upper roof; the water refreezes at the cold eave and backs up under the roofing. The lasting fix is attic air sealing, proper insulation and ventilation, plus ice-and-water shield at the eaves on your next roof. Read our full ice dam guide in the Blog.",
   },
   {
     slug: "small-jobs-gutters-chimneys",

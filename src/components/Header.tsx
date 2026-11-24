@@ -1,12 +1,13 @@
 import { useState } from "react";
+import { Link, NavLink } from "react-router-dom";
 import { Menu, X } from "lucide-react";
 
 const NAV_LINKS = [
-  { href: "#services", label: "Services" },
-  { href: "#winter", label: "Winter Help" },
-  { href: "#work", label: "Our Work" },
-  { href: "#compare", label: "Compare" },
-  { href: "#handbook", label: "Blog & FAQ" },
+  { to: "/services", label: "Services" },
+  { to: "/winter-help", label: "Winter Help" },
+  { to: "/our-work", label: "Our Work" },
+  { to: "/about", label: "About & FAQ" },
+  { to: "/blog", label: "Blog" },
 ] as const;
 
 export function Header() {
@@ -15,39 +16,53 @@ export function Header() {
   return (
     <header className="sticky top-0 z-40 bg-white/95 backdrop-blur-sm border-b border-[#C3D6EA]">
       <a
-        href="#services"
+        href="#main-content"
         className="sr-only focus:not-sr-only focus:fixed focus:top-2 focus:left-2 focus:z-50 focus:px-4 focus:py-2.5 focus:rounded-lg focus:bg-[#0B6CB8] focus:text-white focus:font-semibold"
       >
         Skip to content
       </a>
 
       <div className="max-w-6xl mx-auto px-4 lg:px-6 h-16 flex items-center justify-between gap-8">
-        <a
-          href="#top"
+        <Link
+          to="/"
+          onClick={() => setMobileOpen(false)}
           className="font-display text-xl font-extrabold tracking-tight text-[#081A33] whitespace-nowrap shrink-0 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#0B6CB8]"
         >
           Paul&apos;s <span className="text-[#0B6CB8]">Roofing</span>
-        </a>
+        </Link>
 
         <nav className="hidden lg:flex items-center gap-7" aria-label="Primary navigation">
           {NAV_LINKS.map((link) => (
-            <a
-              key={link.href}
-              href={link.href}
-              className="text-sm font-semibold text-[#2A3D57] hover:text-[#081A33] hover:underline underline-offset-4 decoration-[#0E8FE8] decoration-2 whitespace-nowrap shrink-0 transition-colors duration-150 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#0B6CB8]"
+            <NavLink
+              key={link.to}
+              to={link.to}
+              className={({ isActive }) =>
+                `text-sm font-semibold whitespace-nowrap shrink-0 transition-colors duration-150 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#0B6CB8] ${
+                  isActive
+                    ? "text-[#0B6CB8] underline underline-offset-4 decoration-[#0E8FE8] decoration-2"
+                    : "text-[#2A3D57] hover:text-[#081A33] hover:underline underline-offset-4 decoration-[#0E8FE8] decoration-2"
+                }`
+              }
             >
               {link.label}
-            </a>
+            </NavLink>
           ))}
         </nav>
 
         <div className="flex items-center gap-3 shrink-0">
-          <a
-            href="#quote"
-            className="inline-flex items-center justify-center px-4 py-2.5 min-h-10 rounded-lg bg-[#0E8FE8] hover:bg-[#0B6CB8] text-white font-display text-sm font-bold whitespace-nowrap shrink-0 transition-colors duration-150 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#081A33]"
+          <NavLink
+            to="/quote"
+            onClick={() => setMobileOpen(false)}
+            className={({ isActive }) =>
+              `inline-flex items-center justify-center px-4 py-2.5 min-h-10 rounded-lg font-display text-sm font-bold whitespace-nowrap shrink-0 transition-colors duration-150 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#081A33] ${
+                isActive
+                  ? "bg-[#081A33] text-white"
+                  : "bg-[#0E8FE8] hover:bg-[#0B6CB8] text-white"
+              }`
+            }
           >
             Get a Quote
-          </a>
+          </NavLink>
 
           <button
             type="button"
@@ -67,30 +82,43 @@ export function Header() {
           aria-label="Mobile navigation"
         >
           <div className="flex flex-col divide-y divide-[#EFF5FB]">
+            <NavLink
+              to="/"
+              end
+              onClick={() => setMobileOpen(false)}
+              className={({ isActive }) =>
+                `py-3 min-h-11 flex items-center text-base font-semibold ${
+                  isActive ? "text-[#0B6CB8]" : "text-[#081A33] hover:text-[#0B6CB8]"
+                }`
+              }
+            >
+              Home
+            </NavLink>
             {NAV_LINKS.map((link) => (
-              <a
-                key={link.href}
-                href={link.href}
+              <NavLink
+                key={link.to}
+                to={link.to}
                 onClick={() => setMobileOpen(false)}
-                className="py-3 min-h-11 flex items-center text-base font-semibold text-[#081A33] hover:text-[#0B6CB8]"
+                className={({ isActive }) =>
+                  `py-3 min-h-11 flex items-center text-base font-semibold ${
+                    isActive ? "text-[#0B6CB8]" : "text-[#081A33] hover:text-[#0B6CB8]"
+                  }`
+                }
               >
                 {link.label}
-              </a>
+              </NavLink>
             ))}
-            <a
-              href="#areas"
+            <NavLink
+              to="/quote"
               onClick={() => setMobileOpen(false)}
-              className="py-3 min-h-11 flex items-center text-base font-semibold text-[#081A33] hover:text-[#0B6CB8]"
+              className={({ isActive }) =>
+                `py-3 min-h-11 flex items-center text-base font-semibold ${
+                  isActive ? "text-[#0B6CB8]" : "text-[#081A33] hover:text-[#0B6CB8]"
+                }`
+              }
             >
-              Service Areas
-            </a>
-            <a
-              href="#faq"
-              onClick={() => setMobileOpen(false)}
-              className="py-3 min-h-11 flex items-center text-base font-semibold text-[#081A33] hover:text-[#0B6CB8]"
-            >
-              FAQ
-            </a>
+              Get a Quote
+            </NavLink>
           </div>
         </nav>
       )}

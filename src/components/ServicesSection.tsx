@@ -1,56 +1,39 @@
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { Check, ArrowUpRight } from "lucide-react";
 import {
+  COMPARISON_ROWS,
   CONTACT,
   METAL_COLOURS,
   SECONDARY_SERVICES,
-  WHY_ITEMS,
 } from "../data/siteContent";
 
-interface ServicesSectionProps {
-  onSelectRoofQuote: (roofType: "Metal" | "Shingles", colourNote?: string) => void;
-}
-
-export function ServicesSection({ onSelectRoofQuote }: ServicesSectionProps) {
+export function ServicesSection() {
   const [selectedColour, setSelectedColour] = useState(METAL_COLOURS[0]);
+  const navigate = useNavigate();
+
+  function handleQuoteColour(colourName: string) {
+    navigate("/quote", {
+      state: {
+        projectType: "Replacement",
+        roofType: "Metal",
+        description: `Interested in ${colourName} metal roof.`,
+        timestamp: Date.now(),
+      },
+    });
+  }
 
   return (
     <>
-      <section className="py-14 lg:py-16 bg-white">
-        <div className="max-w-6xl mx-auto px-4 lg:px-6">
-          <p className="text-xs font-bold tracking-wider uppercase text-[#0B6CB8]">
-            Why Paul&apos;s
-          </p>
-          <h2 className="mt-2 font-display text-3xl sm:text-4xl font-extrabold text-[#081A33] max-w-xl">
-            Why choose Paul&apos;s Roofing?
-          </h2>
-          <p className="mt-3 text-base text-[#47617F] max-w-2xl">
-            Over 30 years of experience. Quality workmanship and reliable service, protecting homes
-            across Quispamsis, Saint John, Hampton, and Southern New Brunswick.
-          </p>
-
-          <div className="mt-8 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
-            {WHY_ITEMS.map((item) => (
-              <div
-                key={item.title}
-                className="rounded-xl border border-[#C3D6EA] bg-white p-5"
-              >
-                <h3 className="font-display text-lg font-bold text-[#081A33]">{item.title}</h3>
-                <p className="mt-2 text-sm text-[#47617F] leading-relaxed">{item.description}</p>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      <section id="services" className="scroll-mt-20 py-14 lg:py-16 bg-[#EFF5FB] border-y border-[#C3D6EA]">
+      <section id="services" className="scroll-mt-20 py-14 lg:py-16 bg-[#EFF5FB] border-b border-[#C3D6EA]">
         <div className="max-w-6xl mx-auto px-4 lg:px-6">
           <p className="text-xs font-bold tracking-wider uppercase text-[#0B6CB8]">What we do</p>
-          <h2 className="mt-2 font-display text-3xl sm:text-4xl font-extrabold text-[#081A33]">
+          <h1 className="mt-2 font-display text-3xl sm:text-4xl font-extrabold text-[#081A33]">
             Our services
-          </h2>
+          </h1>
           <p className="mt-3 text-base text-[#47617F] max-w-2xl">
-            Expert solutions for every part of your roof and exterior, built to last.
+            Expert solutions for every part of your roof and exterior, built to last across Southern
+            New Brunswick.
           </p>
 
           <article className="mt-8 rounded-2xl border border-[#C3D6EA] bg-white p-6 lg:p-8 shadow-sm">
@@ -60,9 +43,9 @@ export function ServicesSection({ onSelectRoofQuote }: ServicesSectionProps) {
                   <p className="text-xs font-bold tracking-wider uppercase text-[#0B6CB8]">
                     Our specialty
                   </p>
-                  <h3 className="mt-1.5 font-display text-2xl sm:text-3xl font-extrabold text-[#081A33]">
+                  <h2 className="mt-1.5 font-display text-2xl sm:text-3xl font-extrabold text-[#081A33]">
                     Premium Metal Roofing
-                  </h3>
+                  </h2>
                   <p className="mt-3 text-base text-[#2A3D57] leading-relaxed">
                     High-quality metal roofing systems sourced from industry leaders like Community
                     Metal and Dairy Town Exteriors. Unparalleled durability, longevity, and
@@ -86,9 +69,9 @@ export function ServicesSection({ onSelectRoofQuote }: ServicesSectionProps) {
                 </div>
 
                 <div className="mt-6 rounded-xl bg-[#E4EFFA] border border-[#C3D6EA] p-5">
-                  <h4 className="font-display text-base font-bold text-[#081A33]">
+                  <h3 className="font-display text-base font-bold text-[#081A33]">
                     Industry-leading warranties
-                  </h4>
+                  </h3>
                   <ul className="mt-2.5 space-y-1.5 text-sm text-[#2A3D57]">
                     <li>
                       40-year paint warranty on most colours — won&apos;t chip, crack, or peel
@@ -104,7 +87,7 @@ export function ServicesSection({ onSelectRoofQuote }: ServicesSectionProps) {
                   <img
                     src="/images/service-metal.jpg"
                     alt="House with a dark metal roof at sunset, with red, green, charcoal and brown metal roofing panels laid out in front."
-                    className="w-full aspect-[16/9] object-cover"
+                    className="w-full aspect-video object-cover block"
                     loading="lazy"
                     referrerPolicy="no-referrer"
                   />
@@ -112,9 +95,9 @@ export function ServicesSection({ onSelectRoofQuote }: ServicesSectionProps) {
 
                 <div className="rounded-xl border border-[#C3D6EA] bg-[#EFF5FB] p-5">
                   <div className="flex flex-wrap items-baseline justify-between gap-2">
-                    <h4 className="font-display text-base font-bold text-[#081A33]">
+                    <h3 className="font-display text-base font-bold text-[#081A33]">
                       Popular metal roof colours
-                    </h4>
+                    </h3>
                     <span className="text-xs font-medium text-[#47617F]">
                       Select a finish to preview
                     </span>
@@ -166,9 +149,7 @@ export function ServicesSection({ onSelectRoofQuote }: ServicesSectionProps) {
                     </div>
                     <button
                       type="button"
-                      onClick={() =>
-                        onSelectRoofQuote("Metal", `Interested in ${selectedColour.name} metal roof.`)
-                      }
+                      onClick={() => handleQuoteColour(selectedColour.name)}
                       className="px-3.5 py-2 min-h-10 rounded-lg bg-[#0E8FE8] hover:bg-[#0B6CB8] text-white font-display text-xs font-bold whitespace-nowrap shrink-0 cursor-pointer transition-colors duration-150"
                     >
                       Quote in {selectedColour.name}
@@ -208,7 +189,7 @@ export function ServicesSection({ onSelectRoofQuote }: ServicesSectionProps) {
                 className="rounded-xl border border-[#C3D6EA] bg-white p-6 flex flex-col justify-between"
               >
                 <div>
-                  <h3 className="font-display text-xl font-bold text-[#081A33]">{svc.title}</h3>
+                  <h2 className="font-display text-xl font-bold text-[#081A33]">{svc.title}</h2>
                   <p className="mt-2.5 text-sm sm:text-base text-[#47617F] leading-relaxed">
                     {svc.description}
                   </p>
@@ -246,6 +227,85 @@ export function ServicesSection({ onSelectRoofQuote }: ServicesSectionProps) {
                 )}
               </article>
             ))}
+          </div>
+        </div>
+      </section>
+
+      <section id="compare" className="scroll-mt-20 py-14 lg:py-16 bg-white">
+        <div className="max-w-6xl mx-auto px-4 lg:px-6">
+          <p className="text-xs font-bold tracking-wider uppercase text-[#0B6CB8]">Straight talk</p>
+          <h2 className="mt-2 font-display text-3xl sm:text-4xl font-extrabold text-[#081A33]">
+            Metal vs. shingle: an honest comparison
+          </h2>
+          <p className="mt-3 text-base text-[#47617F] max-w-2xl">
+            No sales pitch — here&apos;s how the two materials actually stack up for a New Brunswick
+            home.
+          </p>
+
+          <div className="mt-8 rounded-2xl border border-[#C3D6EA] bg-white overflow-hidden">
+            <div className="overflow-x-auto">
+              <table className="w-full text-left border-collapse">
+                <thead>
+                  <tr className="bg-[#E4EFFA] border-b border-[#C3D6EA]">
+                    <th className="py-4 px-5 font-display text-sm sm:text-base font-bold text-[#081A33]">
+                      Feature
+                    </th>
+                    <th className="py-4 px-5 font-display text-sm sm:text-base font-bold text-[#081A33] text-center">
+                      Metal roofing
+                    </th>
+                    <th className="py-4 px-5 font-display text-sm sm:text-base font-bold text-[#081A33] text-center">
+                      Shingle roofing
+                    </th>
+                  </tr>
+                </thead>
+                <tbody className="divide-y divide-[#C3D6EA]">
+                  {COMPARISON_ROWS.map((row) => (
+                    <tr key={row.feature} className="hover:bg-[#EFF5FB]/60 transition-colors">
+                      <td className="py-4 px-5 font-display font-bold text-[#081A33] text-sm sm:text-base">
+                        {row.feature}
+                      </td>
+                      <td
+                        className={`py-4 px-5 text-center text-sm sm:text-base tabular-nums ${
+                          row.advantage === "metal"
+                            ? "font-bold text-[#15803D]"
+                            : "text-[#2A3D57]"
+                        }`}
+                      >
+                        {row.metal}
+                      </td>
+                      <td
+                        className={`py-4 px-5 text-center text-sm sm:text-base tabular-nums ${
+                          row.advantage === "shingle"
+                            ? "font-bold text-[#15803D]"
+                            : "text-[#2A3D57]"
+                        }`}
+                      >
+                        {row.shingle}
+                      </td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+          </div>
+
+          <div className="mt-8 flex flex-wrap items-center gap-3">
+            <button
+              type="button"
+              onClick={() =>
+                navigate("/quote", {
+                  state: {
+                    projectType: "Replacement",
+                    roofType: "Unsure",
+                    description: "Looking for advice comparing metal vs. shingles for my home.",
+                    timestamp: Date.now(),
+                  },
+                })
+              }
+              className="px-6 py-3 min-h-12 rounded-lg bg-[#0E8FE8] hover:bg-[#0B6CB8] text-white font-display text-base font-bold cursor-pointer transition-colors"
+            >
+              Get an itemized comparison quote
+            </button>
           </div>
         </div>
       </section>

@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 import { ChevronLeft, ChevronRight, X, Maximize2 } from "lucide-react";
-import { COMPARISON_ROWS, GALLERY_ITEMS } from "../data/siteContent";
+import { GALLERY_ITEMS } from "../data/siteContent";
 
 export function WorkGallerySection() {
   const [lightboxIdx, setLightboxIdx] = useState<number | null>(null);
@@ -26,14 +27,24 @@ export function WorkGallerySection() {
     <>
       <section id="work" className="scroll-mt-20 py-14 lg:py-16 bg-white">
         <div className="max-w-6xl mx-auto px-4 lg:px-6">
-          <p className="text-xs font-bold tracking-wider uppercase text-[#0B6CB8]">Our work</p>
-          <h2 className="mt-2 font-display text-3xl sm:text-4xl font-extrabold text-[#081A33]">
-            Roofs we&apos;re proud of
-          </h2>
-          <p className="mt-3 text-base text-[#47617F] max-w-2xl">
-            Metal and shingle work across Southern New Brunswick — built to protect, built to last.
-            Click any project photo to inspect up close.
-          </p>
+          <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4">
+            <div>
+              <p className="text-xs font-bold tracking-wider uppercase text-[#0B6CB8]">Our work</p>
+              <h1 className="mt-2 font-display text-3xl sm:text-4xl font-extrabold text-[#081A33]">
+                Roofs we&apos;re proud of
+              </h1>
+              <p className="mt-3 text-base text-[#47617F] max-w-2xl">
+                Metal and shingle work across Southern New Brunswick — built to protect, built to
+                last. Click any project photo to inspect up close.
+              </p>
+            </div>
+            <Link
+              to="/quote"
+              className="inline-flex items-center justify-center px-5 py-2.5 min-h-11 rounded-lg bg-[#0E8FE8] hover:bg-[#0B6CB8] text-white font-display text-sm font-bold whitespace-nowrap shrink-0 transition-colors"
+            >
+              Book a free inspection
+            </Link>
+          </div>
 
           <div className="mt-8 grid grid-cols-1 md:grid-cols-2 gap-5">
             {GALLERY_ITEMS.map((item, idx) => (
@@ -71,66 +82,6 @@ export function WorkGallerySection() {
                 </figcaption>
               </figure>
             ))}
-          </div>
-        </div>
-      </section>
-
-      <section id="compare" className="scroll-mt-20 py-14 lg:py-16 bg-[#EFF5FB] border-t border-[#C3D6EA]">
-        <div className="max-w-6xl mx-auto px-4 lg:px-6">
-          <p className="text-xs font-bold tracking-wider uppercase text-[#0B6CB8]">Straight talk</p>
-          <h2 className="mt-2 font-display text-3xl sm:text-4xl font-extrabold text-[#081A33]">
-            Metal vs. shingle: an honest comparison
-          </h2>
-          <p className="mt-3 text-base text-[#47617F] max-w-2xl">
-            No sales pitch — here&apos;s how the two materials actually stack up for a New Brunswick
-            home.
-          </p>
-
-          <div className="mt-8 rounded-2xl border border-[#C3D6EA] bg-white overflow-hidden">
-            <div className="overflow-x-auto">
-              <table className="w-full text-left border-collapse">
-                <thead>
-                  <tr className="bg-[#E4EFFA] border-b border-[#C3D6EA]">
-                    <th className="py-4 px-5 font-display text-sm sm:text-base font-bold text-[#081A33]">
-                      Feature
-                    </th>
-                    <th className="py-4 px-5 font-display text-sm sm:text-base font-bold text-[#081A33] text-center">
-                      Metal roofing
-                    </th>
-                    <th className="py-4 px-5 font-display text-sm sm:text-base font-bold text-[#081A33] text-center">
-                      Shingle roofing
-                    </th>
-                  </tr>
-                </thead>
-                <tbody className="divide-y divide-[#C3D6EA]">
-                  {COMPARISON_ROWS.map((row) => (
-                    <tr key={row.feature} className="hover:bg-[#EFF5FB]/60 transition-colors">
-                      <td className="py-4 px-5 font-display font-bold text-[#081A33] text-sm sm:text-base">
-                        {row.feature}
-                      </td>
-                      <td
-                        className={`py-4 px-5 text-center text-sm sm:text-base tabular-nums ${
-                          row.advantage === "metal"
-                            ? "font-bold text-[#15803D]"
-                            : "text-[#2A3D57]"
-                        }`}
-                      >
-                        {row.metal}
-                      </td>
-                      <td
-                        className={`py-4 px-5 text-center text-sm sm:text-base tabular-nums ${
-                          row.advantage === "shingle"
-                            ? "font-bold text-[#15803D]"
-                            : "text-[#2A3D57]"
-                        }`}
-                      >
-                        {row.shingle}
-                      </td>
-                    </tr>
-                  ))}
-                </tbody>
-              </table>
-            </div>
           </div>
         </div>
       </section>

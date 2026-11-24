@@ -1,9 +1,10 @@
+import { Link } from "react-router-dom";
 import { Phone, Mail } from "lucide-react";
 import { CONTACT, HERO_STATS } from "../data/siteContent";
 
 export function Hero() {
   return (
-    <section id="top" className="bg-[#050D20] text-white">
+    <section className="bg-[#050D20] text-white">
       <div className="relative bg-[#050D20] overflow-hidden">
         <img
           src="/images/hero-bridge.jpg"
@@ -33,12 +34,12 @@ export function Hero() {
         </p>
 
         <div className="mt-7 flex flex-wrap items-center gap-3">
-          <a
-            href="#quote"
+          <Link
+            to="/quote"
             className="inline-flex items-center justify-center px-6 py-3 min-h-12 rounded-lg bg-[#0E8FE8] hover:bg-[#0B7ED6] text-white font-display font-bold text-base whitespace-nowrap shrink-0 transition-colors duration-150 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white"
           >
             Get a Free Quote
-          </a>
+          </Link>
 
           <a
             href={CONTACT.phoneHref}

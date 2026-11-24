@@ -1,4 +1,5 @@
 import { useEffect, useState, type FormEvent } from "react";
+import { useLocation } from "react-router-dom";
 import { AlertTriangle, CheckCircle2, Mail, Phone, Send } from "lucide-react";
 import { CONTACT } from "../data/siteContent";
 import { getAccessToken, googleSignIn } from "../lib/gmailAuth";
@@ -10,17 +11,16 @@ export interface QuotePrefill {
   roofType?: string;
   town?: string;
   description?: string;
-  timestamp: number;
-}
-
-interface QuoteSectionProps {
-  prefill: QuotePrefill | null;
+  timestamp?: number;
 }
 
 const PROJECT_TYPES = ["New Roof", "Replacement", "Repair / Leak", "Inspection"] as const;
 const ROOF_TYPES = ["Metal", "Shingles", "Unsure"] as const;
 
-export function QuoteSection({ prefill }: QuoteSectionProps) {
+export function QuoteSection() {
+  const location = useLocation();
+  const routePrefill = (location.state as QuotePrefill | null) ?? null;
+
   const [urgency, setUrgency] = useState<"standard" | "emergency">("standard");
   const [projectType, setProjectType] = useState("");
   const [roofType, setRoofType] = useState("");
@@ -46,17 +46,15 @@ export function QuoteSection({ prefill }: QuoteSectionProps) {
   } | null>(null);
 
   useEffect(() => {
-    if (!prefill) return;
-    if (prefill.urgency) setUrgency(prefill.urgency);
-    if (prefill.projectType) setProjectType(prefill.projectType);
-    if (prefill.roofType) setRoofType(prefill.roofType);
-    if (prefill.town) setTown(prefill.town);
-    if (prefill.description) {
-      setDescription((prev) => (prev ? prev : prefill.description ?? ""));
-    }
+    if (!routePrefill) return;
+    if (routePrefill.urgency) setUrgency(routePrefill.urgency);
+    if (routePrefill.projectType) setProjectType(routePrefill.projectType);
+    if (routePrefill.roofType) setRoofType(routePrefill.roofType);
+    if (routePrefill.town) setTown(routePrefill.town);
+    if (routePrefill.description) setDescription(routePrefill.description);
     setConfirmation(null);
     setErrorMsg("");
-  }, [prefill]);
+  }, [routePrefill]);
 
   function buildMailtoFallback(referenceId: string): string {
     const subject = `${urgency === "emergency" ? "[URGENT 24/7 EMERGENCY] " : ""}${projectType} (${roofType}) — ${name} [${referenceId}]`;
@@ -231,9 +229,9 @@ export function QuoteSection({ prefill }: QuoteSectionProps) {
     >
       <div className="max-w-4xl mx-auto px-4 lg:px-6">
         <p className="text-xs font-bold tracking-wider uppercase text-[#0B6CB8]">Free estimate</p>
-        <h2 className="mt-2 font-display text-3xl sm:text-4xl font-extrabold text-[#081A33]">
+        <h1 className="mt-2 font-display text-3xl sm:text-4xl font-extrabold text-[#081A33]">
           Get a free quote or request 24/7 emergency repair
-        </h2>
+        </h1>
         <p className="mt-3 text-base text-[#47617F] max-w-2xl">
           Tell us about the job and hit send — your request routes directly to{" "}
           <span className="font-semibold text-[#081A33]">{CONTACT.email}</span> with a reference

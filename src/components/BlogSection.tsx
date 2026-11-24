@@ -1,5 +1,6 @@
-import { useEffect, useMemo, useState } from "react";
-import { Check, ChevronLeft, ChevronRight, Link2, Mail, Phone, Search, X } from "lucide-react";
+import { useMemo, useState } from "react";
+import { Link, useParams } from "react-router-dom";
+import { ArrowLeft, Check, ChevronLeft, ChevronRight, Link2, Mail, Phone, Search } from "lucide-react";
 import {
   ARTICLE_CATEGORIES,
   ARTICLES,
@@ -7,11 +8,6 @@ import {
   type TextSegment,
 } from "../data/articles";
 import { CONTACT } from "../data/siteContent";
-
-interface BlogSectionProps {
-  openArticleId: string | null;
-  onClearExternalOpen: () => void;
-}
 
 const PAGE_SIZE = 9;
 
@@ -24,41 +20,23 @@ function formatArticleDate(iso: string): string {
   });
 }
 
-function getGuideIdFromUrl(): string | null {
-  if (typeof window === "undefined") return null;
-  const searchParams = new URLSearchParams(window.location.search);
-  const queryGuide = searchParams.get("guide");
-  if (queryGuide) return queryGuide;
-  const hash = window.location.hash;
-  if (hash.startsWith("#guide/")) {
-    return decodeURIComponent(hash.slice("#guide/".length));
-  }
-  return null;
-}
-
 function getGuideUrl(articleId: string): string {
-  if (typeof window === "undefined") return `https://www.paulroofs.com/#guide/${articleId}`;
-  return `${window.location.origin}${window.location.pathname}#guide/${articleId}`;
+  if (typeof window === "undefined") return `https://www.paulroofs.com/blog/${articleId}`;
+  return `${window.location.origin}/blog/${articleId}`;
 }
 
-function RenderSegments({
-  segments,
-  onNavigateHash,
-}: {
-  segments: TextSegment[];
-  onNavigateHash: () => void;
-}) {
+function RenderSegments({ segments }: { segments: TextSegment[] }) {
   return (
     <>
       {segments.map((seg, i) => {
         if (!seg.href) return <span key={i}>{seg.text}</span>;
-        if (seg.external) {
+        if (seg.external || seg.href.startsWith("tel:") || seg.href.startsWith("mailto:")) {
           return (
             <a
               key={i}
               href={seg.href}
-              target="_blank"
-              rel="noopener noreferrer"
+              target={seg.external ? "_blank" : undefined}
+              rel={seg.external ? "noopener noreferrer" : undefined}
               className="font-semibold text-[#0B6CB8] underline underline-offset-2"
             >
               {seg.text}
@@ -66,28 +44,195 @@ function RenderSegments({
           );
         }
         return (
-          <a
+          <Link
             key={i}
-            href={seg.href}
-            onClick={() => {
-              if (seg.href?.startsWith("#")) onNavigateHash();
-            }}
+            to={seg.href}
             className="font-semibold text-[#0B6CB8] underline underline-offset-2"
           >
             {seg.text}
-          </a>
+          </Link>
         );
       })}
     </>
   );
 }
 
-export function BlogSection({ openArticleId, onClearExternalOpen }: BlogSectionProps) {
+function ArticleDetailView({ article }: { article: Article }) {
+  const [copied, setCopied] = useState(false);
+
+  const idx = ARTICLES.findIndex((a) => a.id === article.id);
+  const prevArticle = idx > 0 ? ARTICLES[idx - 1] : null;
+  const nextArticle = idx >= 0 && idx < ARTICLES.length - 1 ? ARTICLES[idx + 1] : null;
+
+  async function handleCopyLink() {
+    const url = getGuideUrl(article.id);
+    try {
+      await navigator.clipboard.writeText(url);
+      setCopied(true);
+      setTimeout(() => setCopied(false), 2500);
+    } catch {
+      // Clipboard blocked
+    }
+  }
+
+  return (
+    <section className="py-10 lg:py-14 bg-[#EFF5FB] min-h-[70vh]">
+      <div className="max-w-3xl mx-auto px-4 lg:px-6">
+        <div className="flex flex-wrap items-center justify-between gap-3 mb-6">
+          <Link
+            to="/blog"
+            className="inline-flex items-center gap-1.5 text-sm font-semibold text-[#0B6CB8] hover:underline"
+          >
+            <ArrowLeft className="w-4 h-4" />
+            All roofing guides
+          </Link>
+
+          <div className="text-xs font-semibold text-[#47617F]">
+            {article.cat}
+            {article.town ? ` · ${article.town}` : ""}
+          </div>
+        </div>
+
+        <article className="rounded-2xl border border-[#C3D6EA] bg-white p-6 sm:p-10 space-y-6">
+          <header>
+            <h1 className="font-display text-2xl sm:text-4xl font-extrabold text-[#081A33] leading-tight">
+              {article.title}
+            </h1>
+            <p className="mt-3 text-xs sm:text-sm text-[#47617F] tabular-nums">
+              {formatArticleDate(article.date)} &middot; {article.read} min read &middot;
+              Paul&apos;s Roofing — Quispamsis, Saint John &amp; Southern NB
+            </p>
+          </header>
+
+          <div className="space-y-4 text-base text-[#2A3D57] leading-relaxed">
+            {article.blocks.map((block, bIdx) => {
+              if (block.type === "h4") {
+                return (
+                  <h2 key={bIdx} className="font-display text-xl font-bold text-[#081A33] pt-3">
+                    {block.text}
+                  </h2>
+                );
+              }
+              if (block.type === "p") {
+                return (
+                  <p key={bIdx}>
+                    <RenderSegments segments={block.segments} />
+                  </p>
+                );
+              }
+              return (
+                <ul key={bIdx} className="list-disc pl-6 space-y-1.5">
+                  {block.items.map((itemSegs, liIdx) => (
+                    <li key={liIdx}>
+                      <RenderSegments segments={itemSegs} />
+                    </li>
+                  ))}
+                </ul>
+              );
+            })}
+          </div>
+
+          {article.faq.length > 0 && (
+            <div className="rounded-xl border border-[#C3D6EA] bg-[#EFF5FB] p-5 space-y-3">
+              <h3 className="font-display text-base font-bold text-[#081A33]">Common questions</h3>
+              {article.faq.map(([q, a]) => (
+                <div key={q}>
+                  <p className="font-semibold text-[#081A33] text-sm">{q}</p>
+                  <p className="mt-1 text-sm text-[#2A3D57]">{a}</p>
+                </div>
+              ))}
+            </div>
+          )}
+
+          <div className="flex flex-wrap gap-3 pt-2">
+            <Link
+              to="/quote"
+              state={{
+                description: `Question after reading: ${article.title}`,
+                timestamp: Date.now(),
+              }}
+              className="inline-flex items-center justify-center px-5 py-2.5 min-h-11 rounded-lg bg-[#0E8FE8] hover:bg-[#0B6CB8] text-white font-display text-sm font-bold"
+            >
+              Get a Free Quote
+            </Link>
+            <a
+              href={CONTACT.phoneHref}
+              className="inline-flex items-center justify-center gap-2 px-5 py-2.5 min-h-11 rounded-lg bg-[#081A33] hover:bg-[#0B6CB8] text-white font-display text-sm font-bold"
+            >
+              <Phone className="w-4 h-4" />
+              Call Paul
+            </a>
+            <button
+              type="button"
+              onClick={handleCopyLink}
+              className="inline-flex items-center justify-center gap-2 px-4 py-2.5 min-h-11 rounded-lg border border-[#C3D6EA] text-[#081A33] font-semibold text-sm hover:bg-[#EFF5FB] cursor-pointer"
+            >
+              {copied ? (
+                <>
+                  <Check className="w-4 h-4 text-[#15803D]" />
+                  Link copied
+                </>
+              ) : (
+                <>
+                  <Link2 className="w-4 h-4" />
+                  Copy guide link
+                </>
+              )}
+            </button>
+            <a
+              href={`mailto:?subject=${encodeURIComponent(
+                `${article.title} — Paul's Roofing`
+              )}&body=${encodeURIComponent(
+                `${article.title}\n\n${article.excerpt}\n\nRead the full guide: ${getGuideUrl(
+                  article.id
+                )}`
+              )}`}
+              className="inline-flex items-center justify-center gap-2 px-4 py-2.5 min-h-11 rounded-lg border border-[#C3D6EA] text-[#081A33] font-semibold text-sm hover:bg-[#EFF5FB]"
+            >
+              <Mail className="w-4 h-4" />
+              Share by email
+            </a>
+          </div>
+
+          <div className="pt-5 border-t border-[#C3D6EA] flex flex-wrap items-center justify-between gap-3">
+            {prevArticle ? (
+              <Link
+                to={`/blog/${prevArticle.id}`}
+                className="inline-flex items-center gap-1.5 px-4 py-2 min-h-10 rounded-lg border border-[#C3D6EA] text-sm font-semibold text-[#081A33] hover:bg-[#EFF5FB]"
+              >
+                <ChevronLeft className="w-4 h-4" />
+                Previous guide
+              </Link>
+            ) : (
+              <span />
+            )}
+
+            {nextArticle && (
+              <Link
+                to={`/blog/${nextArticle.id}`}
+                className="inline-flex items-center gap-1.5 px-4 py-2 min-h-10 rounded-lg border border-[#C3D6EA] text-sm font-semibold text-[#081A33] hover:bg-[#EFF5FB]"
+              >
+                Next guide
+                <ChevronRight className="w-4 h-4" />
+              </Link>
+            )}
+          </div>
+        </article>
+      </div>
+    </section>
+  );
+}
+
+export function BlogSection() {
+  const { slug } = useParams<{ slug?: string }>();
   const [activeCat, setActiveCat] = useState<string>("All");
   const [query, setQuery] = useState("");
   const [shown, setShown] = useState(PAGE_SIZE);
-  const [activeArticle, setActiveArticle] = useState<Article | null>(null);
-  const [copiedId, setCopiedId] = useState<string | null>(null);
+
+  const selectedArticle = useMemo(
+    () => (slug ? ARTICLES.find((a) => a.id === slug) ?? null : null),
+    [slug]
+  );
 
   const filtered = useMemo(() => {
     const q = query.trim().toLowerCase();
@@ -109,89 +254,41 @@ export function BlogSection({ openArticleId, onClearExternalOpen }: BlogSectionP
     });
   }, [activeCat, query]);
 
-  function openArticle(article: Article, syncUrl = true) {
-    setActiveArticle(article);
-    setCopiedId(null);
-    if (syncUrl && typeof window !== "undefined") {
-      window.history.replaceState(null, "", `#guide/${encodeURIComponent(article.id)}`);
-    }
+  if (slug && selectedArticle) {
+    return <ArticleDetailView article={selectedArticle} />;
   }
 
-  function closeArticle(syncUrl = true) {
-    setActiveArticle(null);
-    setCopiedId(null);
-    if (syncUrl && typeof window !== "undefined" && window.location.hash.startsWith("#guide/")) {
-      window.history.replaceState(null, "", "#handbook");
-    }
-  }
-
-  useEffect(() => {
-    const syncFromLocation = () => {
-      const id = getGuideIdFromUrl();
-      if (id) {
-        const match = ARTICLES.find((a) => a.id === id);
-        if (match) {
-          setActiveCat("All");
-          setQuery("");
-          setActiveArticle(match);
-          const handbook = document.getElementById("handbook");
-          if (handbook) handbook.scrollIntoView({ behavior: "smooth" });
-        }
-      }
-    };
-    syncFromLocation();
-    window.addEventListener("hashchange", syncFromLocation);
-    return () => window.removeEventListener("hashchange", syncFromLocation);
-  }, []);
-
-  useEffect(() => {
-    if (!openArticleId) return;
-    const found = ARTICLES.find((a) => a.id === openArticleId);
-    if (found) {
-      setActiveCat("All");
-      setQuery("");
-      openArticle(found, true);
-    }
-    onClearExternalOpen();
-  }, [openArticleId, onClearExternalOpen]);
-
-  useEffect(() => {
-    if (!activeArticle) return;
-    const onKey = (e: KeyboardEvent) => {
-      if (e.key === "Escape") closeArticle(true);
-    };
-    window.addEventListener("keydown", onKey);
-    return () => window.removeEventListener("keydown", onKey);
-  }, [activeArticle]);
-
-  const currentFilteredIdx = activeArticle
-    ? filtered.findIndex((a) => a.id === activeArticle.id)
-    : -1;
-
-  async function handleCopyGuideLink(articleId: string) {
-    const url = getGuideUrl(articleId);
-    try {
-      await navigator.clipboard.writeText(url);
-      setCopiedId(articleId);
-      setTimeout(() => setCopiedId((prev) => (prev === articleId ? null : prev)), 2500);
-    } catch {
-      // Fallback: update URL bar directly so user can copy it
-      window.history.replaceState(null, "", `#guide/${encodeURIComponent(articleId)}`);
-    }
+  if (slug && !selectedArticle) {
+    return (
+      <section className="py-16 bg-[#EFF5FB] min-h-[60vh]">
+        <div className="max-w-2xl mx-auto px-4 text-center space-y-4">
+          <h1 className="font-display text-3xl font-extrabold text-[#081A33]">
+            Guide not found
+          </h1>
+          <p className="text-base text-[#47617F]">
+            We couldn&apos;t find a roofing guide matching &ldquo;{slug}&rdquo;. Browse all{" "}
+            {ARTICLES.length} homeowner guides below.
+          </p>
+          <Link
+            to="/blog"
+            className="inline-flex items-center justify-center px-5 py-2.5 min-h-11 rounded-lg bg-[#0E8FE8] text-white font-display text-sm font-bold"
+          >
+            Back to all guides
+          </Link>
+        </div>
+      </section>
+    );
   }
 
   return (
-    <section
-      id="handbook"
-      className="scroll-mt-20 py-14 lg:py-16 bg-[#EFF5FB] border-t border-[#C3D6EA]"
-    >
+    <section id="handbook" className="scroll-mt-20 py-14 lg:py-16 bg-[#EFF5FB]">
       <div className="max-w-6xl mx-auto px-4 lg:px-6">
         <p className="text-xs font-bold tracking-wider uppercase text-[#0B6CB8]">
           Blog &middot; Homeowner&apos;s Handbook
         </p>
-        <h2 className="mt-2 font-display text-3xl sm:text-4xl font-extrabold text-[#081A33]">
+        <h1 className="mt-2 font-display text-3xl sm:text-4xl font-extrabold text-[#081A33]">
           Roofing Tips &amp; Blog — Paul&apos;s Roofing Quispamsis NB
-        </h2>
+        </h1>
         <p className="mt-3 text-base text-[#2A3D57] max-w-3xl leading-relaxed">
           Straight answers on metal roofing, architectural shingles, roof repair, ice dams, gutters
           and winter prep for homeowners across Southern New Brunswick. Every guide comes from 30
@@ -294,18 +391,14 @@ export function BlogSection({ openArticleId, onClearExternalOpen }: BlogSectionP
                     </time>
                   </div>
 
-                  <h3 className="mt-2.5 font-display text-lg font-bold text-[#081A33] leading-snug">
-                    <a
-                      href={`#guide/${article.id}`}
-                      onClick={(e) => {
-                        e.preventDefault();
-                        openArticle(article, true);
-                      }}
+                  <h2 className="mt-2.5 font-display text-lg font-bold text-[#081A33] leading-snug">
+                    <Link
+                      to={`/blog/${article.id}`}
                       className="hover:text-[#0B6CB8] transition-colors"
                     >
                       {article.title}
-                    </a>
-                  </h3>
+                    </Link>
+                  </h2>
 
                   <p className="mt-2 text-sm text-[#47617F] leading-relaxed">{article.excerpt}</p>
                 </div>
@@ -314,13 +407,12 @@ export function BlogSection({ openArticleId, onClearExternalOpen }: BlogSectionP
                   <span className="text-xs font-semibold text-[#47617F] tabular-nums">
                     {article.read} min read
                   </span>
-                  <button
-                    type="button"
-                    onClick={() => openArticle(article, true)}
-                    className="px-4 py-2 min-h-10 rounded-lg bg-[#0E8FE8] hover:bg-[#0B6CB8] text-white font-display text-xs sm:text-sm font-bold whitespace-nowrap shrink-0 cursor-pointer transition-colors duration-150"
+                  <Link
+                    to={`/blog/${article.id}`}
+                    className="px-4 py-2 min-h-10 inline-flex items-center rounded-lg bg-[#0E8FE8] hover:bg-[#0B6CB8] text-white font-display text-xs sm:text-sm font-bold whitespace-nowrap shrink-0 transition-colors duration-150"
                   >
                     Read article
-                  </button>
+                  </Link>
                 </div>
               </article>
             ))}
@@ -339,179 +431,6 @@ export function BlogSection({ openArticleId, onClearExternalOpen }: BlogSectionP
           </div>
         )}
       </div>
-
-      {activeArticle && (
-        <div
-          role="dialog"
-          aria-modal="true"
-          aria-labelledby="blogDialogTitle"
-          onClick={() => closeArticle(true)}
-          className="fixed inset-0 z-50 bg-[#050D20]/80 flex items-center justify-center p-0 sm:p-4"
-        >
-          <div
-            onClick={(e) => e.stopPropagation()}
-            className="bg-white w-full max-w-3xl h-full sm:h-auto sm:max-h-[90vh] sm:rounded-2xl border border-[#C3D6EA] flex flex-col overflow-hidden"
-          >
-            <div className="px-5 py-4 border-b border-[#C3D6EA] bg-[#EFF5FB] flex items-center justify-between gap-4 shrink-0">
-              <div className="text-xs sm:text-sm font-semibold text-[#0B6CB8] truncate">
-                {activeArticle.cat}
-                {activeArticle.town ? ` · ${activeArticle.town}` : ""}
-              </div>
-              <button
-                type="button"
-                onClick={() => closeArticle(true)}
-                aria-label="Close article"
-                className="inline-flex items-center gap-1.5 px-3 py-1.5 min-h-10 rounded-lg bg-[#081A33] text-white font-display text-xs font-bold cursor-pointer shrink-0"
-              >
-                <X className="w-4 h-4" />
-                Close
-              </button>
-            </div>
-
-            <div className="p-6 sm:p-8 overflow-y-auto space-y-5">
-              <div>
-                <h2
-                  id="blogDialogTitle"
-                  className="font-display text-2xl sm:text-3xl font-extrabold text-[#081A33] leading-tight"
-                >
-                  {activeArticle.title}
-                </h2>
-                <p className="mt-2 text-xs sm:text-sm text-[#47617F] tabular-nums">
-                  {formatArticleDate(activeArticle.date)} &middot; {activeArticle.read} min read
-                  &middot; Paul&apos;s Roofing — Quispamsis, Saint John &amp; Southern NB
-                </p>
-              </div>
-
-              <div className="space-y-4 text-base text-[#2A3D57] leading-relaxed">
-                {activeArticle.blocks.map((block, bIdx) => {
-                  if (block.type === "h4") {
-                    return (
-                      <h4
-                        key={bIdx}
-                        className="font-display text-lg font-bold text-[#081A33] pt-2"
-                      >
-                        {block.text}
-                      </h4>
-                    );
-                  }
-                  if (block.type === "p") {
-                    return (
-                      <p key={bIdx}>
-                        <RenderSegments
-                          segments={block.segments}
-                          onNavigateHash={() => closeArticle(false)}
-                        />
-                      </p>
-                    );
-                  }
-                  return (
-                    <ul key={bIdx} className="list-disc pl-6 space-y-1.5">
-                      {block.items.map((itemSegs, liIdx) => (
-                        <li key={liIdx}>
-                          <RenderSegments
-                            segments={itemSegs}
-                            onNavigateHash={() => closeArticle(false)}
-                          />
-                        </li>
-                      ))}
-                    </ul>
-                  );
-                })}
-              </div>
-
-              {activeArticle.faq.length > 0 && (
-                <div className="rounded-xl border border-[#C3D6EA] bg-[#EFF5FB] p-5 space-y-3">
-                  <h4 className="font-display text-base font-bold text-[#081A33]">
-                    Common questions
-                  </h4>
-                  {activeArticle.faq.map(([q, a]) => (
-                    <div key={q}>
-                      <p className="font-semibold text-[#081A33] text-sm">{q}</p>
-                      <p className="mt-1 text-sm text-[#2A3D57]">{a}</p>
-                    </div>
-                  ))}
-                </div>
-              )}
-
-              <div className="flex flex-wrap gap-3 pt-2">
-                <a
-                  href="#quote"
-                  onClick={() => closeArticle(false)}
-                  className="inline-flex items-center justify-center px-5 py-2.5 min-h-11 rounded-lg bg-[#0E8FE8] hover:bg-[#0B6CB8] text-white font-display text-sm font-bold"
-                >
-                  Get a Free Quote
-                </a>
-                <a
-                  href={CONTACT.phoneHref}
-                  className="inline-flex items-center justify-center gap-2 px-5 py-2.5 min-h-11 rounded-lg bg-[#081A33] hover:bg-[#0B6CB8] text-white font-display text-sm font-bold"
-                >
-                  <Phone className="w-4 h-4" />
-                  Call Paul
-                </a>
-                <button
-                  type="button"
-                  onClick={() => handleCopyGuideLink(activeArticle.id)}
-                  className="inline-flex items-center justify-center gap-2 px-4 py-2.5 min-h-11 rounded-lg border border-[#C3D6EA] text-[#081A33] font-semibold text-sm hover:bg-[#EFF5FB] cursor-pointer"
-                >
-                  {copiedId === activeArticle.id ? (
-                    <>
-                      <Check className="w-4 h-4 text-[#15803D]" />
-                      Link copied
-                    </>
-                  ) : (
-                    <>
-                      <Link2 className="w-4 h-4" />
-                      Copy guide link
-                    </>
-                  )}
-                </button>
-                <a
-                  href={`mailto:?subject=${encodeURIComponent(
-                    `${activeArticle.title} — Paul's Roofing`
-                  )}&body=${encodeURIComponent(
-                    `${activeArticle.title}\n\n${activeArticle.excerpt}\n\nRead the full guide: ${getGuideUrl(
-                      activeArticle.id
-                    )}`
-                  )}`}
-                  className="inline-flex items-center justify-center gap-2 px-4 py-2.5 min-h-11 rounded-lg border border-[#C3D6EA] text-[#081A33] font-semibold text-sm hover:bg-[#EFF5FB]"
-                >
-                  <Mail className="w-4 h-4" />
-                  Share by email
-                </a>
-              </div>
-
-              <div className="pt-4 border-t border-[#C3D6EA] flex items-center justify-between gap-3">
-                <button
-                  type="button"
-                  disabled={currentFilteredIdx <= 0}
-                  onClick={() => {
-                    if (currentFilteredIdx > 0) {
-                      openArticle(filtered[currentFilteredIdx - 1], true);
-                    }
-                  }}
-                  className="inline-flex items-center gap-1.5 px-4 py-2 min-h-10 rounded-lg border border-[#C3D6EA] text-sm font-semibold text-[#081A33] hover:bg-[#EFF5FB] disabled:opacity-40 cursor-pointer disabled:cursor-default"
-                >
-                  <ChevronLeft className="w-4 h-4" />
-                  Previous article
-                </button>
-                <button
-                  type="button"
-                  disabled={currentFilteredIdx < 0 || currentFilteredIdx >= filtered.length - 1}
-                  onClick={() => {
-                    if (currentFilteredIdx >= 0 && currentFilteredIdx < filtered.length - 1) {
-                      openArticle(filtered[currentFilteredIdx + 1], true);
-                    }
-                  }}
-                  className="inline-flex items-center gap-1.5 px-4 py-2 min-h-10 rounded-lg border border-[#C3D6EA] text-sm font-semibold text-[#081A33] hover:bg-[#EFF5FB] disabled:opacity-40 cursor-pointer disabled:cursor-default"
-                >
-                  Next article
-                  <ChevronRight className="w-4 h-4" />
-                </button>
-              </div>
-            </div>
-          </div>
-        </div>
-      )}
     </section>
   );
 }
