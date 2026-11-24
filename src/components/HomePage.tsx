@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import { ArrowRight, ArrowUpRight, Check, Phone, ShieldAlert, Snowflake } from "lucide-react";
+import { ArrowRight, ArrowUpRight, Check, Phone, ShieldAlert, Snowflake, Award, ShieldCheck, MapPin, Layers, PhoneCall, SearchCheck } from "lucide-react";
 import { Hero } from "./Hero";
 import {
   CONTACT,
@@ -14,7 +14,7 @@ export function HomePage() {
     <>
       <Hero />
 
-      <section className="py-12 lg:py-14 bg-white border-b border-[#C3D6EA]">
+      <section className="py-12 lg:py-14 bg-[#F7FAFD] border-y border-[#E2ECF5]">
         <div className="max-w-6xl mx-auto px-4 lg:px-6">
           <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4">
             <div>
@@ -35,15 +35,23 @@ export function HomePage() {
           </div>
 
           <div className="mt-7 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
-            {WHY_ITEMS.map((item) => (
-              <div
-                key={item.title}
-                className="rounded-xl border border-[#C3D6EA] bg-[#EFF5FB]/55 p-5"
-              >
-                <h3 className="font-display text-lg font-bold text-[#081A33]">{item.title}</h3>
-                <p className="mt-2 text-sm text-[#47617F] leading-relaxed">{item.description}</p>
-              </div>
-            ))}
+            {WHY_ITEMS.map((item, idx) => {
+              const Icon = idx === 0 ? Award : idx === 1 ? ShieldCheck : idx === 2 ? MapPin : Layers;
+              return (
+                <div
+                  key={item.title}
+                  className="bg-white border border-[#C3D6EA] rounded-2xl p-6 shadow-xs hover:border-[#0E8FE8] transition-all flex flex-col gap-3"
+                >
+                  <div className="w-11 h-11 rounded-xl bg-[#EBF4FC] border border-[#C3D6EA] text-[#0B6CB8] flex items-center justify-center shrink-0">
+                    <Icon className="w-5 h-5" />
+                  </div>
+                  <div>
+                    <h3 className="font-display text-lg font-bold text-[#081A33]">{item.title}</h3>
+                    <p className="mt-2 text-sm text-[#47617F] leading-relaxed">{item.description}</p>
+                  </div>
+                </div>
+              );
+            })}
           </div>
         </div>
       </section>
@@ -180,7 +188,7 @@ export function HomePage() {
             </div>
             <Link
               to="/winter-help"
-              className="inline-flex items-center justify-center gap-2 px-4 py-2.5 min-h-11 rounded-lg bg-[#081A33] hover:bg-[#0B6CB8] text-white font-display text-sm font-bold whitespace-nowrap shrink-0 transition-colors"
+              className="inline-flex items-center gap-2 px-4 py-2.5 rounded-full bg-[#081A33] text-white text-xs sm:text-sm font-bold hover:bg-[#0B6CB8] transition-colors whitespace-nowrap shrink-0"
             >
               <Snowflake className="w-4 h-4" />
               All winter services
@@ -188,72 +196,78 @@ export function HomePage() {
           </div>
 
           <div className="mt-7 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
-            {WINTER_SERVICES.map((svc) => (
-              <article
-                key={svc.id}
-                className="rounded-xl border border-[#C3D6EA] bg-white p-5 flex flex-col justify-between"
-              >
-                <div>
-                  <h3 className="font-display text-base font-bold text-[#081A33]">{svc.title}</h3>
-                  <p className="mt-2 text-sm text-[#47617F] leading-relaxed">{svc.description}</p>
-                </div>
+            {WINTER_SERVICES.map((svc, idx) => {
+              const Icon = idx === 0 ? Snowflake : idx === 1 ? PhoneCall : idx === 2 ? ShieldAlert : SearchCheck;
+              return (
+                <article
+                  key={svc.id}
+                  className="bg-white border border-[#C3D6EA] rounded-2xl p-5 shadow-xs hover:border-[#0E8FE8] transition-all flex flex-col justify-between"
+                >
+                  <div>
+                    <div className="w-10 h-10 rounded-xl bg-[#EBF4FC] border border-[#C3D6EA] text-[#0B6CB8] flex items-center justify-center mb-3">
+                      <Icon className="w-5 h-5" />
+                    </div>
+                    <h3 className="font-display text-base font-bold text-[#081A33]">{svc.title}</h3>
+                    <p className="mt-2 text-sm text-[#47617F] leading-relaxed">{svc.description}</p>
+                  </div>
 
-                <div className="mt-4 pt-3 border-t border-[#EFF5FB]">
-                  {svc.action === "ice-guide" && (
-                    <Link
-                      to="/blog/ice-dams-explained"
-                      className="inline-flex items-center gap-1 text-sm font-bold text-[#0B6CB8] hover:underline"
-                    >
-                      {svc.ctaLabel}
-                      <ArrowRight className="w-3.5 h-3.5" />
-                    </Link>
-                  )}
-                  {svc.action === "call" && (
-                    <a
-                      href={CONTACT.phoneHref}
-                      className="inline-flex items-center gap-1.5 text-sm font-bold text-[#B91C1C] hover:underline"
-                    >
-                      <Phone className="w-3.5 h-3.5" />
-                      {svc.ctaLabel}
-                    </a>
-                  )}
-                  {svc.action === "quote-snow" && (
-                    <Link
-                      to="/quote"
-                      state={{
-                        projectType: "Repair / Leak",
-                        description:
-                          "Interested in snow rails over doors, deck, or walkways on a metal roof.",
-                        timestamp: Date.now(),
-                      }}
-                      className="inline-flex items-center gap-1 text-sm font-bold text-[#0B6CB8] hover:underline"
-                    >
-                      {svc.ctaLabel}
-                      <ArrowRight className="w-3.5 h-3.5" />
-                    </Link>
-                  )}
-                  {svc.action === "quote-inspection" && (
-                    <Link
-                      to="/quote"
-                      state={{
-                        projectType: "Inspection",
-                        description:
-                          "Looking to book a winter roof, flashing, and attic inspection.",
-                        timestamp: Date.now(),
-                      }}
-                      className="inline-flex items-center gap-1 text-sm font-bold text-[#0B6CB8] hover:underline"
-                    >
-                      {svc.ctaLabel}
-                      <ArrowRight className="w-3.5 h-3.5" />
-                    </Link>
-                  )}
-                </div>
-              </article>
-            ))}
+                  <div className="mt-4 pt-3.5 border-t border-[#E2ECF5]">
+                    {svc.action === "ice-guide" && (
+                      <Link
+                        to="/blog/ice-dams-explained"
+                        className="flex items-center justify-between text-sm font-bold text-[#0B6CB8] hover:underline"
+                      >
+                        <span>{svc.ctaLabel}</span>
+                        <ArrowRight className="w-4 h-4" />
+                      </Link>
+                    )}
+                    {svc.action === "call" && (
+                      <a
+                        href={CONTACT.phoneHref}
+                        className="inline-flex items-center justify-center gap-2 w-full py-2.5 px-4 rounded-full border border-red-200 bg-red-50 text-red-700 font-bold text-sm hover:bg-red-100 transition-colors"
+                      >
+                        <Phone className="w-4 h-4" />
+                        {svc.ctaLabel}
+                      </a>
+                    )}
+                    {svc.action === "quote-snow" && (
+                      <Link
+                        to="/quote"
+                        state={{
+                          projectType: "Repair / Leak",
+                          description:
+                            "Interested in snow rails over doors, deck, or walkways on a metal roof.",
+                          timestamp: Date.now(),
+                        }}
+                        className="flex items-center justify-between text-sm font-bold text-[#0B6CB8] hover:underline"
+                      >
+                        <span>{svc.ctaLabel}</span>
+                        <ArrowRight className="w-4 h-4" />
+                      </Link>
+                    )}
+                    {svc.action === "quote-inspection" && (
+                      <Link
+                        to="/quote"
+                        state={{
+                          projectType: "Inspection",
+                          description:
+                            "Looking to book a winter roof, flashing, and attic inspection.",
+                          timestamp: Date.now(),
+                        }}
+                        className="flex items-center justify-between text-sm font-bold text-[#0B6CB8] hover:underline"
+                      >
+                        <span>{svc.ctaLabel}</span>
+                        <ArrowRight className="w-4 h-4" />
+                      </Link>
+                    )}
+                  </div>
+                </article>
+              );
+            })}
           </div>
 
-          <div className="mt-5 flex items-center gap-2.5 text-xs sm:text-sm text-[#7C4A03]">
-            <ShieldAlert className="w-4 h-4 shrink-0" />
+          <div className="w-full mt-6 bg-[#FEF6E6] border border-[#F3D59B] rounded-xl px-5 py-3.5 flex items-center gap-3 text-sm text-[#7A4F01]">
+            <ShieldAlert className="w-5 h-5 shrink-0" />
             <span>
               Safety note: never climb onto an icy roof —{" "}
               <Link to="/winter-help" className="font-bold underline">

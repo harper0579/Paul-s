@@ -1477,6 +1477,7 @@ export const ARTICLES: Article[] = [
     ]
   },
   {
+    "image": "/images/blog-14-emergency-roof-repair-saint-john.webp",
     "id": "emergency-roof-repair-saint-john",
     "title": "Emergency Roof Repair in Saint John: Storm Damage, Fallen Branches & Sudden Leaks",
     "cat": "Repairs & Leaks",
