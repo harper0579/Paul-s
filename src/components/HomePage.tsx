@@ -2,12 +2,13 @@ import { useState } from "react";
 import { Link } from "react-router-dom";
 import { ArrowRight, ArrowUpRight, Check, Phone, ShieldAlert, Snowflake, Award, ShieldCheck, MapPin, Layers, PhoneCall, SearchCheck } from "lucide-react";
 import { Hero } from "./Hero";
+import { NewsletterSection } from "./NewsletterSection";
+import { SecondaryServicesGrid } from "./SecondaryServicesGrid";
+import { TrustBadgesSection } from "./TrustBadgesSection";
 import { WinterHelpCarousel } from "./WinterHelpCarousel";
 import {
   CONTACT,
-  SECONDARY_SERVICES,
   TESTIMONIALS,
-  WHY_ITEMS,
   WINTER_SERVICES,
 } from "../data/siteContent";
 
@@ -17,6 +18,8 @@ export function HomePage() {
   return (
     <>
       <Hero />
+
+      <TrustBadgesSection />
 
       <section className="py-12 lg:py-14 bg-[#F7FAFD] border-y border-[#E2ECF5]">
         <div className="max-w-6xl mx-auto px-4 lg:px-6">
@@ -38,7 +41,7 @@ export function HomePage() {
             </Link>
           </div>
 
-          <div className="mt-7 overflow-hidden rounded-2xl border border-[#C3D6EA] bg-[#081A33] shadow-sm">
+          <div className="mt-7 overflow-hidden rounded-2xl border border-[#C3D6EA] bg-[#F4F9FD] shadow-sm">
             <img
               src="/images/why-choose-us.jpg"
               alt="Why choose Paul's Roofing — Metal Roofing Specialists, Licensed & Insured, Locally Owned, and Premium Materials."
@@ -141,58 +144,7 @@ export function HomePage() {
               </div>
             </article>
 
-            {SECONDARY_SERVICES.map((svc) => (
-              <article
-                key={svc.title}
-                className="rounded-2xl border border-[#C3D6EA] bg-white overflow-hidden shadow-sm hover:border-[#0E8FE8] transition-all flex flex-col justify-between"
-              >
-                <div className="w-full bg-[#081A33] overflow-hidden">
-                  <img
-                    src={svc.imageSrc}
-                    alt={svc.imageAlt}
-                    loading="lazy"
-                    referrerPolicy="no-referrer"
-                    className="w-full h-auto block"
-                  />
-                </div>
-                <div className="p-5 sm:p-6 flex flex-col lg:flex-row lg:items-center justify-between gap-4">
-                  <div className="flex-1 min-w-0">
-                    <p className="text-sm sm:text-base text-[#47617F] leading-relaxed">
-                      {svc.description}
-                    </p>
-                    <ul className="mt-3 flex flex-wrap gap-x-5 gap-y-1.5 text-xs sm:text-sm text-[#2A3D57]">
-                      {svc.bullets.map((bullet) => (
-                        <li key={bullet} className="inline-flex items-center gap-1.5">
-                          <Check className="w-3.5 h-3.5 text-[#0B6CB8] shrink-0" />
-                          <span>{bullet}</span>
-                        </li>
-                      ))}
-                    </ul>
-                  </div>
-
-                  <div className="flex items-center gap-4 shrink-0 pt-3 lg:pt-0 border-t lg:border-t-0 border-[#EFF5FB]">
-                    <Link
-                      to="/services"
-                      className="inline-flex items-center gap-1.5 text-xs sm:text-sm font-bold text-[#0B6CB8] hover:underline whitespace-nowrap"
-                    >
-                      View service details &rarr;
-                    </Link>
-                    <Link
-                      to="/quote"
-                      state={{
-                        projectType: svc.title.includes("Chimney") ? "Repair / Leak" : "Replacement",
-                        roofType: svc.title.includes("Shingles") ? "Shingles" : "Unsure",
-                        description: `Interested in ${svc.title}.`,
-                        timestamp: Date.now(),
-                      }}
-                      className="btn-quote-glow inline-flex items-center justify-center px-4 py-2.5 min-h-10 font-display text-sm font-extrabold cursor-pointer whitespace-nowrap"
-                    >
-                      Get a Quote
-                    </Link>
-                  </div>
-                </div>
-              </article>
-            ))}
+            <SecondaryServicesGrid variant="home" />
           </div>
         </div>
       </section>
@@ -456,6 +408,8 @@ export function HomePage() {
           </div>
         </div>
       </section>
+
+      <NewsletterSection />
     </>
   );
 }

@@ -95,6 +95,8 @@ export const METAL_COLOURS: MetalColour[] = [
 
 export const SECONDARY_SERVICES = [
   {
+    number: "01",
+    kicker: "Shingle Systems",
     title: "Architectural Shingles",
     description:
       "High-performance architectural shingles from Canada's top manufacturers, including IKO and BP — durability, curb appeal, and value.",
@@ -105,16 +107,18 @@ export const SECONDARY_SERVICES = [
       "Excellent manufacturer warranties",
     ],
     hasVisualizers: true,
-    imageSrc: "/images/banner-asphalt-shingles.png",
+    imageSrc: "/assets/aistudio/Gemini_Generated_Image_drlv0kdrlv0kdrlv__2__7490b2c5.jpg",
     imageAlt:
-      "Quality Asphalt Shingles — Expertly Installed by Paul's Roofing",
+      "Architectural Shingles — Expertly Installed by Paul's Roofing",
     defaultProjectType: "Replacement",
     defaultRoofType: "Shingles",
   },
   {
-    title: "Exterior Maintenance: Soffit, Fascia, Drip Edge, Gutters",
+    number: "02",
+    kicker: "Roof Edge & Exterior",
+    title: "Soffit, Fascia, Drip Edge & Gutters",
     description:
-      "Beyond roofing, we offer extensive exterior maintenance and remodelling services to keep your entire home protected and looking its best.",
+      "Complete roofline and exterior maintenance — siding, fascia, vented soffit, drip edge, and seamless gutters to protect your home.",
     bullets: [
       "Siding repair and installation",
       "Gutter cleaning and repair",
@@ -122,16 +126,18 @@ export const SECONDARY_SERVICES = [
       "Comprehensive exterior inspections",
     ],
     hasVisualizers: false,
-    imageSrc: "/images/banner-exterior-maintenance.png",
+    imageSrc: "/assets/aistudio/Gemini_Generated_Image_drlv0kdrlv0kdrlv__1__6a90209b.jpg",
     imageAlt:
-      "Exterior Maintenance: Soffit, Fascia, Drip Edge, Gutters — Expertly Installed by Paul's Roofing",
+      "Soffit, Fascia & Gutters — Expertly Installed by Paul's Roofing",
     defaultProjectType: "Repair / Leak",
     defaultRoofType: "Unsure",
   },
   {
+    number: "03",
+    kicker: "Waterproofing & Repairs",
     title: "Chimney Flashing & Leak Repair",
     description:
-      "Comprehensive repairs for chimneys, flashing, and vents to keep your home dry and secure from the elements.",
+      "Precision repairs for brick chimneys, step and counter-flashing, roof vents, and skylights to keep your home dry year-round.",
     bullets: [
       "Chimney inspection and repair",
       "Flashing installation & waterproofing",
@@ -139,9 +145,9 @@ export const SECONDARY_SERVICES = [
       "Emergency leak sealing",
     ],
     hasVisualizers: false,
-    imageSrc: "/images/banner-chimney-flashing.png",
+    imageSrc: "/assets/aistudio/Gemini_Generated_Image_drlv0kdrlv0kdrlv_87f9f693.jpg",
     imageAlt:
-      "Chimney Flashing & Leak Repair — Expertly Installed by Paul's Roofing",
+      "Chimney Flashing & Repair — Expertly Installed by Paul's Roofing",
     defaultProjectType: "Repair / Leak",
     defaultRoofType: "Unsure",
   },

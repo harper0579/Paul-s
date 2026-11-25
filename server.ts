@@ -12,6 +12,7 @@ const __dirname = path.dirname(__filename);
 const PORT = Number(process.env.PORT) || 3000;
 const DATA_DIR = path.resolve(__dirname, "data");
 const QUOTES_FILE = path.join(DATA_DIR, "quotes.json");
+const NEWSLETTER_FILE = path.join(DATA_DIR, "newsletter.json");
 const RECIPIENT_EMAIL = process.env.QUOTE_RECIPIENT_EMAIL || "paul@paulroofs.com";
 
 interface QuoteRecord {
@@ -44,6 +45,36 @@ function writeQuote(record: QuoteRecord): void {
   const existing = readQuotes();
   existing.unshift(record);
   fs.writeFileSync(QUOTES_FILE, JSON.stringify(existing.slice(0, 500), null, 2), "utf8");
+}
+
+interface NewsletterSubscriber {
+  id: string;
+  email: string;
+  source: string;
+  createdAt: string;
+}
+
+function readSubscribers(): NewsletterSubscriber[] {
+  try {
+    if (!fs.existsSync(NEWSLETTER_FILE)) return [];
+    const raw = fs.readFileSync(NEWSLETTER_FILE, "utf8");
+    const parsed = JSON.parse(raw);
+    return Array.isArray(parsed) ? parsed : [];
+  } catch {
+    return [];
+  }
+}
+
+function saveSubscriber(entry: NewsletterSubscriber): { duplicate: boolean } {
+  fs.mkdirSync(DATA_DIR, { recursive: true });
+  const existing = readSubscribers();
+  const normalized = entry.email.toLowerCase();
+  if (existing.some((item) => item.email.toLowerCase() === normalized)) {
+    return { duplicate: true };
+  }
+  existing.unshift(entry);
+  fs.writeFileSync(NEWSLETTER_FILE, JSON.stringify(existing.slice(0, 2000), null, 2), "utf8");
+  return { duplicate: false };
 }
 
 function cleanField(value: unknown, maxLen: number): string {
@@ -298,6 +329,44 @@ async function startServer() {
       recipient: RECIPIENT_EMAIL,
       message: responseMsg,
     });
+  });
+
+  app.post("/api/newsletter", (req, res) => {
+    const body = req.body ?? {};
+    const email = cleanField(body.email, 160).toLowerCase();
+    const source = cleanField(body.source, 60) || "home-page";
+
+    if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+      res.status(400).json({
+        ok: false,
+        error: "Please enter a valid email address to subscribe for seasonal roofing tips.",
+      });
+      return;
+    }
+
+    const entry: NewsletterSubscriber = {
+      id: `NL-${Date.now().toString(36).toUpperCase().slice(-6)}`,
+      email,
+      source,
+      createdAt: new Date().toISOString(),
+    };
+
+    try {
+      const { duplicate } = saveSubscriber(entry);
+      res.status(duplicate ? 200 : 201).json({
+        ok: true,
+        alreadySubscribed: duplicate,
+        message: duplicate
+          ? "You're already on the list for Paul's seasonal roofing tips."
+          : "You're subscribed — watch your inbox for Paul's seasonal New Brunswick roofing tips.",
+      });
+    } catch (err) {
+      console.error("Failed to save newsletter subscription:", err);
+      res.status(500).json({
+        ok: false,
+        error: "Unable to save your subscription right now. Please try again shortly.",
+      });
+    }
   });
 
   if (process.env.NODE_ENV !== "production") {

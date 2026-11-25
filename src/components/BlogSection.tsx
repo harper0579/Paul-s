@@ -1,10 +1,11 @@
-import { useMemo, useState } from "react";
+import { FormEvent, useMemo, useState } from "react";
 import { Link, useParams } from "react-router-dom";
 import {
   ArrowLeft,
   ArrowRight,
   BookOpen,
   Check,
+  CheckCircle2,
   ChevronDown,
   ChevronLeft,
   ChevronRight,
@@ -14,6 +15,7 @@ import {
   Flame,
   Layers,
   LayoutGrid,
+  Lightbulb,
   Link2,
   List,
   Mail,
@@ -21,9 +23,11 @@ import {
   Phone,
   Search,
   ShieldCheck,
+  SlidersHorizontal,
   Snowflake,
   Sparkles,
   Wrench,
+  X,
 } from "lucide-react";
 import {
   ARTICLE_CATEGORIES,
@@ -31,6 +35,7 @@ import {
   type Article,
   type TextSegment,
 } from "../data/articles";
+import { getBlogTakeaway } from "../data/blogTakeawayData";
 import { CONTACT } from "../data/siteContent";
 
 const PAGE_SIZE = 9;
@@ -138,10 +143,27 @@ function RenderSegments({ segments }: { segments: TextSegment[] }) {
 
 function ArticleDetailView({ article }: { article: Article }) {
   const [copied, setCopied] = useState(false);
+  const [isSubscribeModalOpen, setIsSubscribeModalOpen] = useState(false);
+  const [subEmail, setSubEmail] = useState("");
+  const [subStatus, setSubStatus] = useState<"idle" | "submitting" | "success" | "error">("idle");
+  const [subMessage, setSubMessage] = useState("");
 
   const idx = ARTICLES.findIndex((a) => a.id === article.id);
   const prevArticle = idx > 0 ? ARTICLES[idx - 1] : null;
   const nextArticle = idx >= 0 && idx < ARTICLES.length - 1 ? ARTICLES[idx + 1] : null;
+
+  const takeaway = useMemo(() => getBlogTakeaway(article.id), [article.id]);
+
+  const takeawayRelated = useMemo(() => {
+    return takeaway.relatedLinks
+      .map((linkTitle) => {
+        const match = ARTICLES.find(
+          (a) => a.title.toLowerCase() === linkTitle.toLowerCase()
+        );
+        return match ? { title: match.title, id: match.id, subtext: match.excerpt } : null;
+      })
+      .filter((item): item is { title: string; id: string; subtext: string } => item !== null);
+  }, [takeaway]);
 
   // Headings for Table of Contents
   const headings = useMemo(() => {
@@ -173,6 +195,51 @@ function ArticleDetailView({ article }: { article: Article }) {
     }
   }
 
+  async function handleSubscribeSubmit(e: FormEvent<HTMLFormElement>) {
+    e.preventDefault();
+    const trimmed = subEmail.trim();
+    if (!trimmed || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(trimmed)) {
+      setSubStatus("error");
+      setSubMessage("Please enter a valid email address.");
+      return;
+    }
+    setSubStatus("submitting");
+    setSubMessage("");
+    try {
+      const res = await fetch("/api/newsletter", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ email: trimmed, source: `blog-${article.id}` }),
+      });
+      const data = await res.json().catch(() => ({}));
+      if (!res.ok || !data?.ok) {
+        setSubStatus("error");
+        setSubMessage(
+          typeof data?.error === "string"
+            ? data.error
+            : "Something went wrong. Please try again."
+        );
+        return;
+      }
+      setSubStatus("success");
+      setSubMessage(
+        typeof data?.message === "string"
+          ? data.message
+          : "You're subscribed for seasonal roofing tips."
+      );
+      setSubEmail("");
+    } catch {
+      setSubStatus("error");
+      setSubMessage("Unable to connect right now. Please try again in a moment.");
+    }
+  }
+
+  const mailtoShareHref = `mailto:?subject=${encodeURIComponent(
+    article.title
+  )}&body=${encodeURIComponent(
+    `${article.title}\n\n${article.excerpt}\n\nRead the full guide: ${getGuideUrl(article.id)}`
+  )}`;
+
   return (
     <section className="pb-12 md:py-10 lg:py-14 bg-[#EFF5FB] min-h-[70vh]">
       <div className="max-w-7xl mx-auto px-4 md:px-6 pt-5 pb-4 md:pt-0 md:pb-6 flex flex-wrap items-center justify-between gap-3">
@@ -201,24 +268,125 @@ function ArticleDetailView({ article }: { article: Article }) {
           <img
             src={article.image}
             alt={article.title}
-            className="w-full h-auto block rounded-none md:rounded-2xl border md:border-[#C3D6EA] shadow-sm max-h-[520px] object-cover"
+            className="w-full h-auto block rounded-none md:rounded-2xl border md:border-[#C3D6EA] shadow-sm"
           />
         </div>
       )}
+
+      {/* Main Title & Introduction */}
+      <div className="max-w-7xl mx-auto px-4 md:px-6 mb-8">
+        <header className="rounded-2xl border border-[#C3D6EA] bg-white p-6 sm:p-8 shadow-sm">
+          <h1 className="font-display text-2xl sm:text-4xl font-extrabold text-[#081A33] leading-tight">
+            {article.title}
+          </h1>
+          <p className="mt-3 text-xs sm:text-sm text-[#47617F] tabular-nums">
+            {formatArticleDate(article.date)} &middot; {article.read} min read &middot; Paul&apos;s Roofing — Quispamsis, Saint John &amp; Southern NB
+          </p>
+          <p className="mt-4 text-base sm:text-lg text-[#2A3D57] leading-relaxed max-w-4xl">
+            {article.excerpt}
+          </p>
+        </header>
+      </div>
+
+      {/* NEW INFO BOX & SIDEBAR ROW */}
+      <div className="flex flex-col lg:flex-row gap-6 max-w-7xl mx-auto px-4 md:px-6 mb-8">
+        {/* LEFT BOX: "Did You Know?" Fact / Highlight Card */}
+        <div className="bg-white border-2 border-slate-200 rounded-[24px] p-6 sm:p-8 flex-1 flex flex-col justify-between min-h-[380px]">
+          <div>
+            <h2 className="text-[#081A33] font-extrabold text-3xl sm:text-4xl flex items-center gap-3 font-display">
+              <Lightbulb className="w-8 h-8 text-[#081A33] shrink-0" aria-hidden="true" />
+              <span>Did You Know?</span>
+            </h2>
+            <p className="border-t border-slate-100 pt-3 mt-4 text-[#4A5E7A] text-sm font-semibold tracking-wide">
+              Paul&apos;s Roofing &nbsp;&bull;&nbsp; {takeaway.category}
+            </p>
+            <p className="text-slate-700 text-lg sm:text-xl leading-relaxed mt-4 flex-grow">
+              {takeaway.takeawayText}
+            </p>
+          </div>
+
+          <div className="bg-[#F8FAFC] border border-[#CBD5E1] rounded-xl px-5 py-3 mt-6 text-slate-800 font-bold text-sm sm:text-base">
+            Tip: {takeaway.tip}
+          </div>
+        </div>
+
+        {/* RIGHT SIDEBAR: Navigation, Shares & Related Posts Card */}
+        <aside className="bg-[#081A33] rounded-[24px] p-6 w-full lg:w-[360px] shrink-0 text-white flex flex-col justify-between gap-6">
+          <div>
+            <h2 className="text-white font-extrabold text-xl sm:text-2xl font-display">
+              Quick Table of Contents
+            </h2>
+            <ul className="mt-4 space-y-2.5 text-sm font-semibold">
+              <li>
+                <button
+                  type="button"
+                  onClick={handleCopyLink}
+                  className="inline-flex items-center gap-2 text-slate-100 hover:text-white transition-colors cursor-pointer text-left"
+                >
+                  <span aria-hidden="true" className="text-slate-300 font-bold">
+                    &rsaquo;
+                  </span>
+                  <span>{copied ? "Link copied to clipboard" : "Copy article link"}</span>
+                </button>
+              </li>
+              <li>
+                <a
+                  href={mailtoShareHref}
+                  className="inline-flex items-center gap-2 text-slate-100 hover:text-white transition-colors"
+                >
+                  <span aria-hidden="true" className="text-slate-300 font-bold">
+                    &rsaquo;
+                  </span>
+                  <span>Share by email</span>
+                </a>
+              </li>
+              <li>
+                <button
+                  type="button"
+                  onClick={() => {
+                    setSubStatus("idle");
+                    setSubMessage("");
+                    setIsSubscribeModalOpen(true);
+                  }}
+                  className="inline-flex items-center gap-2 text-slate-100 hover:text-white transition-colors cursor-pointer text-left"
+                >
+                  <span aria-hidden="true" className="text-slate-300 font-bold">
+                    &rsaquo;
+                  </span>
+                  <span>Subscribe to Our Tips</span>
+                </button>
+              </li>
+            </ul>
+          </div>
+
+          <div className="border-t border-white/10 pt-5 mt-2">
+            <h3 className="text-white font-bold text-base mb-3 font-display">
+              More on {takeaway.category}
+            </h3>
+            <div>
+              {takeawayRelated.map((rel) => (
+                <Link
+                  key={rel.id}
+                  to={`/blog/${rel.id}`}
+                  className="bg-[#152E52]/60 hover:bg-[#1C3A66]/80 rounded-xl p-4 border border-white/5 transition-all text-left flex flex-col gap-1 cursor-pointer mb-3 last:mb-0"
+                >
+                  <span className="font-bold text-white text-sm leading-snug">
+                    {rel.title}
+                  </span>
+                  <span className="text-xs text-slate-200 line-clamp-2">
+                    {rel.subtext}
+                  </span>
+                </Link>
+              ))}
+            </div>
+          </div>
+        </aside>
+      </div>
 
       <div className="max-w-7xl mx-auto px-4 md:px-6 grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
         {/* Main Article Body */}
         <div className="lg:col-span-8">
           <article className="rounded-2xl border border-[#C3D6EA] bg-white p-6 sm:p-10 space-y-6 shadow-sm">
-            <header>
-              <h1 className="font-display text-2xl sm:text-4xl font-extrabold text-[#081A33] leading-tight">
-                {article.title}
-              </h1>
-              <p className="mt-3 text-xs sm:text-sm text-[#47617F] tabular-nums">
-                {formatArticleDate(article.date)} &middot; {article.read} min read &middot; Paul&apos;s Roofing — Quispamsis, Saint John &amp; Southern NB
-              </p>
-            </header>
-
             {/* Mobile In-Article TOC */}
             {headings.length > 0 && (
               <div className="lg:hidden rounded-xl border border-[#C3D6EA] bg-[#EFF5FB] p-4">
@@ -426,6 +594,94 @@ function ArticleDetailView({ article }: { article: Article }) {
           )}
         </div>
       </div>
+
+      {isSubscribeModalOpen && (
+        <div
+          role="dialog"
+          aria-modal="true"
+          aria-labelledby="blog-subscribe-modal-title"
+          className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-[#081A33]/70 backdrop-blur-xs"
+          onClick={(e) => {
+            if (e.target === e.currentTarget) setIsSubscribeModalOpen(false);
+          }}
+        >
+          <div className="w-full max-w-md rounded-2xl bg-white border border-slate-200 p-6 sm:p-7 shadow-xl space-y-4">
+            <div className="flex items-start justify-between gap-4">
+              <div>
+                <p className="text-xs font-bold uppercase tracking-wider text-[#4A5E7A]">
+                  Paul&apos;s Roofing &bull; Stay Updated
+                </p>
+                <h2
+                  id="blog-subscribe-modal-title"
+                  className="mt-1 font-display text-xl font-extrabold text-[#081A33]"
+                >
+                  Subscribe to Seasonal Roofing Tips
+                </h2>
+              </div>
+              <button
+                type="button"
+                aria-label="Close modal"
+                onClick={() => setIsSubscribeModalOpen(false)}
+                className="p-1.5 rounded-lg text-slate-500 hover:text-[#081A33] hover:bg-slate-100 cursor-pointer"
+              >
+                <X className="w-5 h-5" />
+              </button>
+            </div>
+
+            <p className="text-sm text-slate-600 leading-relaxed">
+              Practical reminders for spring checks, fall gutters, ice dam prevention, and winter storm readiness in Southern New Brunswick.
+            </p>
+
+            {subStatus === "success" ? (
+              <div
+                role="status"
+                className="rounded-xl border border-slate-200 bg-[#F8FAFC] p-4 flex items-start gap-3 text-[#081A33]"
+              >
+                <CheckCircle2 className="w-5 h-5 shrink-0 mt-0.5 text-[#081A33]" aria-hidden="true" />
+                <div className="text-sm">
+                  <p className="font-bold">Subscribed</p>
+                  <p className="mt-0.5 text-slate-600">{subMessage}</p>
+                </div>
+              </div>
+            ) : (
+              <form onSubmit={handleSubscribeSubmit} noValidate className="space-y-3">
+                <div>
+                  <label htmlFor="modal-newsletter-email" className="sr-only">
+                    Email address
+                  </label>
+                  <input
+                    id="modal-newsletter-email"
+                    type="email"
+                    required
+                    value={subEmail}
+                    onChange={(e) => {
+                      setSubEmail(e.target.value);
+                      if (subStatus === "error") {
+                        setSubStatus("idle");
+                        setSubMessage("");
+                      }
+                    }}
+                    placeholder="Enter your email address"
+                    className="w-full min-h-11 px-4 py-2.5 rounded-xl border border-[#CBD5E1] bg-[#F8FAFC] text-sm text-[#081A33] placeholder:text-slate-400 focus:outline-none focus:bg-white focus:border-[#081A33]"
+                  />
+                </div>
+                {subStatus === "error" && subMessage && (
+                  <p role="alert" className="text-xs font-semibold text-red-700">
+                    {subMessage}
+                  </p>
+                )}
+                <button
+                  type="submit"
+                  disabled={subStatus === "submitting"}
+                  className="w-full min-h-11 px-5 py-2.5 rounded-xl bg-[#081A33] hover:bg-[#152E52] text-white font-display text-sm font-bold transition-colors cursor-pointer disabled:opacity-60"
+                >
+                  {subStatus === "submitting" ? "Subscribing..." : "Subscribe for Seasonal Tips"}
+                </button>
+              </form>
+            )}
+          </div>
+        </div>
+      )}
     </section>
   );
 }
@@ -438,6 +694,7 @@ export function BlogSection() {
   const [shown, setShown] = useState(PAGE_SIZE);
   const [viewMode, setViewMode] = useState<"grid" | "toc">("grid");
   const [isTocDrawerOpen, setIsTocDrawerOpen] = useState(false);
+  const [isFilterOpen, setIsFilterOpen] = useState(false);
 
   const selectedArticle = useMemo(
     () => (slug ? ARTICLES.find((a) => a.id === slug) ?? null : null),
@@ -588,7 +845,7 @@ export function BlogSection() {
     <section id="handbook" className="scroll-mt-20 pt-6 pb-12 bg-[#EFF5FB]">
       {/* Blog Hero Banner */}
       <div className="max-w-7xl mx-auto px-4 md:px-6 mb-6">
-        <div className="bg-[#081A33] rounded-2xl overflow-hidden relative max-w-7xl mx-auto mb-8 shadow-sm">
+        <div className="bg-[#081A33] rounded-2xl overflow-hidden relative max-w-7xl mx-auto shadow-sm">
           <div
             className="absolute inset-0 bg-cover bg-right bg-no-repeat hidden lg:block"
             style={{
@@ -613,20 +870,91 @@ export function BlogSection() {
         </div>
       </div>
 
-      {/* Dynamic Table of Contents & Category Filter Hub */}
-      <div className="max-w-7xl mx-auto px-4 md:px-6 mb-8">
-        <div className="bg-white border border-[#C3D6EA] rounded-2xl p-5 sm:p-6 shadow-xs space-y-6">
-          {/* Header Row: Title, Mode Toggles & Search */}
-          <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-4 pb-5 border-b border-[#EFF5FB]">
-            <div>
-              <div className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-md bg-[#EBF4FC] text-[#0B6CB8] text-xs font-bold uppercase tracking-wider mb-1.5">
-                <BookOpen className="w-3.5 h-3.5" />
-                36-Article Handbook Navigation
+      {/* Compact Blog Controls Bar + Collapsible Topic Filter & Table of Contents Hub */}
+      <div className="max-w-7xl mx-auto px-4 md:px-6 mb-6 space-y-4">
+        <div className="bg-white border border-[#C3D6EA] rounded-2xl px-4 sm:px-5 py-3 shadow-xs flex flex-wrap items-center justify-between gap-3">
+          <div className="flex flex-wrap items-center gap-2.5 text-xs sm:text-sm font-semibold text-[#47617F]">
+            <span className="font-display font-bold text-[#081A33] tabular-nums">
+              {filtered.length === ARTICLES.length
+                ? `All ${ARTICLES.length} Homeowner Guides`
+                : `Showing ${filtered.length} of ${ARTICLES.length} guides`}
+            </span>
+            {activeTheme !== "all" && (
+              <span className="px-2 py-0.5 rounded-md bg-[#EBF4FC] text-[#0B6CB8] text-xs font-bold">
+                {currentThemeDef.shortLabel}
+              </span>
+            )}
+            {activeCat !== "All" && (
+              <span className="px-2 py-0.5 rounded-md bg-[#EBF4FC] text-[#0B6CB8] text-xs font-bold">
+                {activeCat}
+              </span>
+            )}
+            {query.trim() && (
+              <span className="px-2 py-0.5 rounded-md bg-[#EFF5FB] text-[#081A33] text-xs font-semibold">
+                &ldquo;{query.trim()}&rdquo;
+              </span>
+            )}
+            {(activeTheme !== "all" || activeCat !== "All" || query.trim()) && (
+              <button
+                type="button"
+                onClick={() => {
+                  setActiveTheme("all");
+                  setActiveCat("All");
+                  setQuery("");
+                  setShown(PAGE_SIZE);
+                }}
+                className="text-xs font-bold text-[#0B6CB8] hover:underline cursor-pointer"
+              >
+                Reset
+              </button>
+            )}
+          </div>
+
+          <div className="flex flex-wrap items-center gap-2">
+            {viewMode === "toc" && (
+              <button
+                type="button"
+                onClick={() => setViewMode("grid")}
+                className="inline-flex items-center gap-1.5 px-3 py-2 rounded-xl border border-[#C3D6EA] bg-[#EFF5FB] text-[#081A33] hover:border-[#0B6CB8] text-xs font-bold transition-colors cursor-pointer"
+              >
+                <LayoutGrid className="w-3.5 h-3.5 text-[#0B6CB8]" />
+                Back to Article Cards
+              </button>
+            )}
+            <button
+              type="button"
+              aria-expanded={isFilterOpen}
+              onClick={() => setIsFilterOpen((open) => !open)}
+              className={`inline-flex items-center gap-2 px-4 py-2 rounded-xl border text-xs sm:text-sm font-bold transition-colors cursor-pointer ${
+                isFilterOpen
+                  ? "bg-[#081A33] border-[#081A33] text-white"
+                  : "bg-[#EFF5FB] border-[#C3D6EA] text-[#081A33] hover:border-[#0B6CB8] hover:bg-[#E4EFFA]"
+              }`}
+            >
+              <SlidersHorizontal className={`w-4 h-4 ${isFilterOpen ? "text-[#45BCFF]" : "text-[#0B6CB8]"}`} />
+              <span>{isFilterOpen ? "Hide Topics & Filter" : "Topics, Filter & Search"}</span>
+              {isFilterOpen ? (
+                <ChevronUp className="w-4 h-4 opacity-80" />
+              ) : (
+                <ChevronDown className="w-4 h-4 opacity-80" />
+              )}
+            </button>
+          </div>
+        </div>
+
+        {isFilterOpen && (
+          <div className="bg-white border border-[#C3D6EA] rounded-2xl p-5 sm:p-6 shadow-xs space-y-6 animate-fadeIn">
+            {/* Header Row: Title, Mode Toggles & Search */}
+            <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-4 pb-5 border-b border-[#EFF5FB]">
+              <div>
+                <div className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-md bg-[#EBF4FC] text-[#0B6CB8] text-xs font-bold uppercase tracking-wider mb-1.5">
+                  <BookOpen className="w-3.5 h-3.5" />
+                  36-Article Handbook Navigation
+                </div>
+                <h2 className="font-display text-xl sm:text-2xl font-extrabold text-[#081A33]">
+                  Table of Contents &amp; Topic Filter
+                </h2>
               </div>
-              <h2 className="font-display text-xl sm:text-2xl font-extrabold text-[#081A33]">
-                Table of Contents &amp; Topic Filter
-              </h2>
-            </div>
 
             <div className="flex flex-wrap items-center gap-3">
               {/* View Switcher: Card Grid vs Table of Contents */}
@@ -844,6 +1172,7 @@ export function BlogSection() {
             )}
           </div>
         </div>
+        )}
       </div>
 
       {/* VIEW MODE: TABLE OF CONTENTS DIRECTORY */}
@@ -984,7 +1313,7 @@ export function BlogSection() {
                               src={article.image}
                               alt={article.title}
                               loading="lazy"
-                              className="w-full h-48 object-cover block hover:scale-102 transition-transform duration-300"
+                              className="w-full h-auto block"
                             />
                           </Link>
                         )}
