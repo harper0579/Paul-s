@@ -1,5 +1,6 @@
 import { FormEvent, useState } from "react";
 import { ArrowRight, CheckCircle2, Mail } from "lucide-react";
+import { subscribeToNewsletter } from "../lib/newsletter";
 
 export function NewsletterSection() {
   const [email, setEmail] = useState("");
@@ -8,46 +9,19 @@ export function NewsletterSection() {
 
   async function handleSubmit(e: FormEvent<HTMLFormElement>) {
     e.preventDefault();
-    const trimmed = email.trim();
-
-    if (!trimmed || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(trimmed)) {
-      setStatus("error");
-      setMessage("Please enter a valid email address.");
-      return;
-    }
-
     setStatus("submitting");
     setMessage("");
 
-    try {
-      const res = await fetch("/api/newsletter", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ email: trimmed, source: "home-stay-updated" }),
-      });
-      const data = await res.json().catch(() => ({}));
-
-      if (!res.ok || !data?.ok) {
-        setStatus("error");
-        setMessage(
-          typeof data?.error === "string"
-            ? data.error
-            : "Something went wrong. Please try again."
-        );
-        return;
-      }
-
-      setStatus("success");
-      setMessage(
-        typeof data?.message === "string"
-          ? data.message
-          : "You're subscribed for seasonal roofing tips."
-      );
-      setEmail("");
-    } catch {
+    const result = await subscribeToNewsletter(email, "home-stay-updated");
+    if (!result.ok) {
       setStatus("error");
-      setMessage("Unable to connect right now. Please try again in a moment.");
+      setMessage(result.message);
+      return;
     }
+
+    setStatus("success");
+    setMessage(result.message);
+    setEmail("");
   }
 
   return (

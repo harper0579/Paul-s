@@ -167,7 +167,7 @@ export const WINTER_SERVICES = [
     title: "Emergency Leak Repair — 24/7",
     description:
       "Active leak, storm damage, or a branch through the roof. We answer around the clock for emergencies across Southern New Brunswick.",
-    ctaLabel: "Call (506) 271-4162",
+    ctaLabel: "Call Now",
     action: "call" as const,
   },
   {

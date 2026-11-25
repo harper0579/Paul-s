@@ -390,7 +390,7 @@ export function HomePage() {
                 className="btn-call-glow inline-flex items-center justify-center gap-2 px-6 py-3 min-h-12 font-display font-extrabold text-base whitespace-nowrap"
               >
                 <Phone className="w-4 h-4 text-[#45BCFF] drop-shadow-[0_0_6px_rgba(69,188,255,0.8)] shrink-0" />
-                Call {CONTACT.phoneDisplay}
+                Call Now
               </a>
             </div>
           </div>

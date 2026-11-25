@@ -389,7 +389,7 @@ export function QuoteSection() {
                       className="btn-call-glow inline-flex items-center gap-2 px-5 py-2.5 min-h-10 font-display text-sm font-extrabold"
                     >
                       <Phone className="w-4 h-4 text-[#45BCFF]" />
-                      Call {CONTACT.phoneDisplay}
+                      Call Now
                     </a>
                     {!confirmation.emailDispatched && (
                       <a
@@ -675,7 +675,7 @@ export function QuoteSection() {
                   className="btn-call-glow px-5 py-2.5 min-h-11 font-display font-bold text-sm inline-flex items-center gap-2"
                 >
                   <Phone className="w-4 h-4 text-[#45BCFF]" />
-                  <span>Call {CONTACT.phoneDisplay}</span>
+                  <span>Call Now</span>
                 </a>
 
                 <a

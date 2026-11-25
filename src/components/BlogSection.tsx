@@ -37,6 +37,7 @@ import {
 } from "../data/articles";
 import { getBlogTakeaway } from "../data/blogTakeawayData";
 import { CONTACT } from "../data/siteContent";
+import { subscribeToNewsletter } from "../lib/newsletter";
 
 const PAGE_SIZE = 9;
 
@@ -197,41 +198,19 @@ function ArticleDetailView({ article }: { article: Article }) {
 
   async function handleSubscribeSubmit(e: FormEvent<HTMLFormElement>) {
     e.preventDefault();
-    const trimmed = subEmail.trim();
-    if (!trimmed || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(trimmed)) {
-      setSubStatus("error");
-      setSubMessage("Please enter a valid email address.");
-      return;
-    }
     setSubStatus("submitting");
     setSubMessage("");
-    try {
-      const res = await fetch("/api/newsletter", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ email: trimmed, source: `blog-${article.id}` }),
-      });
-      const data = await res.json().catch(() => ({}));
-      if (!res.ok || !data?.ok) {
-        setSubStatus("error");
-        setSubMessage(
-          typeof data?.error === "string"
-            ? data.error
-            : "Something went wrong. Please try again."
-        );
-        return;
-      }
-      setSubStatus("success");
-      setSubMessage(
-        typeof data?.message === "string"
-          ? data.message
-          : "You're subscribed for seasonal roofing tips."
-      );
-      setSubEmail("");
-    } catch {
+
+    const result = await subscribeToNewsletter(subEmail, `blog-${article.id}`);
+    if (!result.ok) {
       setSubStatus("error");
-      setSubMessage("Unable to connect right now. Please try again in a moment.");
+      setSubMessage(result.message);
+      return;
     }
+
+    setSubStatus("success");
+    setSubMessage(result.message);
+    setSubEmail("");
   }
 
   const mailtoShareHref = `mailto:?subject=${encodeURIComponent(

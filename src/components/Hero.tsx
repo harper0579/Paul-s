@@ -36,7 +36,7 @@ export function Hero() {
             className="btn-call-glow inline-flex items-center justify-center gap-2 px-6 py-3.5 min-h-12 font-display font-extrabold text-base whitespace-nowrap shrink-0 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#45BCFF] shadow-md"
           >
             <Phone className="w-4 h-4 text-[#45BCFF] drop-shadow-[0_0_6px_rgba(69,188,255,0.8)] shrink-0" />
-            Call {CONTACT.phoneDisplay}
+            Call Now
           </a>
 
           <a

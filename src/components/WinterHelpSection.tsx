@@ -94,7 +94,7 @@ export function WinterHelpSection() {
                         className="btn-quote-glow w-full inline-flex items-center justify-center gap-2 px-4 py-2.5 min-h-11 font-display text-sm font-extrabold transition-colors duration-150"
                       >
                         <Phone className="w-4 h-4 shrink-0" />
-                        Call (506) 271-4162
+                        Call Now
                       </a>
                       <button
                         type="button"

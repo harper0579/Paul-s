@@ -76,11 +76,6 @@ export function Footer() {
                     Get a Quote
                   </Link>
                 </li>
-                <li>
-                  <Link to="/sitemap" className="hover:text-white hover:underline transition-colors">
-                    XML Sitemap &amp; Crawler
-                  </Link>
-                </li>
               </ul>
             </div>
 
