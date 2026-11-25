@@ -8,11 +8,13 @@ import {
   SERVICE_AREAS,
   TESTIMONIALS,
 } from "../data/siteContent";
+import { ServiceAreaMap } from "./ServiceAreaMap";
 
 export function AboutAndAreasSection() {
   const [openFaqSlug, setOpenFaqSlug] = useState<string | null>(FAQ_ITEMS[0].slug);
   const [faqQuery, setFaqQuery] = useState("");
   const [copiedSlug, setCopiedSlug] = useState<string | null>(null);
+  const [selectedMapTown, setSelectedMapTown] = useState<string>("Quispamsis");
   const navigate = useNavigate();
   const location = useLocation();
 
@@ -194,6 +196,13 @@ export function AboutAndAreasSection() {
                 className="w-full h-auto block"
               />
             </div>
+          </div>
+
+          <div className="mt-8">
+            <ServiceAreaMap
+              selectedTown={selectedMapTown}
+              onTownChange={setSelectedMapTown}
+            />
           </div>
 
           <div className="mt-8 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 items-stretch">

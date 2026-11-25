@@ -6,7 +6,6 @@ import {
   METAL_COLOURS,
 } from "../data/siteContent";
 import { SecondaryServicesGrid } from "./SecondaryServicesGrid";
-import { TrustBadgesSection } from "./TrustBadgesSection";
 
 export function ServicesSection() {
   const [selectedColour, setSelectedColour] = useState(METAL_COLOURS[0]);
@@ -202,8 +201,6 @@ export function ServicesSection() {
           </div>
         </div>
       </section>
-
-      <TrustBadgesSection />
 
       <section id="compare" className="scroll-mt-20 py-14 lg:py-16 bg-white">
         <div className="max-w-6xl mx-auto px-4 lg:px-6">

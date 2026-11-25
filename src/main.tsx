@@ -3,6 +3,20 @@ import { BrowserRouter } from "react-router-dom";
 import App from "./App.tsx";
 import "./index.css";
 
+// Tier 1 Case A Quota Defense: monitor Maps JS auth failures and console quota errors
+(window as unknown as { gm_authFailure?: () => void }).gm_authFailure = () => {
+  window.dispatchEvent(new CustomEvent("gmp-quota-exceeded"));
+};
+
+const origConsoleError = console.error;
+console.error = (...args: unknown[]) => {
+  origConsoleError.apply(console, args);
+  const msg = args.map((a) => String(a)).join(" ");
+  if (msg.includes("OverQuotaMapError") || msg.includes("QuotaExceededError")) {
+    window.dispatchEvent(new CustomEvent("gmp-quota-exceeded"));
+  }
+};
+
 createRoot(document.getElementById("root")!).render(
   <BrowserRouter>
     <App />

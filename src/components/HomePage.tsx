@@ -4,8 +4,8 @@ import { ArrowRight, ArrowUpRight, Check, Phone, ShieldAlert, Snowflake, Award, 
 import { Hero } from "./Hero";
 import { NewsletterSection } from "./NewsletterSection";
 import { SecondaryServicesGrid } from "./SecondaryServicesGrid";
-import { TrustBadgesSection } from "./TrustBadgesSection";
 import { WinterHelpCarousel } from "./WinterHelpCarousel";
+import { ServiceAreaMap } from "./ServiceAreaMap";
 import {
   CONTACT,
   TESTIMONIALS,
@@ -18,8 +18,6 @@ export function HomePage() {
   return (
     <>
       <Hero />
-
-      <TrustBadgesSection />
 
       <section className="py-12 lg:py-14 bg-[#F7FAFD] border-y border-[#E2ECF5]">
         <div className="max-w-6xl mx-auto px-4 lg:px-6">
@@ -406,6 +404,34 @@ export function HomePage() {
               className="w-full h-auto block"
             />
           </div>
+        </div>
+      </section>
+
+      <section className="py-12 lg:py-14 bg-[#EFF5FB] border-t border-[#C3D6EA]">
+        <div className="max-w-6xl mx-auto px-4 lg:px-6">
+          <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4 mb-7">
+            <div>
+              <p className="text-xs font-bold tracking-wider uppercase text-[#0B6CB8]">
+                Where we work
+              </p>
+              <h2 className="mt-2 font-display text-2xl sm:text-3xl font-extrabold text-[#081A33]">
+                Southern New Brunswick service area map
+              </h2>
+              <p className="mt-2 text-base text-[#47617F] max-w-2xl">
+                Based in Quispamsis &mdash; click a community or search your address to check
+                coverage and start a free quote.
+              </p>
+            </div>
+            <Link
+              to="/about#areas"
+              className="inline-flex items-center gap-1.5 text-sm font-bold text-[#0B6CB8] hover:underline whitespace-nowrap shrink-0"
+            >
+              View all 8 towns &amp; details
+              <ArrowRight className="w-4 h-4" />
+            </Link>
+          </div>
+
+          <ServiceAreaMap compact />
         </div>
       </section>
 

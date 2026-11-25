@@ -90,9 +90,9 @@ export function Header() {
           className="bg-[#081A33] text-white px-3 sm:px-4 lg:px-6 flex items-center min-w-0 lg:shrink-0 focus-visible:outline-2 focus-visible:outline-offset-[-2px] focus-visible:outline-[#45BCFF]"
         >
           <img
-            src="/images/header-logo.png"
-            alt="Paul's Roofing — Atlantic Canada's Trusted Roofing Experts"
-            className="h-9 sm:h-11 w-auto object-contain"
+            src="/images/logo-badge.png"
+            alt="Paul's Roofing — Roofing New Brunswick, One Sheet at a Time"
+            className="h-10 sm:h-12 w-auto object-contain"
           />
         </Link>
 

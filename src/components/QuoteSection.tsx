@@ -1,7 +1,9 @@
 import { useEffect, useState, type FormEvent } from "react";
 import { useLocation } from "react-router-dom";
-import { AlertTriangle, CheckCircle2, Mail, Phone, Send } from "lucide-react";
+import { AlertTriangle, CheckCircle2, Loader2, Mail, MapPin, Phone, Send } from "lucide-react";
 import { CONTACT } from "../data/siteContent";
+import { useMapsStatus } from "../context/MapsStatusContext";
+import { usePlacesAutocomplete } from "../hooks/usePlacesAutocomplete";
 import { getAccessToken, googleSignIn } from "../lib/gmailAuth";
 import { sendGmailMessage } from "../lib/gmailApi";
 
@@ -17,6 +19,54 @@ export interface QuotePrefill {
 const PROJECT_TYPES = ["New Roof", "Replacement", "Repair / Leak", "Inspection"] as const;
 const ROOF_TYPES = ["Metal", "Shingles", "Unsure"] as const;
 
+function PlacesTownDropdown({
+  query,
+  open,
+  onSelect,
+}: {
+  query: string;
+  open: boolean;
+  onSelect: (value: string) => void;
+}) {
+  const { suggestions, isLoading, selectSuggestion } = usePlacesAutocomplete(query, open);
+
+  return (
+    <>
+      {isLoading && (
+        <Loader2 className="w-4 h-4 text-[#0B6CB8] animate-spin absolute right-3.5 top-3.5 pointer-events-none" />
+      )}
+      {open && suggestions.length > 0 && (
+        <ul
+          role="listbox"
+          aria-label="Address suggestions"
+          className="absolute z-30 left-0 right-0 mt-1.5 rounded-xl border border-[#C3D6EA] bg-white shadow-lg overflow-hidden max-h-56 overflow-y-auto"
+        >
+          {suggestions.map((suggestion, index) => {
+            const text = suggestion.placePrediction?.text?.text;
+            if (!text) return null;
+            return (
+              <li key={`${text}-${index}`}>
+                <button
+                  type="button"
+                  onMouseDown={(e) => e.preventDefault()}
+                  onClick={async () => {
+                    const place = await selectSuggestion(suggestion);
+                    onSelect(place?.formattedAddress || place?.displayName || text);
+                  }}
+                  className="w-full text-left px-3.5 py-2.5 text-sm text-[#081A33] hover:bg-[#EFF5FB] border-b last:border-b-0 border-[#E2ECF5] flex items-center gap-2 cursor-pointer"
+                >
+                  <MapPin className="w-4 h-4 text-[#0B6CB8] shrink-0" />
+                  <span className="truncate">{text}</span>
+                </button>
+              </li>
+            );
+          })}
+        </ul>
+      )}
+    </>
+  );
+}
+
 export function QuoteSection() {
   const location = useLocation();
   const routePrefill = (location.state as QuotePrefill | null) ?? null;
@@ -29,8 +79,11 @@ export function QuoteSection() {
   const [phone, setPhone] = useState("");
   const [email, setEmail] = useState("");
   const [town, setTown] = useState("");
+  const [townSuggestionsOpen, setTownSuggestionsOpen] = useState(false);
   const [errorMsg, setErrorMsg] = useState("");
   const [submitting, setSubmitting] = useState(false);
+  const { hasApiKey, quotaExceeded } = useMapsStatus();
+  const mapsAutocompleteActive = hasApiKey && !quotaExceeded;
   const [gmailConfirmOpen, setGmailConfirmOpen] = useState(false);
   const [gmailSending, setGmailSending] = useState(false);
   const [gmailSentNote, setGmailSentNote] = useState("");
@@ -560,18 +613,37 @@ export function QuoteSection() {
                   />
                 </div>
 
-                <div>
+                <div className="relative">
                   <label htmlFor="qTown" className="block text-sm font-bold text-[#081A33] mb-1.5">
-                    Town
+                    Town or street address
                   </label>
-                  <input
-                    id="qTown"
-                    type="text"
-                    value={town}
-                    onChange={(e) => setTown(e.target.value)}
-                    placeholder="e.g. Quispamsis"
-                    className="w-full min-h-11 rounded-xl bg-[#f1f6fa] border border-[#94a3b8] px-4 py-2.5 text-sm sm:text-base text-[#081A33] placeholder-[#47617F] focus:outline-none focus:border-[#0B6CB8] focus:ring-1 focus:ring-[#0B6CB8]"
-                  />
+                  <div className="relative">
+                    <input
+                      id="qTown"
+                      type="text"
+                      value={town}
+                      onFocus={() => setTownSuggestionsOpen(true)}
+                      onBlur={() => {
+                        window.setTimeout(() => setTownSuggestionsOpen(false), 180);
+                      }}
+                      onChange={(e) => {
+                        setTown(e.target.value);
+                        setTownSuggestionsOpen(true);
+                      }}
+                      placeholder="e.g. Quispamsis or street address"
+                      className="w-full min-h-11 rounded-xl bg-[#f1f6fa] border border-[#94a3b8] px-4 py-2.5 pr-10 text-sm sm:text-base text-[#081A33] placeholder-[#47617F] focus:outline-none focus:border-[#0B6CB8] focus:ring-1 focus:ring-[#0B6CB8]"
+                    />
+                    {mapsAutocompleteActive && (
+                      <PlacesTownDropdown
+                        query={town}
+                        open={townSuggestionsOpen}
+                        onSelect={(value) => {
+                          setTown(value);
+                          setTownSuggestionsOpen(false);
+                        }}
+                      />
+                    )}
+                  </div>
                 </div>
               </div>
 

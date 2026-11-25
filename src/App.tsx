@@ -3,8 +3,10 @@
  * SPDX-License-Identifier: Apache-2.0
  */
 
-import { useEffect } from "react";
+import { useEffect, useState, type ReactNode } from "react";
 import { Link, Route, Routes, useLocation, useNavigate } from "react-router-dom";
+import { APIProvider } from "@vis.gl/react-google-maps";
+import { MapsStatusContext } from "./context/MapsStatusContext";
 import { Header } from "./components/Header";
 import { HomePage } from "./components/HomePage";
 import { ServicesSection } from "./components/ServicesSection";
@@ -16,6 +18,9 @@ import { QuoteSection } from "./components/QuoteSection";
 import { GmailWorkspaceSection } from "./components/GmailWorkspaceSection";
 import { SitemapGeneratorSection } from "./components/SitemapGeneratorSection";
 import { Footer } from "./components/Footer";
+
+const MAPS_API_KEY =
+  (import.meta.env.VITE_GOOGLE_MAPS_API_KEY as string | undefined)?.trim() || "";
 
 const LEGACY_HASH_ROUTES: Record<string, string> = {
   "#services": "/services",
@@ -100,27 +105,72 @@ function NotFoundPage() {
   );
 }
 
-export default function App() {
+function OptionalMapsProvider({ children }: { children: ReactNode }) {
+  if (!MAPS_API_KEY) {
+    return <>{children}</>;
+  }
   return (
-    <div className="min-h-screen flex flex-col bg-white text-[#2A3D57]">
-      <ScrollAndHashManager />
-      <Header />
-      <main id="main-content" className="flex-1">
-        <Routes>
-          <Route path="/" element={<HomePage />} />
-          <Route path="/services" element={<ServicesSection />} />
-          <Route path="/winter-help" element={<WinterHelpSection />} />
-          <Route path="/our-work" element={<WorkGallerySection />} />
-          <Route path="/about" element={<AboutAndAreasSection />} />
-          <Route path="/blog" element={<BlogSection />} />
-          <Route path="/blog/:slug" element={<BlogSection />} />
-          <Route path="/quote" element={<QuoteSection />} />
-          <Route path="/gmail" element={<GmailWorkspaceSection />} />
-          <Route path="/sitemap" element={<SitemapGeneratorSection />} />
-          <Route path="*" element={<NotFoundPage />} />
-        </Routes>
-      </main>
-      <Footer />
-    </div>
+    <APIProvider apiKey={MAPS_API_KEY} language="en" region="CA">
+      {children}
+    </APIProvider>
+  );
+}
+
+export default function App() {
+  const [quotaExceeded, setQuotaExceeded] = useState(false);
+
+  useEffect(() => {
+    const handleQuotaExceeded = () => {
+      setQuotaExceeded(true);
+    };
+    window.addEventListener("gmp-quota-exceeded", handleQuotaExceeded);
+    return () => {
+      window.removeEventListener("gmp-quota-exceeded", handleQuotaExceeded);
+    };
+  }, []);
+
+  return (
+    <MapsStatusContext.Provider
+      value={{ hasApiKey: Boolean(MAPS_API_KEY), quotaExceeded }}
+    >
+      <OptionalMapsProvider>
+        <div className="min-h-screen flex flex-col bg-white text-[#2A3D57]">
+          {quotaExceeded && (
+            <div className="bg-amber-50 border-b border-amber-200 text-amber-900 px-4 py-2.5 text-xs md:text-sm text-center sticky top-0 z-[60] shadow-sm">
+              <span>
+                Google Maps Platform quota reached. If you are the app owner, visit{" "}
+                <a
+                  href="https://developers.google.com/maps/ai/ai-studio?utm_campaign=gmp_mcp_codeassist_v1_aistudio#quota_exceeded_errors"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="underline font-semibold text-amber-950 hover:text-amber-800"
+                >
+                  maps developer site
+                </a>{" "}
+                for instructions to update your account.
+              </span>
+            </div>
+          )}
+          <ScrollAndHashManager />
+          <Header />
+          <main id="main-content" className="flex-1">
+            <Routes>
+              <Route path="/" element={<HomePage />} />
+              <Route path="/services" element={<ServicesSection />} />
+              <Route path="/winter-help" element={<WinterHelpSection />} />
+              <Route path="/our-work" element={<WorkGallerySection />} />
+              <Route path="/about" element={<AboutAndAreasSection />} />
+              <Route path="/blog" element={<BlogSection />} />
+              <Route path="/blog/:slug" element={<BlogSection />} />
+              <Route path="/quote" element={<QuoteSection />} />
+              <Route path="/gmail" element={<GmailWorkspaceSection />} />
+              <Route path="/sitemap" element={<SitemapGeneratorSection />} />
+              <Route path="*" element={<NotFoundPage />} />
+            </Routes>
+          </main>
+          <Footer />
+        </div>
+      </OptionalMapsProvider>
+    </MapsStatusContext.Provider>
   );
 }

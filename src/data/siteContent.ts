@@ -245,18 +245,6 @@ export const GALLERY_ITEMS: GalleryItem[] = [
     title: "Across Southern NB Neighbourhoods",
     caption: "Serving Quispamsis, Rothesay, Saint John, Hampton, and the coast.",
   },
-  {
-    src: "/images/panel-charcoal-clean.jpg",
-    alt: "Close-up of dark charcoal standing-seam steel roofing panels",
-    title: "Charcoal Standing-Seam Profile",
-    caption: "Sleek dark charcoal steel with clean fastener and rib lines.",
-  },
-  {
-    src: "/images/panel-green-clean.jpg",
-    alt: "Close-up of Hartford green standing-seam metal roofing panels",
-    title: "Hartford Green Finish",
-    caption: "A classic New Brunswick tone for wooded lots and white trim.",
-  },
 ];
 
 export const COMPARISON_ROWS = [
