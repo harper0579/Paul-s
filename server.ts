@@ -13,7 +13,7 @@ const PORT = Number(process.env.PORT) || 3000;
 const DATA_DIR = path.resolve(__dirname, "data");
 const QUOTES_FILE = path.join(DATA_DIR, "quotes.json");
 const NEWSLETTER_FILE = path.join(DATA_DIR, "newsletter.json");
-const RECIPIENT_EMAIL = process.env.QUOTE_RECIPIENT_EMAIL || "lunacraigcep@gmail.com";
+const RECIPIENT_EMAIL = process.env.QUOTE_RECIPIENT_EMAIL || "Email Us";
 
 interface QuoteRecord {
   id: string;
@@ -310,17 +310,17 @@ async function startServer() {
       console.error("Failed to save quote:", err);
       res.status(500).json({
         ok: false,
-        error: `Unable to save your request right now. Please call (506) 271-4162 or email ${RECIPIENT_EMAIL} directly.`,
+        error: `Unable to save your request right now. Please call us or email ${RECIPIENT_EMAIL} directly.`,
       });
       return;
     }
 
     const responseMsg =
       urgency === "emergency"
-        ? `Urgent request ${id} logged for ${name}. For an active leak right now, please also call (506) 271-4162 — Paul answers 24/7.`
+        ? `Urgent request ${id} logged for ${name}. For an active leak right now, please also call us — Paul answers 24/7.`
         : record.emailDispatched
         ? `Quote request ${id} sent to ${RECIPIENT_EMAIL} for ${name}. Paul will follow up during business hours (Mon–Fri 6 a.m.–7 p.m.).`
-        : `Quote request ${id} saved for ${name}. You can also tap "Email copy to Paul" below or call (506) 271-4162 anytime.`;
+        : `Quote request ${id} saved for ${name}. You can also tap "Email copy to Paul" below or call us anytime.`;
 
     res.status(201).json({
       ok: true,
