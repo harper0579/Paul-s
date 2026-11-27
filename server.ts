@@ -13,7 +13,7 @@ const PORT = Number(process.env.PORT) || 3000;
 const DATA_DIR = path.resolve(__dirname, "data");
 const QUOTES_FILE = path.join(DATA_DIR, "quotes.json");
 const NEWSLETTER_FILE = path.join(DATA_DIR, "newsletter.json");
-const RECIPIENT_EMAIL = process.env.QUOTE_RECIPIENT_EMAIL || "paul@paulroofs.com";
+const RECIPIENT_EMAIL = process.env.QUOTE_RECIPIENT_EMAIL || "lunacraigcep@gmail.com";
 
 interface QuoteRecord {
   id: string;

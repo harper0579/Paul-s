@@ -49,7 +49,7 @@ export default async function handler(req: NewsletterRequest, res: NewsletterRes
     return;
   }
 
-  const recipient = process.env.QUOTE_RECIPIENT_EMAIL?.trim() || "paul@paulroofs.com";
+  const recipient = process.env.QUOTE_RECIPIENT_EMAIL?.trim() || "lunacraigcep@gmail.com";
   let emailDispatched = false;
 
   const resendKey = process.env.RESEND_API_KEY?.trim();

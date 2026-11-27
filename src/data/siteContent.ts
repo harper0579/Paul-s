@@ -1,8 +1,8 @@
 export const CONTACT = {
   phoneHref: "tel:+15062714162",
   phoneDisplay: "(506) 271-4162",
-  email: "paul@paulroofs.com",
-  emailHref: "mailto:paul@paulroofs.com",
+  email: "lunacraigcep@gmail.com",
+  emailHref: "mailto:lunacraigcep@gmail.com",
   facebookHref: "https://www.facebook.com/profile.php?id=61577716957565",
   googleReviewsHref:
     "https://www.google.com/maps/search/?api=1&query=Paul%27s+Roofing+Quispamsis+NB",

@@ -17,7 +17,7 @@ Upgrade the site Footer (`Footer.tsx`) to use `/images/footer-bg.webp` as its fu
      - `XML Sitemap & Crawler`
    - Column 3 (`CONTACT` in `#F5C451` with icon):
      - `Call (506) 271-4162` (with phone icon, `tel:5062714162`)
-     - `paul@paulroofs.com` (with mail icon, `mailto:paul@paulroofs.com`)
+     - `lunacraigcep@gmail.com` (with mail icon, `mailto:lunacraigcep@gmail.com`)
      - `Facebook` (with icon)
      - `Quispamsis, New Brunswick` (with map-pin icon)
    - Column 4 (`BUSINESS HOURS` in `#F5C451` with clock icon):
