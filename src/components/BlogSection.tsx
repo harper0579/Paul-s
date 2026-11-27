@@ -227,7 +227,7 @@ function ArticleDetailView({ article }: { article: Article }) {
           className="inline-flex items-center gap-1.5 text-sm font-semibold text-[#0B6CB8] hover:underline"
         >
           <ArrowLeft className="w-4 h-4" />
-          Back to all 36 guides &amp; Table of Contents
+          Back to all 54 guides &amp; Table of Contents
         </Link>
 
         <div className="flex items-center gap-2 text-xs font-semibold text-[#47617F]">
@@ -540,7 +540,7 @@ function ArticleDetailView({ article }: { article: Article }) {
                   className="inline-flex items-center gap-1.5 text-xs font-bold text-[#0B6CB8] hover:underline"
                 >
                   <BookOpen className="w-3.5 h-3.5" />
-                  Browse full 36-guide handbook
+                  Browse full 54-guide handbook
                 </Link>
               </div>
             </div>

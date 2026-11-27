@@ -17,6 +17,168 @@ export const DEFAULT_BLOG_TAKEAWAY: BlogTakeawayEntry = {
 };
 
 export const blogTakeawayData: Record<string, BlogTakeawayEntry> = {
+  "roofing-kingston-peninsula": {
+    "category": "Towns",
+    "takeawayText": "Everything on the Kingston Peninsula runs on ferry timing, steep wooded lots, and wind off the Kennebecasis and Saint John rivers. Fastening to spec, trimming overhanging branches, and planning around ferry crossings keep a peninsula roof dry.",
+    "tip": "Ask how your roofer schedules ferry deliveries and trim overhanging branches first.",
+    "relatedLinks": [
+      "Roofing in Quispamsis & Rothesay: Local Guide to Replacements, Repairs & Metal Roofs",
+      "Metal vs. Shingles: An Honest Comparison for NB Homeowners"
+    ]
+  },
+  "storm-damage-insurance-claim": {
+    "category": "Repairs & Leaks",
+    "takeawayText": "Take clear photos of missing shingles, bent metal, fallen branches, and interior stains before cleaning anything up. A written itemized quote that separates material, labour, tear-off, and disposal gives your adjuster real line items to approve.",
+    "tip": "Photograph all storm damage before cleanup and call 24/7 for a tarp if water is coming in.",
+    "relatedLinks": [
+      "Roof Leaking in Winter in NB? What to Do in the First 24 Hours",
+      "Emergency Roof Repair in Saint John: Storm Damage, Fallen Branches & Sudden Leaks"
+    ]
+  },
+  "flat-low-slope-roofs-nb": {
+    "category": "Repairs & Leaks",
+    "takeawayText": "Architectural shingles rely on gravity and will leak on a flat or low-slope roof under a 4 in 12 pitch. Low-slope additions and porches need a continuous sealed membrane system with clear drains before winter.",
+    "tip": "Never shingle a flat or low-slope roof — use a proper sealed membrane system.",
+    "relatedLinks": [
+      "Roof Repair vs Full Replacement: An Honest Roofer's Decision Guide",
+      "Ice & Water Shield: The Layer Under Your Roof That Saves NB Homes Every Winter"
+    ]
+  },
+  "how-to-pick-roofing-contractor-nb": {
+    "category": "Cost & Financing",
+    "takeawayText": "A good install on average shingles beats a bad install on the best metal panel every time. Always insist on a written itemized quote, proof of liability and workers' compensation coverage, and local Southern NB references.",
+    "tip": "Never pay the full job upfront and walk away from vague one-line verbal quotes.",
+    "relatedLinks": [
+      "Making Your Roof Affordable",
+      "Roof Replacement: What It Involves"
+    ]
+  },
+  "solar-panels-metal-roof-nb": {
+    "category": "Metal Roofing",
+    "takeawayText": "A metal roof lasts 50+ years while solar panels last around 25 years — putting the metal roof on first avoids paying to remove and reinstall panels later. Standing seam clamps attach to the raised seam with zero roof penetrations.",
+    "tip": "Coordinate snow guard placement and panel layout with your roofer before anyone drills.",
+    "relatedLinks": [
+      "Standing Seam vs Screw-Down Metal Roofing: Which Is Right for Your NB Home?",
+      "Snow Rails on a Metal Roof: Do You Need Them in New Brunswick?"
+    ]
+  },
+  "gutter-guards-nb-winter": {
+    "category": "Gutters & Exterior",
+    "takeawayText": "Gutter guards keep fall leaves out, but in a New Brunswick winter they can hold a sheet of ice across the top of the gutter and will never cure attic-driven ice dams.",
+    "tip": "Fix sagging gutters and attic ventilation first — gutter guards do not stop ice dams.",
+    "relatedLinks": [
+      "Gutters in New Brunswick: Cleaning, Repair & When Clogged Gutters Damage Your Roof",
+      "Ice Dams in Quispamsis & Rothesay: What Causes Them and How to Stop Them for Good"
+    ]
+  },
+  "roof-valleys-leaks": {
+    "category": "Repairs & Leaks",
+    "takeawayText": "A roof valley carries twice the water flow of a single slope, making it the first place debris settles and winter ice backs up. Sealant smears fail fast — a lasting fix rebuilds the ice-and-water shield and metal liner.",
+    "tip": "Check ceilings beneath roof valleys first when tracking down a mystery leak.",
+    "relatedLinks": [
+      "Chimney Flashing Leaks: Why the Chimney Is the #1 Leak Source We Fix",
+      "Ice & Water Shield: The Layer Under Your Roof That Saves NB Homes Every Winter"
+    ]
+  },
+  "cottage-roofs-nb-winterizing": {
+    "category": "Ice Dams & Winter",
+    "takeawayText": "A seasonal cottage roof sits unwatched for 5 or 6 months through snow load and freeze-thaw cycles. Cleaning gutters, trimming branches, and checking flashing before closing up keeps a minor fall gap from becoming a spring rebuild.",
+    "tip": "Walk the fall close-up roof checklist before locking the cottage for winter.",
+    "relatedLinks": [
+      "Winterizing Your Roof: The Fall Checklist That Prevents Winter Leaks",
+      "Spring Roof Check: What Winter Did to Your Roof (and What to Fix First)"
+    ]
+  },
+  "coastal-bay-of-fundy-roofing": {
+    "category": "Metal Roofing",
+    "takeawayText": "Salt fog and Fundy gusts attack roof edges, ridge caps, and cheap fasteners first. Using quality pre-painted steel with a 40-year paint warranty on most colours and coastal-rated fasteners keeps ocean weather out.",
+    "tip": "Check fastener ratings and coastal warranty rules when roofing near the Bay of Fundy.",
+    "relatedLinks": [
+      "Roofing in Grand Bay-Westfield, Sussex & St. Martins: One Crew, All of Southern NB",
+      "How Long Does a Metal Roof Last in Atlantic Canada's Climate?"
+    ]
+  },
+  "attic-insulation-roof-health": {
+    "category": "Ice Dams & Winter",
+    "takeawayText": "Escaping indoor heat warms the roof deck from below, triggering eave ice dams and winter attic frost. Sealing attic air leaks and keeping soffit baffles open lets cold air sweep cleanly from eaves to ridge.",
+    "tip": "Keep attic insulation baffled back so it never blocks your soffit intake vents.",
+    "relatedLinks": [
+      "Attic Ventilation in NB Homes: Why Your Roof Is Cooking From the Inside",
+      "Ice Dams in Quispamsis & Rothesay: What Causes Them and How to Stop Them for Good"
+    ]
+  },
+  "ridge-vents-vs-box-vents-nb": {
+    "category": "Maintenance",
+    "takeawayText": "Never mix a continuous ridge vent with box vents or gable vents on the same attic space — the ridge vent pulls air from the nearest upper opening instead of drawing cool dry air up from the soffits.",
+    "tip": "Use one exhaust vent system matched with open soffit intake along the eaves.",
+    "relatedLinks": [
+      "Attic Ventilation in NB Homes: Why Your Roof Is Cooking From the Inside",
+      "Fall Roof Inspection Checklist for New Brunswick Homeowners"
+    ]
+  },
+  "rotten-roof-decking-sheathing": {
+    "category": "Repairs & Leaks",
+    "takeawayText": "Shingle nails and metal fasteners cannot hold wind and snow load in soft, delaminated wood. Stripping down to bare decking lets us cut out hidden rot along eaves and valleys before new underlayment goes down.",
+    "tip": "Make sure your quote spells out how rotten decking is replaced if uncovered during tear-off.",
+    "relatedLinks": [
+      "Roof Replacement: What It Involves",
+      "Roof Overlay vs Full Tear-Off: Why Layering New Shingles Over Old Fails in NB"
+    ]
+  },
+  "roofing-sussex-kings-county": {
+    "category": "Towns",
+    "takeawayText": "Inland Kings County farmhouses and rural buildings carry deep winter snowpack, making snow guards above verandas, steps, and barn doors essential when upgrading to a metal roof.",
+    "tip": "Plan snow guard placement over porches and doorways before your metal roof goes on.",
+    "relatedLinks": [
+      "Snow Rails on a Metal Roof: Do You Need Them in New Brunswick?",
+      "Roofing in Grand Bay-Westfield, Sussex & St. Martins: One Crew, All of Southern NB"
+    ]
+  },
+  "plumbing-vents-pipe-boot-leaks": {
+    "category": "Repairs & Leaks",
+    "takeawayText": "A small ceiling stain near an upstairs bathroom often comes from a sun-cracked rubber plumbing vent collar rather than worn shingles. Installing a new metal-base pipe boot fixes it cleanly without messy tar patches.",
+    "tip": "Check rubber plumbing vent collars first when a stain shows up near an upstairs bath.",
+    "relatedLinks": [
+      "Skylight & Vent Leaks: The Small Openings That Cause Big Stains",
+      "Chimney Flashing Leaks: Why the Chimney Is the #1 Leak Source We Fix"
+    ]
+  },
+  "roof-overlay-vs-full-tear-off": {
+    "category": "Cost & Financing",
+    "takeawayText": "Nail-over shingle overlays trap heat, hide soft wood decking, and prevent ice-and-water shield from bonding directly to bare wood at the eaves. A full tear-off protects your home and warranty.",
+    "tip": "Always insist on a full tear-off down to bare wood rather than layering over old shingles.",
+    "relatedLinks": [
+      "Roof Replacement: What It Involves",
+      "How to Pick a Roofing Contractor in Southern NB and the Red Flags That Should Stop You"
+    ]
+  },
+  "garage-shed-workshop-roofs": {
+    "category": "Cost & Financing",
+    "takeawayText": "Quoting your detached garage, workshop, or shed alongside your house roof saves a second crew mobilization and keeps metal panels or shingles in the exact same colour run.",
+    "tip": "Ask for an optional garage or shed line item while we are quoting your main roof.",
+    "relatedLinks": [
+      "Making Your Roof Affordable",
+      "How to Choose the Perfect Metal Roof Colour for Your Home"
+    ]
+  },
+  "steep-pitch-heritage-roofs-saint-john": {
+    "category": "Towns",
+    "takeawayText": "Tall steep-pitch roofs in Saint John need proper roof staging, lifeline rigging, and custom metal step flashing around dormers and brick chimneys to stand up to harbour wind and driving rain.",
+    "tip": "Verify that quotes for steep multi-storey homes include full staging and custom flashing.",
+    "relatedLinks": [
+      "Chimney Flashing Leaks: Why the Chimney Is the #1 Leak Source We Fix",
+      "How to Pick a Roofing Contractor in Southern NB and the Red Flags That Should Stop You"
+    ]
+  },
+  "roof-raking-new-brunswick": {
+    "category": "Ice Dams & Winter",
+    "takeawayText": "Pulling heavy snow off the bottom few feet of a shingle roof from the ground helps reduce ice dam backup — just leave a thin snow cushion so the rake never scrapes brittle frozen shingles.",
+    "tip": "Work strictly from the ground, watch power lines, and leave a thin protective layer of snow.",
+    "relatedLinks": [
+      "Snow Load & Winter Roof Damage in New Brunswick: How Much Snow Is Too Much?",
+      "Ice Dams in Quispamsis & Rothesay: What Causes Them and How to Stop Them for Good"
+    ]
+  },
   "metal-roof-colour": {
     category: "Metal Roofing",
     takeawayText:

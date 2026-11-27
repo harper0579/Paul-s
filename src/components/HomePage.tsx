@@ -374,7 +374,7 @@ export function HomePage() {
               Free estimates across Quispamsis, Rothesay, Saint John, Hampton, Grand Bay-Westfield,
               Sussex, St. Martins, and the Kingston Peninsula. Or read our{" "}
               <Link to="/blog" className="text-[#45BCFF] font-semibold underline underline-offset-2">
-                36 homeowner roofing guides
+                54 homeowner roofing guides
               </Link>
               .
             </p>

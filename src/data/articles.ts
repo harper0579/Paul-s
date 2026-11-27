@@ -1,3 +1,4 @@
+import { ARTICLES_37_TO_54, HERO_IMAGES_37_TO_54 } from './articles-37-to-54';
 export interface TextSegment {
   text: string;
   href?: string;
@@ -3810,3 +3811,14 @@ export const ARTICLES: Article[] = [
     ]
   }
 ];
+if (!ARTICLES.some((a: any) => a.id === "roofing-kingston-peninsula")) {
+  (ARTICLES as any[]).push(
+    ...ARTICLES_37_TO_54.map((a) => ({
+      ...a,
+      image: HERO_IMAGES_37_TO_54[a.id],
+      heroImage: HERO_IMAGES_37_TO_54[a.id],
+      hero: HERO_IMAGES_37_TO_54[a.id],
+      img: HERO_IMAGES_37_TO_54[a.id],
+    }))
+  );
+}
